@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PeersApp...</title>
+
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        color: white;
+        background-color: #03101c;
+      }
+      div.head {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        color: #00bfff;
+        font-size: 50px;
+        font-style: italic;
+        font-weight: 1000;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+      }
+      .p1 {
+        text-align: justify;
+        padding: 5px 30px;
+        font-size: 1.3em;
+      }
+
+      /* =========================
+      TOGGLE SWITCH UI BUTTONS
+      ========================= */
+
+      .final__toggle-2 {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 1rem;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 15px 0 0;
+        margin-left: 30px;
+        font-weight: 1000;
+      }
+      .final__toggle-2__input {
+        display: none;
+      }
+      .final__toggle-2__button {
+        position: relative;
+        display: inline-block;
+        line-height: 20px;
+        text-transform: uppercase;
+        background-color: aliceblue;
+        color: #aaaaaa;
+        border: 1px solid #cccccc;
+        padding: 5px 10px 5px 30px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .final__toggle-2__button:before {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: auto;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: #cccccc;
+        content: "";
+        transition: all 0.3s ease;
+      }
+      .final__toggle-2__input:checked + .final__toggle-2__button {
+        background-color: #03101c;
+        border-color: #00b3b4;
+        color: #ffffff;
+      }
+      .final__toggle-2__input:checked + .final__toggle-2__button:before {
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+  <body id="body">
+    <section>
+      <div class="head">
+        <h1 id="h1">Welcome to PeersApp</h1>
+        <label for="final-toggle2" class="final__toggle-2">
+          <input
+            type="checkbox"
+            id="final-toggle2"
+            class="final__toggle-2__input"
+          />
+          <span class="final__toggle-2__button">Light Mode</span>
+        </label>
+      </div>
+      <p class="p1">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, magnam
+        quae repudiandae doloremque blanditiis reprehenderit nulla voluptatibus
+        animi dolores. Accusantium corporis, magni dolorum inventore
+        exercitationem delectus recusandae incidunt quos expedita?
+      </p>
+    </section>
+    <script>
+      let toggleInput = document.getElementById("final-toggle2");
+      let body = document.getElementById("body");
+      let h1 = document.getElementById("h1");
+
+      toggleInput.addEventListener("click", () => {
+        if (toggleInput.checked) {
+          h1.style.color = "blue";
+          body.style.color = "black";
+          body.style.background = "#c5d9eb";
+        } else {
+          body.style.background = "rgb(3, 16, 28)";
+          h1.style.color = "#00bfff";
+          body.style.color = "white";
+        }
+      });
+    </script>
+  </body>
+</html>
