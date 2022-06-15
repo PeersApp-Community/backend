@@ -1,19 +1,10 @@
 [
     {
-        "label": "os",
-        "kind": 6,
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "get_asgi_application",
-        "importPath": "django.core.asgi",
-        "description": "django.core.asgi",
-        "isExtraImport": true,
-        "detail": "django.core.asgi",
+        "detail": "pathlib",
         "documentation": {}
     },
     {
@@ -25,11 +16,54 @@
         "documentation": {}
     },
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
         "label": "timedelta",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
         "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "django_on_heroku",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django_on_heroku",
+        "description": "django_on_heroku",
+        "detail": "django_on_heroku",
+        "documentation": {}
+    },
+    {
+        "label": "dj_database_url",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "dj_database_url",
+        "description": "dj_database_url",
+        "detail": "dj_database_url",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
         "documentation": {}
     },
     {
@@ -488,210 +522,507 @@
         "documentation": {}
     },
     {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = \"django-insecure-cjlw9sy1m_si!ecq@!p6-eziybxb2zqm2@52avkww657=zp_2q\"\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "SECRET_KEY = \"django-insecure-cjlw9sy1m_si!ecq@!p6-eziybxb2zqm2@52avkww657=zp_2q\"\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "DEBUG = True\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    # App",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "INSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    # App\n    'djoser',\n    \"corsheaders\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "MIDDLEWARE = [\n    \"django.middleware.security.SecurityMiddleware\",\n    \"whitenoise.middleware.WhiteNoiseMiddleware\",\n    \"django.contrib.sessions.middleware.SessionMiddleware\",\n    \"corsheaders.middleware.CorsMiddleware\",\n    \"django.middleware.common.CommonMiddleware\",\n    \"django.middleware.csrf.CsrfViewMiddleware\",\n    \"django.contrib.auth.middleware.AuthenticationMiddleware\",\n    \"django.contrib.messages.middleware.MessageMiddleware\",\n    \"django.middleware.clickjacking.XFrameOptionsMiddleware\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "ROOT_URLCONF = \"todos.urls\"\nTEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [],\n        \"APP_DIRS\": True,\n        \"OPTIONS\": {\n            \"context_processors\": [\n                \"django.template.context_processors.debug\",\n                \"django.template.context_processors.request\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "TEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [],\n        \"APP_DIRS\": True,\n        \"OPTIONS\": {\n            \"context_processors\": [\n                \"django.template.context_processors.debug\",\n                \"django.template.context_processors.request\",\n                \"django.contrib.auth.context_processors.auth\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "WSGI_APPLICATION = \"todos.wsgi.application\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "DATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.UserAttributeSimilarityValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.MinimumLengthValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.CommonPasswordValidator\",\n    },",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "LANGUAGE_CODE = \"en-us\"\nTIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "TIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nMEDIA_URL = \"/media/\"",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nMEDIA_URL = \"/media/\"\nMEDIA_ROOT = os.path.join(BASE_DIR, \"media\")",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nMEDIA_URL = \"/media/\"\nMEDIA_ROOT = os.path.join(BASE_DIR, \"media\")\nAUTH_USER_MODEL = \"core.User\"",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nMEDIA_URL = \"/media/\"\nMEDIA_ROOT = os.path.join(BASE_DIR, \"media\")\nAUTH_USER_MODEL = \"core.User\"\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nMEDIA_URL = \"/media/\"\nMEDIA_ROOT = os.path.join(BASE_DIR, \"media\")\nAUTH_USER_MODEL = \"core.User\"\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',\n    \"DEFAULT_PERMISSION_CLASSES\" : [\n        \"rest_framework.permissions.AllowAny\"\n        ] ,",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_URL",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "MEDIA_URL = \"/media/\"\nMEDIA_ROOT = os.path.join(BASE_DIR, \"media\")\nAUTH_USER_MODEL = \"core.User\"\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',\n    \"DEFAULT_PERMISSION_CLASSES\" : [\n        \"rest_framework.permissions.AllowAny\"\n        ] ,\n    \"DEFAULT_AUTHENTICATION_CLASSES\": (",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "MEDIA_ROOT = os.path.join(BASE_DIR, \"media\")\nAUTH_USER_MODEL = \"core.User\"\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',\n    \"DEFAULT_PERMISSION_CLASSES\" : [\n        \"rest_framework.permissions.AllowAny\"\n        ] ,\n    \"DEFAULT_AUTHENTICATION_CLASSES\": (\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "AUTH_USER_MODEL = \"core.User\"\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',\n    \"DEFAULT_PERMISSION_CLASSES\" : [\n        \"rest_framework.permissions.AllowAny\"\n        ] ,\n    \"DEFAULT_AUTHENTICATION_CLASSES\": (\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ),",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "REST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',\n    \"DEFAULT_PERMISSION_CLASSES\" : [\n        \"rest_framework.permissions.AllowAny\"\n        ] ,\n    \"DEFAULT_AUTHENTICATION_CLASSES\": (\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ),\n}",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_ALL_ORIGINS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\nCORS_ORIGIN_WHITELIST = (\n    'http://localhost:3000',\n)\n# ALLOWED_HOSTS=[]\nCORS_ORIGIN_WHITELIST = (\n    'http://localhost:3000',\n)\n# CORS_ALLOW_METHODS = [\n#     \"DELETE\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ORIGIN_WHITELIST",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "CORS_ORIGIN_WHITELIST = (\n    'http://localhost:3000',\n)\n# ALLOWED_HOSTS=[]\nCORS_ORIGIN_WHITELIST = (\n    'http://localhost:3000',\n)\n# CORS_ALLOW_METHODS = [\n#     \"DELETE\",\n#     \"GET\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ORIGIN_WHITELIST",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "CORS_ORIGIN_WHITELIST = (\n    'http://localhost:3000',\n)\n# CORS_ALLOW_METHODS = [\n#     \"DELETE\",\n#     \"GET\",\n#     \"OPTIONS\",\n#     \"PATCH\",\n#     \"POST\",\n#     \"PUT\",",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "PeersApp.settings.base",
+        "description": "PeersApp.settings.base",
+        "peekOfCode": "SIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),\n    'ROTATE_REFRESH_TOKENS': False,\n    'BLACKLIST_AFTER_ROTATION': False,\n    'UPDATE_LAST_LOGIN': False,\n    'ALGORITHM': 'HS256',\n    'SIGNING_KEY': SECRET_KEY,\n    'VERIFYING_KEY': None,\n    'AUDIENCE': None,",
+        "detail": "PeersApp.settings.base",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    # added",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "INSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    # added\n    \"debug_toolbar\",\n    \"rest_framework\",",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "MIDDLEWARE = [\n    \"django.middleware.security.SecurityMiddleware\",\n    # ...\n    \"debug_toolbar.middleware.DebugToolbarMiddleware\",\n    # ...\n    \"django.contrib.sessions.middleware.SessionMiddleware\",\n    \"django.middleware.common.CommonMiddleware\",\n    \"django.middleware.csrf.CsrfViewMiddleware\",\n    \"django.contrib.auth.middleware.AuthenticationMiddleware\",\n    \"django.contrib.messages.middleware.MessageMiddleware\",",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "INTERNAL_IPS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "INTERNAL_IPS = [\n    # ...\n    \"127.0.0.1\",\n    # ...\n]\nROOT_URLCONF = \"PeersApp.urls\"\nTEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [os.path.join(BASE_DIR, \"templates\")],",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "ROOT_URLCONF = \"PeersApp.urls\"\nTEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [os.path.join(BASE_DIR, \"templates\")],\n        \"APP_DIRS\": True,\n        \"OPTIONS\": {\n            \"context_processors\": [\n                \"django.template.context_processors.debug\",\n                \"django.template.context_processors.request\",",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "TEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [os.path.join(BASE_DIR, \"templates\")],\n        \"APP_DIRS\": True,\n        \"OPTIONS\": {\n            \"context_processors\": [\n                \"django.template.context_processors.debug\",\n                \"django.template.context_processors.request\",\n                \"django.contrib.auth.context_processors.auth\",",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "WSGI_APPLICATION = \"PeersApp.wsgi.application\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "DATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.UserAttributeSimilarityValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.MinimumLengthValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.CommonPasswordValidator\",\n    },",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "LANGUAGE_CODE = \"en-us\"\nTIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "TIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "AUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],\n    #     'DEFAULT_PARSER_CLASSES': [",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "REST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],\n    #     'DEFAULT_PARSER_CLASSES': [\n    #         'rest_framework.parsers.JSONParser',",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "SIMPLE_JWT = {\n    \"ACCESS_TOKEN_LIFETIME\": timedelta(minutes=10),\n    \"REFRESH_TOKEN_LIFETIME\": timedelta(days=30),\n    \"ROTATE_REFRESH_TOKENS\": True,\n    \"BLACKLIST_AFTER_ROTATION\": True,\n    \"UPDATE_LAST_LOGIN\": False,\n    \"ALGORITHM\": \"HS256\",\n    \"SIGNING_KEY\": SECRET_KEY,\n    \"VERIFYING_KEY\": None,\n    \"AUDIENCE\": None,",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "DJOSER",
+        "kind": 5,
+        "importPath": "PeersApp.settings.common",
+        "description": "PeersApp.settings.common",
+        "peekOfCode": "DJOSER = {\n    \"PASSWORD_RESET_CONFIRM_URL\": \"#/password/reset/confirm/{uid}/{token}\",\n    \"USERNAME_RESET_CONFIRM_URL\": \"#/username/reset/confirm/{uid}/{token}\",\n    \"ACTIVATION_URL\": \"#/activate/{uid}/{token}\",\n    \"SEND_ACTIVATION_EMAIL\": True,\n    \"SERIALIZERS\": {\n    'activation': 'djoser.serializers.ActivationSerializer',\n    'password_reset': 'djoser.serializers.SendEmailResetSerializer',\n    'password_reset_confirm': 'djoser.serializers.PasswordResetConfirmSerializer',\n    'password_reset_confirm_retype': 'djoser.serializers.PasswordResetConfirmRetypeSerializer',",
+        "detail": "PeersApp.settings.common",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "PeersApp.settings.dev",
+        "description": "PeersApp.settings.dev",
+        "peekOfCode": "DEBUG = True\nSECRET_KEY = \"django-insecure-g&@3na06dum*%=qc6yf5q3yewk!xllvz9wt5=prdhe-#8vbom%\"\nALLOWED_HOSTS = [\"*\"]\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": os.path.join(BASE_DIR, \"db.sqlite3\"),\n    }\n}\n# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')",
+        "detail": "PeersApp.settings.dev",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "PeersApp.settings.dev",
+        "description": "PeersApp.settings.dev",
+        "peekOfCode": "SECRET_KEY = \"django-insecure-g&@3na06dum*%=qc6yf5q3yewk!xllvz9wt5=prdhe-#8vbom%\"\nALLOWED_HOSTS = [\"*\"]\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": os.path.join(BASE_DIR, \"db.sqlite3\"),\n    }\n}\n# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# STATICFILES_DIRS = [",
+        "detail": "PeersApp.settings.dev",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.dev",
+        "description": "PeersApp.settings.dev",
+        "peekOfCode": "ALLOWED_HOSTS = [\"*\"]\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": os.path.join(BASE_DIR, \"db.sqlite3\"),\n    }\n}\n# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# STATICFILES_DIRS = [\n#     os.path.join(BASE_DIR, 'static'),",
+        "detail": "PeersApp.settings.dev",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "PeersApp.settings.dev",
+        "description": "PeersApp.settings.dev",
+        "peekOfCode": "DATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": os.path.join(BASE_DIR, \"db.sqlite3\"),\n    }\n}\n# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# STATICFILES_DIRS = [\n#     os.path.join(BASE_DIR, 'static'),\n# ]",
+        "detail": "PeersApp.settings.dev",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "PeersApp.settings.prod",
+        "description": "PeersApp.settings.prod",
+        "peekOfCode": "SECRET_KEY = os.environ[\"SECRET_KEY\"]\nDEBUG = False\nALLOWED_HOSTS = [\"todo-appl1.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nALLOWED_HOSTS = [\"todo-app-rjt.herokuapp.com\"]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "detail": "PeersApp.settings.prod",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "PeersApp.settings.prod",
+        "description": "PeersApp.settings.prod",
+        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = [\"todo-appl1.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nALLOWED_HOSTS = [\"todo-app-rjt.herokuapp.com\"]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "detail": "PeersApp.settings.prod",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.prod",
+        "description": "PeersApp.settings.prod",
+        "peekOfCode": "ALLOWED_HOSTS = [\"todo-appl1.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nALLOWED_HOSTS = [\"todo-app-rjt.herokuapp.com\"]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "detail": "PeersApp.settings.prod",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "PeersApp.settings.prod",
+        "description": "PeersApp.settings.prod",
+        "peekOfCode": "DATABASES = {\n    \"default\": dj_database_url.config()\n}\nALLOWED_HOSTS = [\"todo-app-rjt.herokuapp.com\"]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "detail": "PeersApp.settings.prod",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "PeersApp.settings.prod",
+        "description": "PeersApp.settings.prod",
+        "peekOfCode": "ALLOWED_HOSTS = [\"todo-app-rjt.herokuapp.com\"]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "detail": "PeersApp.settings.prod",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_ROOT",
+        "kind": 5,
+        "importPath": "PeersApp.settings.prod",
+        "description": "PeersApp.settings.prod",
+        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "detail": "PeersApp.settings.prod",
+        "documentation": {}
+    },
+    {
         "label": "application",
         "kind": 5,
         "importPath": "PeersApp.asgi",
         "description": "PeersApp.asgi",
         "peekOfCode": "application = get_asgi_application()",
         "detail": "PeersApp.asgi",
-        "documentation": {}
-    },
-    {
-        "label": "BASE_DIR",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = \"django-insecure-g&@3na06dum*%=qc6yf5q3yewk!xllvz9wt5=prdhe-#8vbom%\"\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "SECRET_KEY",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "SECRET_KEY = \"django-insecure-g&@3na06dum*%=qc6yf5q3yewk!xllvz9wt5=prdhe-#8vbom%\"\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "DEBUG",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "ALLOWED_HOSTS",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    # added",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "INSTALLED_APPS",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "INSTALLED_APPS = [\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",\n    \"django.contrib.staticfiles\",\n    # added\n    \"debug_toolbar\",\n    \"rest_framework\",",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "MIDDLEWARE",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "MIDDLEWARE = [\n    \"django.middleware.security.SecurityMiddleware\",\n    # ...\n    \"debug_toolbar.middleware.DebugToolbarMiddleware\",\n    # ...\n    \"django.contrib.sessions.middleware.SessionMiddleware\",\n    \"django.middleware.common.CommonMiddleware\",\n    \"django.middleware.csrf.CsrfViewMiddleware\",\n    \"django.contrib.auth.middleware.AuthenticationMiddleware\",\n    \"django.contrib.messages.middleware.MessageMiddleware\",",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "INTERNAL_IPS",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "INTERNAL_IPS = [\n    # ...\n    \"127.0.0.1\",\n    # ...\n]\nROOT_URLCONF = \"PeersApp.urls\"\nTEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [os.path.join(BASE_DIR, \"templates\")],",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "ROOT_URLCONF",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "ROOT_URLCONF = \"PeersApp.urls\"\nTEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [os.path.join(BASE_DIR, \"templates\")],\n        \"APP_DIRS\": True,\n        \"OPTIONS\": {\n            \"context_processors\": [\n                \"django.template.context_processors.debug\",\n                \"django.template.context_processors.request\",",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "TEMPLATES",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "TEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [os.path.join(BASE_DIR, \"templates\")],\n        \"APP_DIRS\": True,\n        \"OPTIONS\": {\n            \"context_processors\": [\n                \"django.template.context_processors.debug\",\n                \"django.template.context_processors.request\",\n                \"django.contrib.auth.context_processors.auth\",",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "WSGI_APPLICATION",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "WSGI_APPLICATION = \"PeersApp.wsgi.application\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "DATABASES",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "DATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "AUTH_PASSWORD_VALIDATORS",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.UserAttributeSimilarityValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.MinimumLengthValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.CommonPasswordValidator\",\n    },",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "LANGUAGE_CODE",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "LANGUAGE_CODE = \"en-us\"\nTIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "TIME_ZONE",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "TIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "USE_I18N",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "USE_TZ",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "STATIC_URL",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "DEFAULT_AUTO_FIELD",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "AUTH_USER_MODEL",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "AUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],\n    #     'DEFAULT_PARSER_CLASSES': [",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "REST_FRAMEWORK",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "REST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],\n    #     'DEFAULT_PARSER_CLASSES': [\n    #         'rest_framework.parsers.JSONParser',",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "SIMPLE_JWT",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "SIMPLE_JWT = {\n    \"ACCESS_TOKEN_LIFETIME\": timedelta(minutes=10),\n    \"REFRESH_TOKEN_LIFETIME\": timedelta(days=30),\n    \"ROTATE_REFRESH_TOKENS\": True,\n    \"BLACKLIST_AFTER_ROTATION\": True,\n    \"UPDATE_LAST_LOGIN\": False,\n    \"ALGORITHM\": \"HS256\",\n    \"SIGNING_KEY\": SECRET_KEY,\n    \"VERIFYING_KEY\": None,\n    \"AUDIENCE\": None,",
-        "detail": "PeersApp.settings",
-        "documentation": {}
-    },
-    {
-        "label": "DJOSER",
-        "kind": 5,
-        "importPath": "PeersApp.settings",
-        "description": "PeersApp.settings",
-        "peekOfCode": "DJOSER = {\n    \"PASSWORD_RESET_CONFIRM_URL\": \"#/password/reset/confirm/{uid}/{token}\",\n    \"USERNAME_RESET_CONFIRM_URL\": \"#/username/reset/confirm/{uid}/{token}\",\n    \"ACTIVATION_URL\": \"#/activate/{uid}/{token}\",\n    \"SEND_ACTIVATION_EMAIL\": True,\n    \"SERIALIZERS\": {\n    'activation': 'djoser.serializers.ActivationSerializer',\n    'password_reset': 'djoser.serializers.SendEmailResetSerializer',\n    'password_reset_confirm': 'djoser.serializers.PasswordResetConfirmSerializer',\n    'password_reset_confirm_retype': 'djoser.serializers.PasswordResetConfirmRetypeSerializer',",
-        "detail": "PeersApp.settings",
         "documentation": {}
     },
     {
@@ -915,7 +1246,7 @@
         "kind": 2,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PeersApp.settings')\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
+        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault(\"DJANGO_SETTINGS_MODULE\", \"PeersApp.settings.dev\")\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
         "detail": "manage",
         "documentation": {}
     }
