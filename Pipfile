@@ -16,8 +16,6 @@ gunicorn = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
-autopep8 = "*"
-black = "*"
 
 [requires]
 python_version = "3.9"
