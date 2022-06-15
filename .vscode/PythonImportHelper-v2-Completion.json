@@ -544,7 +544,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.common",
         "description": "PeersApp.settings.common",
-        "peekOfCode": "MIDDLEWARE = [\n    \"django.middleware.security.SecurityMiddleware\",\n    # ...\n    # \"debug_toolbar.middleware.DebugToolbarMiddleware\",\n    # ...\n    \"django.contrib.sessions.middleware.SessionMiddleware\",\n    \"django.middleware.common.CommonMiddleware\",\n    \"django.middleware.csrf.CsrfViewMiddleware\",\n    \"django.contrib.auth.middleware.AuthenticationMiddleware\",\n    \"django.contrib.messages.middleware.MessageMiddleware\",",
+        "peekOfCode": "MIDDLEWARE = [\n    \"django.middleware.security.SecurityMiddleware\",\n    # ...\n    \"whitenoise.middleware.WhiteNoiseMiddleware\",\n    # \"debug_toolbar.middleware.DebugToolbarMiddleware\",\n    # ...\n    \"django.contrib.sessions.middleware.SessionMiddleware\",\n    \"django.middleware.common.CommonMiddleware\",\n    \"django.middleware.csrf.CsrfViewMiddleware\",\n    \"django.contrib.auth.middleware.AuthenticationMiddleware\",",
         "detail": "PeersApp.settings.common",
         "documentation": {}
     },
