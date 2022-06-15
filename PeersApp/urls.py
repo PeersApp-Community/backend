@@ -34,6 +34,7 @@ urlpatterns = [
     path("api/", include("peers_api.urls")),
     path('base/', include('base.urls')),
     # 
+    path('api-auth/', include('rest_framework.urls')),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
