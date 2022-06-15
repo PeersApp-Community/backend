@@ -1,8 +1,132 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers
-from base.models import User
+from djoser.serializers import UserCreateSerializer as DjoserUserCreateSerializer
+from .models import Profile, User
+import random
+import math
 
 
-class UserSerializer(serializers.ModelSerializer):
+def otp_create(phone):
+    num = []
+    num[:0] = str(phone)
+    random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])
+
+    digits = [i for i in range(0, random_num)]
+    otp = ""
+    for i in range(6):
+        index = math.floor(random.random() * 10)
+        otp += str(digits[index])
+
+    return otp
+
+
+# class UserCreateSerializer(DjoserUserCreateSerializer):
+class UserCreateSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(style={"input_type": "password"}, write_only=True)
+
+    class Meta(DjoserUserCreateSerializer.Meta):
+        # model = User
+        fields = ["id", "username", "email", "phone", "password"]
+
+    def validate_phone(self, value):
+        if User.objects.filter(phone=value).exists():
+            raise serializers.ValidationError(
+                "User with the given phone number already exists."
+            )
+        if len(value) < 7:
+            raise serializers.ValidationError("Phone Number is too short")
+        return value
+
+    def create(self, validated_data):
+        user = User(**validated_data)
+        user.otp = otp_create(validated_data["phone"])
+        user.save()
+        return user
+
+    # def update(self, instance, validated_data):
+
+    #     return super().update(instance, validated_data)
+
+    # def create(self, vali):
+    #     serializer = UserCreateSerializer(data=request.data)
+
+    #     if serializer.is_valid(raise_exception=True):
+    #         headers = self.get_success_headers(serializer.data)
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class GetOtpSerializer(serializers.ModelSerializer):
+    phone = serializers.CharField()
+    otp = serializers.CharField(max_length=6, min_length=6, write_only=True)
+
     class Meta:
         model = User
-        field = ["id", "first_name", "last_name", "email", "phone", "bio", "avatar"]
+        fields = ["otp", "phone"]
+
+    def validate_phone(self, value):
+        if not User.objects.filter(phone=value).exists():
+            raise serializers.ValidationError(
+                "No user with the given phone number was found."
+            )
+        return value
+
+    def save(self, **kwargs):
+        phone = self.validated_data["phone"]
+        otp = self.validated_data["otp"]
+
+        try:
+            user = User.objects.get(phone=phone, otp=otp)
+
+            # updating an existing user
+            self.instance = user
+            if self.instance.is_phone_verified == False:
+                self.instance.is_phone_verified = True
+                self.instance.otp = ""
+                self.instance.save()
+            return self.instance
+        except User.DoesNotExist:
+            raise serializers.ValidationError(
+                "The OTP is Wrong."
+            )
+
+        # return self.instance
+
+    #
+
+    # def save(self, **kwargs):
+    #     otp = self.validated_data['otp']
+
+    #     # phone = Customer.objects.get(
+    #     #     phone=self.context['phone'])
+    #     User = Order.objects.create(customer=customer)
+
+    #     cart_items = CartItem.objects \
+    #         .select_related('product') \
+    #         .filter(cart_id=cart_id)
+    #     order_items = [
+    #         OrderItem(
+    #             order=order,
+    #             product=item.product,
+    #             unit_price=item.product.unit_price,
+    #             quantity=item.quantity
+    #         ) for item in cart_items
+    #     ]
+    #     OrderItem.objects.bulk_create(order_items)
+
+    #     Cart.objects.filter(pk=cart_id).delete()
+
+    #     order_created.send_robust(self.__class__, order=order)
+
+    #     return order
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+
+    class Meta:
+        model = Profile
+        fields = ["id", "user_id", "first_name", "last_name", "bio", "avatar"]
+
+    def create(self, validated_data):
+        user_id = self.context["user_id"]
+        return Profile.objects.create(user_id=user_id, **validated_data)

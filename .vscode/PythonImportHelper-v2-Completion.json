@@ -25,6 +25,46 @@
         "documentation": {}
     },
     {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "static",
+        "importPath": "django.conf.urls.static",
+        "description": "django.conf.urls.static",
+        "isExtraImport": true,
+        "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
         "label": "admin",
         "importPath": "django.contrib",
         "description": "django.contrib",
@@ -73,11 +113,35 @@
         "documentation": {}
     },
     {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
         "label": "TemplateView",
         "importPath": "django.views.generic",
         "description": "django.views.generic",
         "isExtraImport": true,
         "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "TokenObtainPairView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "TokenRefreshView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
         "documentation": {}
     },
     {
@@ -147,6 +211,38 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -172,14 +268,6 @@
         "documentation": {}
     },
     {
-        "label": "settings",
-        "importPath": "django.conf",
-        "description": "django.conf",
-        "isExtraImport": true,
-        "detail": "django.conf",
-        "documentation": {}
-    },
-    {
         "label": "django.db.models.deletion",
         "kind": 6,
         "isExtraImport": true,
@@ -189,11 +277,11 @@
         "documentation": {}
     },
     {
-        "label": "AppConfig",
-        "importPath": "django.apps",
-        "description": "django.apps",
+        "label": "UserAdmin",
+        "importPath": "django.contrib.auth.admin",
+        "description": "django.contrib.auth.admin",
         "isExtraImport": true,
-        "detail": "django.apps",
+        "detail": "django.contrib.auth.admin",
         "documentation": {}
     },
     {
@@ -205,11 +293,43 @@
         "documentation": {}
     },
     {
-        "label": "default",
-        "importPath": "email.policy",
-        "description": "email.policy",
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
         "isExtraImport": true,
-        "detail": "email.policy",
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "django.utils",
+        "description": "django.utils",
+        "isExtraImport": true,
+        "detail": "django.utils",
+        "documentation": {}
+    },
+    {
+        "label": "gettext_lazy",
+        "importPath": "django.utils.translation",
+        "description": "django.utils.translation",
+        "isExtraImport": true,
+        "detail": "django.utils.translation",
+        "documentation": {}
+    },
+    {
+        "label": "get_object_or_404",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
         "documentation": {}
     },
     {
@@ -221,11 +341,133 @@
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "base.models",
-        "description": "base.models",
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
         "isExtraImport": true,
-        "detail": "base.models",
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "UserCreateSerializer",
+        "importPath": "djoser.serializers",
+        "description": "djoser.serializers",
+        "isExtraImport": true,
+        "detail": "djoser.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "DefaultRouter",
+        "importPath": "rest_framework.routers",
+        "description": "rest_framework.routers",
+        "isExtraImport": true,
+        "detail": "rest_framework.routers",
+        "documentation": {}
+    },
+    {
+        "label": "AllowAny",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsAuthenticatedOrReadOnly",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "ListCreateAPIView",
+        "importPath": "rest_framework.generics",
+        "description": "rest_framework.generics",
+        "isExtraImport": true,
+        "detail": "rest_framework.generics",
+        "documentation": {}
+    },
+    {
+        "label": "CreateAPIView",
+        "importPath": "rest_framework.generics",
+        "description": "rest_framework.generics",
+        "isExtraImport": true,
+        "detail": "rest_framework.generics",
+        "documentation": {}
+    },
+    {
+        "label": "UpdateAPIView",
+        "importPath": "rest_framework.generics",
+        "description": "rest_framework.generics",
+        "isExtraImport": true,
+        "detail": "rest_framework.generics",
+        "documentation": {}
+    },
+    {
+        "label": "GenericAPIView",
+        "importPath": "rest_framework.generics",
+        "description": "rest_framework.generics",
+        "isExtraImport": true,
+        "detail": "rest_framework.generics",
+        "documentation": {}
+    },
+    {
+        "label": "api_view",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "permission_classes",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "APIView",
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "isExtraImport": true,
+        "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
+        "label": "ModelViewSet",
+        "importPath": "rest_framework.viewsets",
+        "description": "rest_framework.viewsets",
+        "isExtraImport": true,
+        "detail": "rest_framework.viewsets",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
         "documentation": {}
     },
     {
@@ -234,30 +476,6 @@
         "description": "django.test",
         "isExtraImport": true,
         "detail": "django.test",
-        "documentation": {}
-    },
-    {
-        "label": "TestCase",
-        "importPath": "django.test",
-        "description": "django.test",
-        "isExtraImport": true,
-        "detail": "django.test",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
         "documentation": {}
     },
     {
@@ -409,7 +627,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings",
         "description": "PeersApp.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {",
         "detail": "PeersApp.settings",
         "documentation": {}
     },
@@ -418,7 +636,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings",
         "description": "PeersApp.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],",
         "detail": "PeersApp.settings",
         "documentation": {}
     },
@@ -427,7 +645,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings",
         "description": "PeersApp.settings",
-        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"",
+        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]",
         "detail": "PeersApp.settings",
         "documentation": {}
     },
@@ -436,7 +654,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings",
         "description": "PeersApp.settings",
-        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"\nAUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],",
         "detail": "PeersApp.settings",
         "documentation": {}
     },
@@ -445,8 +663,53 @@
         "kind": 5,
         "importPath": "PeersApp.settings",
         "description": "PeersApp.settings",
-        "peekOfCode": "AUTH_USER_MODEL = \"base.User\"",
+        "peekOfCode": "AUTH_USER_MODEL = \"base.User\"\nREST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],\n    #     'DEFAULT_PARSER_CLASSES': [",
         "detail": "PeersApp.settings",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "PeersApp.settings",
+        "description": "PeersApp.settings",
+        "peekOfCode": "REST_FRAMEWORK = {\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticated\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ]\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],\n    #     'DEFAULT_PARSER_CLASSES': [\n    #         'rest_framework.parsers.JSONParser',",
+        "detail": "PeersApp.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "PeersApp.settings",
+        "description": "PeersApp.settings",
+        "peekOfCode": "SIMPLE_JWT = {\n    \"ACCESS_TOKEN_LIFETIME\": timedelta(minutes=10),\n    \"REFRESH_TOKEN_LIFETIME\": timedelta(days=30),\n    \"ROTATE_REFRESH_TOKENS\": True,\n    \"BLACKLIST_AFTER_ROTATION\": True,\n    \"UPDATE_LAST_LOGIN\": False,\n    \"ALGORITHM\": \"HS256\",\n    \"SIGNING_KEY\": SECRET_KEY,\n    \"VERIFYING_KEY\": None,\n    \"AUDIENCE\": None,",
+        "detail": "PeersApp.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DJOSER",
+        "kind": 5,
+        "importPath": "PeersApp.settings",
+        "description": "PeersApp.settings",
+        "peekOfCode": "DJOSER = {\n    \"PASSWORD_RESET_CONFIRM_URL\": \"#/password/reset/confirm/{uid}/{token}\",\n    \"USERNAME_RESET_CONFIRM_URL\": \"#/username/reset/confirm/{uid}/{token}\",\n    \"ACTIVATION_URL\": \"#/activate/{uid}/{token}\",\n    \"SEND_ACTIVATION_EMAIL\": True,\n    \"SERIALIZERS\": {\n    'activation': 'djoser.serializers.ActivationSerializer',\n    'password_reset': 'djoser.serializers.SendEmailResetSerializer',\n    'password_reset_confirm': 'djoser.serializers.PasswordResetConfirmSerializer',\n    'password_reset_confirm_retype': 'djoser.serializers.PasswordResetConfirmRetypeSerializer',",
+        "detail": "PeersApp.settings",
+        "documentation": {}
+    },
+    {
+        "label": "admin.site.site_header",
+        "kind": 5,
+        "importPath": "PeersApp.urls",
+        "description": "PeersApp.urls",
+        "peekOfCode": "admin.site.site_header = 'PeersApp Admin'\nadmin.site.index_title = 'Admin'\nurlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path(\"auth/\", include(\"djoser.urls\")),\n    path(\"auth/\", include(\"djoser.urls.jwt\")),",
+        "detail": "PeersApp.urls",
+        "documentation": {}
+    },
+    {
+        "label": "admin.site.index_title",
+        "kind": 5,
+        "importPath": "PeersApp.urls",
+        "description": "PeersApp.urls",
+        "peekOfCode": "admin.site.index_title = 'Admin'\nurlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path(\"auth/\", include(\"djoser.urls\")),\n    path(\"auth/\", include(\"djoser.urls.jwt\")),\n    path(\"api/token/\", TokenObtainPairView.as_view(), name=\"token_obtain_pair\"),",
+        "detail": "PeersApp.urls",
         "documentation": {}
     },
     {
@@ -454,7 +717,7 @@
         "kind": 5,
         "importPath": "PeersApp.urls",
         "description": "PeersApp.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path('api/', include('peers_api.urls')),\n    path('__debug__/', include('debug_toolbar.urls')),\n    path('admin/', admin.site.urls),\n]",
+        "peekOfCode": "urlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path(\"auth/\", include(\"djoser.urls\")),\n    path(\"auth/\", include(\"djoser.urls.jwt\")),\n    path(\"api/token/\", TokenObtainPairView.as_view(), name=\"token_obtain_pair\"),\n    path(\"api/token/refresh/\", TokenRefreshView.as_view(), name=\"token_refresh\"),",
         "detail": "PeersApp.urls",
         "documentation": {}
     },
@@ -486,6 +749,42 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "base.migrations.0003_remove_user_created_profile_updated_and_more",
+        "description": "base.migrations.0003_remove_user_created_profile_updated_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('base', '0002_remove_user_avatar_remove_user_bio_and_more'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='user',\n            name='created',\n        ),\n        migrations.AddField(",
+        "detail": "base.migrations.0003_remove_user_created_profile_updated_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "base.migrations.0004_user_otp",
+        "description": "base.migrations.0004_user_otp",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('base', '0003_remove_user_created_profile_updated_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='user',\n            name='otp',\n            field=models.IntegerField(blank=True, max_length=6, null=True),\n        ),",
+        "detail": "base.migrations.0004_user_otp",
+        "documentation": {}
+    },
+    {
+        "label": "UserdAdmin",
+        "kind": 6,
+        "importPath": "base.admin",
+        "description": "base.admin",
+        "peekOfCode": "class UserdAdmin(BaseUserAdmin):\n    add_fieldsets = (\n        (\n            None,\n            {\n                \"classes\": (\"wide\",),\n                \"fields\": (\n                    \"username\",\n                    \"email\",\n                    \"phone\",",
+        "detail": "base.admin",
+        "documentation": {}
+    },
+    {
+        "label": "ProfileAdmin",
+        "kind": 6,
+        "importPath": "base.admin",
+        "description": "base.admin",
+        "peekOfCode": "class ProfileAdmin(admin.ModelAdmin):\n    autocomplete_fields = [\"user\"]\n    list_display = [\"user_id\", \"id\", \"user\", \"first_name\", \"last_name\", \"avatar\"]",
+        "detail": "base.admin",
+        "documentation": {}
+    },
+    {
         "label": "BaseConfig",
         "kind": 6,
         "importPath": "base.apps",
@@ -499,7 +798,7 @@
         "kind": 6,
         "importPath": "base.models",
         "description": "base.models",
-        "peekOfCode": "class User(AbstractUser):\n    email = models.EmailField(unique=True)\n    phone = models.CharField(max_length=15, unique=True)\n    created = models.DateTimeField(auto_now_add=True)\n    USERNAME_FIELD = \"email\" or \"phone\"\n    REQUIRED_FIELDS = [\"username\", \"phone\"]\nclass Profile(models.Model):\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\n    first_name = models.CharField(max_length=255, null=True, blank=True)\n    last_name = models.CharField(max_length=255, null=True, blank=True)",
+        "peekOfCode": "class User(AbstractUser):\n    email = models.EmailField(unique=True)\n    phone = models.CharField(max_length=15, unique=True)\n    is_phone_verified = models.BooleanField(default=False)\n    is_email_verified = models.BooleanField(default=False)\n    date_joined = models.DateTimeField(_(\"date joined\"), default=timezone.now)\n    otp = models.CharField(max_length=6, blank=True, null=True)\n    USERNAME_FIELD = \"email\" or \"phone\"\n    REQUIRED_FIELDS = [\"username\", \"phone\"]\nclass Profile(models.Model):",
         "detail": "base.models",
         "documentation": {}
     },
@@ -508,17 +807,89 @@
         "kind": 6,
         "importPath": "base.models",
         "description": "base.models",
-        "peekOfCode": "class Profile(models.Model):\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\n    first_name = models.CharField(max_length=255, null=True, blank=True)\n    last_name = models.CharField(max_length=255, null=True, blank=True)\n    bio = models.CharField(max_length=100, null=True, blank=True)\n    avatar = models.ImageField(null=True, blank=True, default=\"avatar.svg\")",
+        "peekOfCode": "class Profile(models.Model):\n    user = models.OneToOneField(User, on_delete=models.CASCADE)\n    first_name = models.CharField(max_length=255, null=True, blank=True)\n    last_name = models.CharField(max_length=255, null=True, blank=True)\n    bio = models.CharField(max_length=100, null=True, blank=True)\n    avatar = models.ImageField(null=True, blank=True, default=\"avatar.svg\")\n    updated = models.DateTimeField(auto_now=True)",
         "detail": "base.models",
         "documentation": {}
     },
     {
-        "label": "UserSerializer",
+        "label": "UserCreateSerializer",
         "kind": 6,
         "importPath": "base.serializers",
         "description": "base.serializers",
-        "peekOfCode": "class UserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = User\n        field = [\"id\", \"first_name\", \"last_name\", \"email\", \"phone\", \"bio\", \"avatar\"]",
+        "peekOfCode": "class UserCreateSerializer(serializers.ModelSerializer):\n    password = serializers.CharField(style={\"input_type\": \"password\"}, write_only=True)\n    class Meta(DjoserUserCreateSerializer.Meta):\n        # model = User\n        fields = [\"id\", \"username\", \"email\", \"phone\", \"password\"]\n    def validate_phone(self, value):\n        if User.objects.filter(phone=value).exists():\n            raise serializers.ValidationError(\n                \"User with the given phone number already exists.\"\n            )",
         "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "GetOtpSerializer",
+        "kind": 6,
+        "importPath": "base.serializers",
+        "description": "base.serializers",
+        "peekOfCode": "class GetOtpSerializer(serializers.ModelSerializer):\n    phone = serializers.CharField()\n    otp = serializers.CharField(max_length=6, min_length=6, write_only=True)\n    class Meta:\n        model = User\n        fields = [\"otp\", \"phone\"]\n    def validate_phone(self, value):\n        if not User.objects.filter(phone=value).exists():\n            raise serializers.ValidationError(\n                \"No user with the given phone number was found.\"",
+        "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "ProfileSerializer",
+        "kind": 6,
+        "importPath": "base.serializers",
+        "description": "base.serializers",
+        "peekOfCode": "class ProfileSerializer(serializers.ModelSerializer):\n    user_id = serializers.IntegerField()\n    class Meta:\n        model = Profile\n        fields = [\"id\", \"user_id\", \"first_name\", \"last_name\", \"bio\", \"avatar\"]\n    def create(self, validated_data):\n        user_id = self.context[\"user_id\"]\n        return Profile.objects.create(user_id=user_id, **validated_data)",
+        "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "otp_create",
+        "kind": 2,
+        "importPath": "base.serializers",
+        "description": "base.serializers",
+        "peekOfCode": "def otp_create(phone):\n    num = []\n    num[:0] = str(phone)\n    random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])\n    digits = [i for i in range(0, random_num)]\n    otp = \"\"\n    for i in range(6):\n        index = math.floor(random.random() * 10)\n        otp += str(digits[index])\n    return otp",
+        "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "base.urls",
+        "description": "base.urls",
+        "peekOfCode": "router = DefaultRouter()\n# router.register(\"reg\", UserCreateViewSet, basename=\"reg\")\nrouter.register(\"profile\", ProfileViewSet)\n# Routers provide an easy way of automatically determining the URL conf.\n#\nurlpatterns = [\n    path(\"reg/\", UserCreateAPIView.as_view()),\n    path(\"reg/val/\", validate_user),\n]\nurlpatterns += router.urls",
+        "detail": "base.urls",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "base.urls",
+        "description": "base.urls",
+        "peekOfCode": "urlpatterns = [\n    path(\"reg/\", UserCreateAPIView.as_view()),\n    path(\"reg/val/\", validate_user),\n]\nurlpatterns += router.urls",
+        "detail": "base.urls",
+        "documentation": {}
+    },
+    {
+        "label": "UserCreateAPIView",
+        "kind": 6,
+        "importPath": "base.views",
+        "description": "base.views",
+        "peekOfCode": "class UserCreateAPIView(CreateAPIView):\n    queryset = User.objects.all()\n    serializer_class = UserCreateSerializer\n    permission_classes = [AllowAny]\n@api_view([\"PATCH\"])\n@permission_classes([AllowAny])\ndef validate_user(request):\n    if request.method == \"PATCH\":\n        serializer = GetOtpSerializer(data=request.data, partial=True)\n        # set partial=True to update a data partially",
+        "detail": "base.views",
+        "documentation": {}
+    },
+    {
+        "label": "ProfileViewSet",
+        "kind": 6,
+        "importPath": "base.views",
+        "description": "base.views",
+        "peekOfCode": "class ProfileViewSet(ModelViewSet):\n    queryset = Profile.objects.all()\n    serializer_class = ProfileSerializer\n    permission_classes = [AllowAny]\n    def get_serializer_context(self):\n        return {\"user_id\": self.request.user.id}\n    # def create(self, request, *args, **kwargs):\n    #     serializer = UserCreateSerializer(\n    #         data=request.data,\n    #         context={'user_id': self.request.user.id})",
+        "detail": "base.views",
+        "documentation": {}
+    },
+    {
+        "label": "validate_user",
+        "kind": 2,
+        "importPath": "base.views",
+        "description": "base.views",
+        "peekOfCode": "def validate_user(request):\n    if request.method == \"PATCH\":\n        serializer = GetOtpSerializer(data=request.data, partial=True)\n        # set partial=True to update a data partially\n        serializer.is_valid(raise_exception=True)\n        serializer.save()\n        return Response(\n            {\"Message\": \"You are Validated\"}, status=status.HTTP_201_CREATED\n        )\nclass ProfileViewSet(ModelViewSet):",
+        "detail": "base.views",
         "documentation": {}
     },
     {
