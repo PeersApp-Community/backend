@@ -14,7 +14,7 @@ DATABASES = {
     "default": dj_database_url.config()
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Configure Django App for Heroku.
 django_on_heroku.settings(locals())
