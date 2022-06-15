@@ -688,7 +688,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.dev",
         "description": "PeersApp.settings.dev",
-        "peekOfCode": "DEBUG = True\nSECRET_KEY = \"django-insecure-g&@3na06dum*%=qc6yf5q3yewk!xllvz9wt5=prdhe-#8vbom%\"\nALLOWED_HOSTS = [\"*\"]\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": os.path.join(BASE_DIR, \"db.sqlite3\"),\n    }\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')",
+        "peekOfCode": "DEBUG = False\nSECRET_KEY = \"django-insecure-g&@3na06dum*%=qc6yf5q3yewk!xllvz9wt5=prdhe-#8vbom%\"\nALLOWED_HOSTS = [\"*\"]\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": os.path.join(BASE_DIR, \"db.sqlite3\"),\n    }\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')",
         "detail": "PeersApp.settings.dev",
         "documentation": {}
     },
@@ -733,7 +733,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "SECRET_KEY = os.environ[\"SECRET_KEY\"]\nDEBUG = False\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "peekOfCode": "SECRET_KEY = os.environ[\"SECRET_KEY\"]\nDEBUG = True\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -742,7 +742,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -751,7 +751,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "ALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "peekOfCode": "ALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -760,7 +760,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "DATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "peekOfCode": "DATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -769,7 +769,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -1012,7 +1012,7 @@
         "kind": 2,
         "importPath": "manage",
         "description": "manage",
-        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault(\"DJANGO_SETTINGS_MODULE\", \"PeersApp.settings.prod\")\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
+        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault(\"DJANGO_SETTINGS_MODULE\", \"PeersApp.settings.dev\")\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
         "detail": "manage",
         "documentation": {}
     }

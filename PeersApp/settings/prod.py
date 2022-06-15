@@ -6,7 +6,7 @@ import dj_database_url
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["https://peers-app-sh.herokuapp.com"]
 
@@ -18,3 +18,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Configure Django App for Heroku.
 django_on_heroku.settings(locals())
+# https://peers-app-sh.herokuapp.com/
