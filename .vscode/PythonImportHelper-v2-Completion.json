@@ -787,7 +787,7 @@
         "kind": 5,
         "importPath": "PeersApp.urls",
         "description": "PeersApp.urls",
-        "peekOfCode": "admin.site.site_header = 'PeersApp Admin'\nadmin.site.index_title = 'Admin'\nurlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path('api-auth/', include('rest_framework.urls')),\n    path(\"auth/\", include(\"djoser.urls\")),",
+        "peekOfCode": "admin.site.site_header = 'PeersApp Admin'\nadmin.site.index_title = 'Admin'\nurlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),\n    path(\"auth/\", include(\"djoser.urls\")),",
         "detail": "PeersApp.urls",
         "documentation": {}
     },
@@ -796,7 +796,7 @@
         "kind": 5,
         "importPath": "PeersApp.urls",
         "description": "PeersApp.urls",
-        "peekOfCode": "admin.site.index_title = 'Admin'\nurlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path('api-auth/', include('rest_framework.urls')),\n    path(\"auth/\", include(\"djoser.urls\")),\n    path(\"auth/\", include(\"djoser.urls.jwt\")),",
+        "peekOfCode": "admin.site.index_title = 'Admin'\nurlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),\n    path(\"auth/\", include(\"djoser.urls\")),\n    path(\"auth/\", include(\"djoser.urls.jwt\")),",
         "detail": "PeersApp.urls",
         "documentation": {}
     },
@@ -805,7 +805,7 @@
         "kind": 5,
         "importPath": "PeersApp.urls",
         "description": "PeersApp.urls",
-        "peekOfCode": "urlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path('api-auth/', include('rest_framework.urls')),\n    path(\"auth/\", include(\"djoser.urls\")),\n    path(\"auth/\", include(\"djoser.urls.jwt\")),\n    path(\"api/token/\", TokenObtainPairView.as_view(), name=\"token_obtain_pair\"),",
+        "peekOfCode": "urlpatterns = [\n    path(\"\", TemplateView.as_view(template_name=\"index.html\"), name=\"index\"),\n    path(\"peers-admin/\", admin.site.urls),\n    path(\"api/\", include(\"peers_api.urls\")),\n    path('base/', include('base.urls')),\n    # \n    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),\n    path(\"auth/\", include(\"djoser.urls\")),\n    path(\"auth/\", include(\"djoser.urls.jwt\")),\n    path(\"api/token/\", TokenObtainPairView.as_view(), name=\"token_obtain_pair\"),",
         "detail": "PeersApp.urls",
         "documentation": {}
     },
