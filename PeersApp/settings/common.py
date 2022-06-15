@@ -22,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -81,9 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "PeersApp.wsgi.application"
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {

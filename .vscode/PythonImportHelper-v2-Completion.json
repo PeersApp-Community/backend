@@ -580,7 +580,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.common",
         "description": "PeersApp.settings.common",
-        "peekOfCode": "WSGI_APPLICATION = \"PeersApp.wsgi.application\"\n# Password validation\n# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.UserAttributeSimilarityValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.MinimumLengthValidator\",\n    },",
+        "peekOfCode": "WSGI_APPLICATION = \"PeersApp.wsgi.application\"\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.UserAttributeSimilarityValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.MinimumLengthValidator\",\n    },\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.CommonPasswordValidator\",",
         "detail": "PeersApp.settings.common",
         "documentation": {}
     },
@@ -733,7 +733,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "SECRET_KEY = os.environ[\"SECRET_KEY\"]\nDEBUG = False\nALLOWED_HOSTS = [\"todo-appl1.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "peekOfCode": "SECRET_KEY = os.environ[\"SECRET_KEY\"]\nDEBUG = False\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -742,7 +742,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = [\"todo-appl1.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -751,7 +751,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "ALLOWED_HOSTS = [\"todo-appl1.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
+        "peekOfCode": "ALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },

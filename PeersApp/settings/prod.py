@@ -8,12 +8,11 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["todo-appl1.herokuapp.com"]
+ALLOWED_HOSTS = ["https://peers-app-sh.herokuapp.com"]
 
 DATABASES = {
     "default": dj_database_url.config()
 }
-
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
