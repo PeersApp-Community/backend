@@ -15,18 +15,12 @@ from pathlib import Path
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -88,17 +82,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "PeersApp.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -146,23 +129,23 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ]
+    ],
     #     'DEFAULT_RENDERER_CLASSES': [
     #         'rest_framework.renderers.JSONRenderer',
     #     ],
     #     'DEFAULT_PARSER_CLASSES': [
     #         'rest_framework.parsers.JSONParser',
     #     ]
+    # 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1500),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": False,
     "ALGORITHM": "HS256",
-    "SIGNING_KEY": SECRET_KEY,
     "VERIFYING_KEY": None,
     "AUDIENCE": None,
     "ISSUER": None,
@@ -188,30 +171,30 @@ DJOSER = {
     "ACTIVATION_URL": "#/activate/{uid}/{token}",
     "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {
-    'activation': 'djoser.serializers.ActivationSerializer',
-    'password_reset': 'djoser.serializers.SendEmailResetSerializer',
-    'password_reset_confirm': 'djoser.serializers.PasswordResetConfirmSerializer',
-    'password_reset_confirm_retype': 'djoser.serializers.PasswordResetConfirmRetypeSerializer',
-    'set_password': 'djoser.serializers.SetPasswordSerializer',
-    'set_password_retype': 'djoser.serializers.SetPasswordRetypeSerializer',
-    'set_username': 'djoser.serializers.SetUsernameSerializer',
-    'set_username_retype': 'djoser.serializers.SetUsernameRetypeSerializer',
-    'username_reset': 'djoser.serializers.SendEmailResetSerializer',
-    'username_reset_confirm': 'djoser.serializers.UsernameResetConfirmSerializer',
-    'username_reset_confirm_retype': 'djoser.serializers.UsernameResetConfirmRetypeSerializer',
-    'user_create': 'djoser.serializers.UserCreateSerializer',
-    'user_create_password_retype': 'djoser.serializers.UserCreatePasswordRetypeSerializer',
-    'user_delete': 'djoser.serializers.UserDeleteSerializer',
-    'user': 'djoser.serializers.UserSerializer',
-    'current_user': 'djoser.serializers.UserSerializer',
-    'token': 'djoser.serializers.TokenSerializer',
-    'token_create': 'djoser.serializers.TokenCreateSerializer',
-},
+        "activation": "djoser.serializers.ActivationSerializer",
+        "password_reset": "djoser.serializers.SendEmailResetSerializer",
+        "password_reset_confirm": "djoser.serializers.PasswordResetConfirmSerializer",
+        "password_reset_confirm_retype": "djoser.serializers.PasswordResetConfirmRetypeSerializer",
+        "set_password": "djoser.serializers.SetPasswordSerializer",
+        "set_password_retype": "djoser.serializers.SetPasswordRetypeSerializer",
+        "set_username": "djoser.serializers.SetUsernameSerializer",
+        "set_username_retype": "djoser.serializers.SetUsernameRetypeSerializer",
+        "username_reset": "djoser.serializers.SendEmailResetSerializer",
+        "username_reset_confirm": "djoser.serializers.UsernameResetConfirmSerializer",
+        "username_reset_confirm_retype": "djoser.serializers.UsernameResetConfirmRetypeSerializer",
+        "user_create": "djoser.serializers.UserCreateSerializer",
+        "user_create_password_retype": "djoser.serializers.UserCreatePasswordRetypeSerializer",
+        "user_delete": "djoser.serializers.UserDeleteSerializer",
+        "user": "djoser.serializers.UserSerializer",
+        "current_user": "djoser.serializers.UserSerializer",
+        "token": "djoser.serializers.TokenSerializer",
+        "token_create": "djoser.serializers.TokenCreateSerializer",
+    },
 }
 
 
 # Available endpoints
-# 
+#
 # /users/
 # /users/me/
 # /users/confirm/
@@ -227,9 +210,9 @@ DJOSER = {
 # /jwt/create/ (JSON Web Token Authentication)
 # /jwt/refresh/ (JSON Web Token Authentication)
 # /jwt/verify/ (JSON Web Token Authentication)
-# 
-# 
+#
+#
 # Supported authentication backends
-# 
+#
 # Token based authentication from DRF
 # JSON Web Token authentication from django-rest-framework-simplejwt

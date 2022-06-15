@@ -1,5 +1,5 @@
 import os
-from .base import *
+from .common import *
 import django_on_heroku
 import dj_database_url
 
@@ -13,8 +13,6 @@ ALLOWED_HOSTS = ["todo-appl1.herokuapp.com"]
 DATABASES = {
     "default": dj_database_url.config()
 }
-
-ALLOWED_HOSTS = ["todo-app-rjt.herokuapp.com"]
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
