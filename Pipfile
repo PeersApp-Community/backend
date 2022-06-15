@@ -13,6 +13,7 @@ djoser = "*"
 django-on-heroku = "*"
 dj-database-url = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
