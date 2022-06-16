@@ -14,7 +14,7 @@ DATABASES = {
     "default": dj_database_url.config()
 }
 
-ALLOWED_HOSTS = ["todo-app-rjt.herokuapp.com"]
+
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
