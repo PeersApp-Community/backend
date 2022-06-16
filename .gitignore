@@ -4,4 +4,4 @@ PeersApp/settings/dev.py
 .env
 db.sqlite3
 .vscode
-/staticfiles/
+# /staticfiles/
