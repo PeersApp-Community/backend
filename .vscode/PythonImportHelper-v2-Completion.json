@@ -733,7 +733,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "SECRET_KEY = os.environ[\"SECRET_KEY\"]\nDEBUG = True\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
+        "peekOfCode": "SECRET_KEY = os.environ[\"SECRET_KEY\"]\nDEBUG = False\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -742,7 +742,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
+        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -751,7 +751,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "ALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
+        "peekOfCode": "ALLOWED_HOSTS = [\"https://peers-app-sh.herokuapp.com\"]\nDATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -760,7 +760,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "DATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
+        "peekOfCode": "DATABASES = {\n    \"default\": dj_database_url.config()\n}\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
@@ -769,7 +769,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.prod",
         "description": "PeersApp.settings.prod",
-        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
+        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\n# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'\n# Configure Django App for Heroku.\ndjango_on_heroku.settings(locals())\n# https://peers-app-sh.herokuapp.com/",
         "detail": "PeersApp.settings.prod",
         "documentation": {}
     },
