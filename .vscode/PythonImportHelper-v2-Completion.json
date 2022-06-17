@@ -409,6 +409,22 @@
         "documentation": {}
     },
     {
+        "label": "Client",
+        "importPath": "twilio.rest",
+        "description": "twilio.rest",
+        "isExtraImport": true,
+        "detail": "twilio.rest",
+        "documentation": {}
+    },
+    {
+        "label": "Client",
+        "importPath": "twilio.rest",
+        "description": "twilio.rest",
+        "isExtraImport": true,
+        "detail": "twilio.rest",
+        "documentation": {}
+    },
+    {
         "label": "DefaultRouter",
         "importPath": "rest_framework.routers",
         "description": "rest_framework.routers",
@@ -904,7 +920,7 @@
         "kind": 6,
         "importPath": "base.models",
         "description": "base.models",
-        "peekOfCode": "class User(AbstractUser):\n    email = models.EmailField(unique=True)\n    phone = models.CharField(max_length=15, unique=True)\n    is_phone_verified = models.BooleanField(default=False)\n    is_email_verified = models.BooleanField(default=False)\n    date_joined = models.DateTimeField(_(\"date joined\"), default=timezone.now)\n    otp = models.CharField(max_length=6, blank=True, null=True)\n    USERNAME_FIELD = \"email\" or \"phone\"\n    REQUIRED_FIELDS = [\"username\", \"phone\"]\nclass Profile(models.Model):",
+        "peekOfCode": "class User(AbstractUser):\n    email = models.EmailField(unique=True)\n    phone = models.CharField(max_length=15, unique=True)\n    is_phone_verified = models.BooleanField(default=False)\n    is_email_verified = models.BooleanField(default=False)\n    date_joined = models.DateTimeField(_(\"date joined\"), default=timezone.now)\n    otp = models.CharField(max_length=6, blank=True, null=True)\n    USERNAME_FIELD = \"phone\" or \"email\"\n    REQUIRED_FIELDS = [\"username\"]\nclass Profile(models.Model):",
         "detail": "base.models",
         "documentation": {}
     },
@@ -945,12 +961,84 @@
         "documentation": {}
     },
     {
+        "label": "send_otp",
+        "kind": 2,
+        "importPath": "base.serializers",
+        "description": "base.serializers",
+        "peekOfCode": "def send_otp(otp, VERIFIED_NUMBER):\n    client.messages.create(\n        body=f\"Your OTP is {otp}\", from_=\"+2348069051233\", to=[VERIFIED_NUMBER]\n    )\n# send_otp(otp, validated_data[\"phone\"])\ndef otp_create(phone):\n    num = []\n    num[:0] = str(phone)\n    random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])\n    digits = [i for i in range(0, random_num)]",
+        "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
         "label": "otp_create",
         "kind": 2,
         "importPath": "base.serializers",
         "description": "base.serializers",
         "peekOfCode": "def otp_create(phone):\n    num = []\n    num[:0] = str(phone)\n    random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])\n    digits = [i for i in range(0, random_num)]\n    otp = \"\"\n    for i in range(6):\n        index = math.floor(random.random() * 10)\n        otp += str(digits[index])\n    return otp",
         "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "account_sid",
+        "kind": 5,
+        "importPath": "base.serializers",
+        "description": "base.serializers",
+        "peekOfCode": "account_sid = \"AC46eb2ae7ab874b8fd3c1307574ff3dc3\"\nauth_token = \"140f71b42196cb4e653b7dcb8d750383\"\nclient = Client(account_sid, auth_token)\ndef send_otp(otp, VERIFIED_NUMBER):\n    client.messages.create(\n        body=f\"Your OTP is {otp}\", from_=\"+2348069051233\", to=[VERIFIED_NUMBER]\n    )\n# send_otp(otp, validated_data[\"phone\"])\ndef otp_create(phone):\n    num = []",
+        "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "auth_token",
+        "kind": 5,
+        "importPath": "base.serializers",
+        "description": "base.serializers",
+        "peekOfCode": "auth_token = \"140f71b42196cb4e653b7dcb8d750383\"\nclient = Client(account_sid, auth_token)\ndef send_otp(otp, VERIFIED_NUMBER):\n    client.messages.create(\n        body=f\"Your OTP is {otp}\", from_=\"+2348069051233\", to=[VERIFIED_NUMBER]\n    )\n# send_otp(otp, validated_data[\"phone\"])\ndef otp_create(phone):\n    num = []\n    num[:0] = str(phone)",
+        "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "base.serializers",
+        "description": "base.serializers",
+        "peekOfCode": "client = Client(account_sid, auth_token)\ndef send_otp(otp, VERIFIED_NUMBER):\n    client.messages.create(\n        body=f\"Your OTP is {otp}\", from_=\"+2348069051233\", to=[VERIFIED_NUMBER]\n    )\n# send_otp(otp, validated_data[\"phone\"])\ndef otp_create(phone):\n    num = []\n    num[:0] = str(phone)\n    random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])",
+        "detail": "base.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "account_sid",
+        "kind": 5,
+        "importPath": "base.tests",
+        "description": "base.tests",
+        "peekOfCode": "account_sid = \"AC46eb2ae7ab874b8fd3c1307574ff3dc3\"\nauth_token = \"140f71b42196cb4e653b7dcb8d750383\"\nclient = Client(account_sid, auth_token)\n# def send_otp(otp, VERIFIED_NUMBER):\nmessage = client.messages.create(\n    body=f\"Your OTP is 898989\", from_=\"+2347066367867\", to=[\"+2347066367867\"]\n)\n# send_otp(otp, validated_data[\"phone\"])\nmessage()\nprint(message())",
+        "detail": "base.tests",
+        "documentation": {}
+    },
+    {
+        "label": "auth_token",
+        "kind": 5,
+        "importPath": "base.tests",
+        "description": "base.tests",
+        "peekOfCode": "auth_token = \"140f71b42196cb4e653b7dcb8d750383\"\nclient = Client(account_sid, auth_token)\n# def send_otp(otp, VERIFIED_NUMBER):\nmessage = client.messages.create(\n    body=f\"Your OTP is 898989\", from_=\"+2347066367867\", to=[\"+2347066367867\"]\n)\n# send_otp(otp, validated_data[\"phone\"])\nmessage()\nprint(message())",
+        "detail": "base.tests",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "base.tests",
+        "description": "base.tests",
+        "peekOfCode": "client = Client(account_sid, auth_token)\n# def send_otp(otp, VERIFIED_NUMBER):\nmessage = client.messages.create(\n    body=f\"Your OTP is 898989\", from_=\"+2347066367867\", to=[\"+2347066367867\"]\n)\n# send_otp(otp, validated_data[\"phone\"])\nmessage()\nprint(message())",
+        "detail": "base.tests",
+        "documentation": {}
+    },
+    {
+        "label": "message",
+        "kind": 5,
+        "importPath": "base.tests",
+        "description": "base.tests",
+        "peekOfCode": "message = client.messages.create(\n    body=f\"Your OTP is 898989\", from_=\"+2347066367867\", to=[\"+2347066367867\"]\n)\n# send_otp(otp, validated_data[\"phone\"])\nmessage()\nprint(message())",
+        "detail": "base.tests",
         "documentation": {}
     },
     {
@@ -994,7 +1082,7 @@
         "kind": 2,
         "importPath": "base.views",
         "description": "base.views",
-        "peekOfCode": "def validate_user(request):\n    if request.method == \"PATCH\":\n        serializer = GetOtpSerializer(data=request.data, partial=True)\n        # set partial=True to update a data partially\n        serializer.is_valid(raise_exception=True)\n        serializer.save()\n        return Response(\n            {\"Message\": \"You are Validated\"}, status=status.HTTP_201_CREATED\n        )\nclass ProfileViewSet(ModelViewSet):",
+        "peekOfCode": "def validate_user(request):\n    if request.method == \"PATCH\":\n        serializer = GetOtpSerializer(data=request.data, partial=True)\n        # set partial=True to update a data partially\n        serializer.is_valid(raise_exception=True)\n        serializer.save()\n        return Response(\n            {\"Message\": \"You are now Validated\"}, status=status.HTTP_201_CREATED\n        )\nclass ProfileViewSet(ModelViewSet):",
         "detail": "base.views",
         "documentation": {}
     },

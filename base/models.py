@@ -12,8 +12,8 @@ class User(AbstractUser):
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
     otp = models.CharField(max_length=6, blank=True, null=True)
 
-    USERNAME_FIELD = "email" or "phone"
-    REQUIRED_FIELDS = ["username", "phone"]
+    USERNAME_FIELD = "phone" or "email"
+    REQUIRED_FIELDS = ["username"]
 
 
 class Profile(models.Model):

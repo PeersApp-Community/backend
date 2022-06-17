@@ -14,6 +14,7 @@ django-on-heroku = "*"
 dj-database-url = "*"
 gunicorn = "*"
 whitenoise = "*"
+twilio = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

@@ -5,6 +5,25 @@ from .models import Profile, User
 import random
 import math
 
+# importing the client from the twilio
+from twilio.rest import Client
+
+# Your Account Sid and Auth Token from twilio account
+
+
+account_sid = "AC46eb2ae7ab874b8fd3c1307574ff3dc3"
+auth_token = "140f71b42196cb4e653b7dcb8d750383"
+client = Client(account_sid, auth_token)
+
+
+def send_otp(otp, VERIFIED_NUMBER):
+    client.messages.create(
+        body=f"Your OTP is {otp}", from_="+2348069051233", to=[VERIFIED_NUMBER]
+    )
+    
+# send_otp(otp, validated_data["phone"])
+
+
 
 def otp_create(phone):
     num = []
@@ -41,6 +60,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user = User(**validated_data)
         user.otp = otp_create(validated_data["phone"])
         user.save()
+        otp = user.otp
+        send_otp(otp, validated_data["phone"])
         return user
 
     # def update(self, instance, validated_data):
@@ -85,9 +106,7 @@ class GetOtpSerializer(serializers.ModelSerializer):
                 self.instance.save()
             return self.instance
         except User.DoesNotExist:
-            raise serializers.ValidationError(
-                "The OTP is Wrong."
-            )
+            raise serializers.ValidationError("The OTP is Wrong.")
 
         # return self.instance
 
