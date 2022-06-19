@@ -351,22 +351,6 @@
         "documentation": {}
     },
     {
-        "label": "get_object_or_404",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
         "label": "serializers",
         "importPath": "rest_framework",
         "description": "rest_framework",
@@ -406,14 +390,6 @@
         "importPath": "math",
         "description": "math",
         "detail": "math",
-        "documentation": {}
-    },
-    {
-        "label": "Client",
-        "importPath": "twilio.rest",
-        "description": "twilio.rest",
-        "isExtraImport": true,
-        "detail": "twilio.rest",
         "documentation": {}
     },
     {
@@ -526,6 +502,14 @@
         "description": "django.test",
         "isExtraImport": true,
         "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
         "documentation": {}
     },
     {
@@ -938,7 +922,7 @@
         "kind": 6,
         "importPath": "base.serializers",
         "description": "base.serializers",
-        "peekOfCode": "class UserCreateSerializer(serializers.ModelSerializer):\n    password = serializers.CharField(style={\"input_type\": \"password\"}, write_only=True)\n    class Meta(DjoserUserCreateSerializer.Meta):\n        # model = User\n        fields = [\"id\", \"username\", \"email\", \"phone\", \"password\"]\n    def validate_phone(self, value):\n        if User.objects.filter(phone=value).exists():\n            raise serializers.ValidationError(\n                \"User with the given phone number already exists.\"\n            )",
+        "peekOfCode": "class UserCreateSerializer(serializers.ModelSerializer):\n    otp = serializers.CharField(read_only=True)\n    password = serializers.CharField(style={\"input_type\": \"password\"}, write_only=True)\n    class Meta(DjoserUserCreateSerializer.Meta):\n        # model = User\n        fields = [\"id\", \"username\", \"email\", \"phone\", \"password\", \"otp\"]\n    def validate_phone(self, value):\n        if User.objects.filter(phone=value).exists():\n            raise serializers.ValidationError(\n                \"User with the given phone number already exists.\"",
         "detail": "base.serializers",
         "documentation": {}
     },
@@ -961,47 +945,11 @@
         "documentation": {}
     },
     {
-        "label": "send_otp",
-        "kind": 2,
-        "importPath": "base.serializers",
-        "description": "base.serializers",
-        "peekOfCode": "def send_otp(otp, VERIFIED_NUMBER):\n    client.messages.create(\n        body=f\"Your OTP is {otp}\", from_=\"+2348069051233\", to=[VERIFIED_NUMBER]\n    )\n# send_otp(otp, validated_data[\"phone\"])\ndef otp_create(phone):\n    num = []\n    num[:0] = str(phone)\n    random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])\n    digits = [i for i in range(0, random_num)]",
-        "detail": "base.serializers",
-        "documentation": {}
-    },
-    {
         "label": "otp_create",
         "kind": 2,
         "importPath": "base.serializers",
         "description": "base.serializers",
         "peekOfCode": "def otp_create(phone):\n    num = []\n    num[:0] = str(phone)\n    random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])\n    digits = [i for i in range(0, random_num)]\n    otp = \"\"\n    for i in range(6):\n        index = math.floor(random.random() * 10)\n        otp += str(digits[index])\n    return otp",
-        "detail": "base.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "account_sid",
-        "kind": 5,
-        "importPath": "base.serializers",
-        "description": "base.serializers",
-        "peekOfCode": "account_sid = \"AC46eb2ae7ab874b8fd3c1307574ff3dc3\"\nauth_token = \"140f71b42196cb4e653b7dcb8d750383\"\nclient = Client(account_sid, auth_token)\ndef send_otp(otp, VERIFIED_NUMBER):\n    client.messages.create(\n        body=f\"Your OTP is {otp}\", from_=\"+2348069051233\", to=[VERIFIED_NUMBER]\n    )\n# send_otp(otp, validated_data[\"phone\"])\ndef otp_create(phone):\n    num = []",
-        "detail": "base.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "auth_token",
-        "kind": 5,
-        "importPath": "base.serializers",
-        "description": "base.serializers",
-        "peekOfCode": "auth_token = \"140f71b42196cb4e653b7dcb8d750383\"\nclient = Client(account_sid, auth_token)\ndef send_otp(otp, VERIFIED_NUMBER):\n    client.messages.create(\n        body=f\"Your OTP is {otp}\", from_=\"+2348069051233\", to=[VERIFIED_NUMBER]\n    )\n# send_otp(otp, validated_data[\"phone\"])\ndef otp_create(phone):\n    num = []\n    num[:0] = str(phone)",
-        "detail": "base.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "client",
-        "kind": 5,
-        "importPath": "base.serializers",
-        "description": "base.serializers",
-        "peekOfCode": "client = Client(account_sid, auth_token)\ndef send_otp(otp, VERIFIED_NUMBER):\n    client.messages.create(\n        body=f\"Your OTP is {otp}\", from_=\"+2348069051233\", to=[VERIFIED_NUMBER]\n    )\n# send_otp(otp, validated_data[\"phone\"])\ndef otp_create(phone):\n    num = []\n    num[:0] = str(phone)\n    random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])",
         "detail": "base.serializers",
         "documentation": {}
     },

@@ -1,28 +1,16 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer as DjoserUserCreateSerializer
 from .models import Profile, User
 import random
 import math
 
-# importing the client from the twilio
-from twilio.rest import Client
 
-# Your Account Sid and Auth Token from twilio account
+# def send_otp(otp, VERIFIED_NUMBER):
+#     client.messages.create(
+#         body=f"Your OTP is {otp}", from_="+2348069051233", to=[VERIFIED_NUMBER]
+#     )
 
-
-account_sid = "AC46eb2ae7ab874b8fd3c1307574ff3dc3"
-auth_token = "140f71b42196cb4e653b7dcb8d750383"
-client = Client(account_sid, auth_token)
-
-
-def send_otp(otp, VERIFIED_NUMBER):
-    client.messages.create(
-        body=f"Your OTP is {otp}", from_="+2348069051233", to=[VERIFIED_NUMBER]
-    )
-    
 # send_otp(otp, validated_data["phone"])
-
 
 
 def otp_create(phone):
@@ -41,11 +29,12 @@ def otp_create(phone):
 
 # class UserCreateSerializer(DjoserUserCreateSerializer):
 class UserCreateSerializer(serializers.ModelSerializer):
+    otp = serializers.CharField(read_only=True)
     password = serializers.CharField(style={"input_type": "password"}, write_only=True)
 
     class Meta(DjoserUserCreateSerializer.Meta):
         # model = User
-        fields = ["id", "username", "email", "phone", "password"]
+        fields = ["id", "username", "email", "phone", "password", "otp"]
 
     def validate_phone(self, value):
         if User.objects.filter(phone=value).exists():
@@ -60,20 +49,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user = User(**validated_data)
         user.otp = otp_create(validated_data["phone"])
         user.save()
-        otp = user.otp
-        send_otp(otp, validated_data["phone"])
         return user
-
-    # def update(self, instance, validated_data):
-
-    #     return super().update(instance, validated_data)
-
-    # def create(self, vali):
-    #     serializer = UserCreateSerializer(data=request.data)
-
-    #     if serializer.is_valid(raise_exception=True):
-    #         headers = self.get_success_headers(serializer.data)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class GetOtpSerializer(serializers.ModelSerializer):
@@ -109,34 +85,6 @@ class GetOtpSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("The OTP is Wrong.")
 
         # return self.instance
-
-    #
-
-    # def save(self, **kwargs):
-    #     otp = self.validated_data['otp']
-
-    #     # phone = Customer.objects.get(
-    #     #     phone=self.context['phone'])
-    #     User = Order.objects.create(customer=customer)
-
-    #     cart_items = CartItem.objects \
-    #         .select_related('product') \
-    #         .filter(cart_id=cart_id)
-    #     order_items = [
-    #         OrderItem(
-    #             order=order,
-    #             product=item.product,
-    #             unit_price=item.product.unit_price,
-    #             quantity=item.quantity
-    #         ) for item in cart_items
-    #     ]
-    #     OrderItem.objects.bulk_create(order_items)
-
-    #     Cart.objects.filter(pk=cart_id).delete()
-
-    #     order_created.send_robust(self.__class__, order=order)
-
-    #     return order
 
 
 class ProfileSerializer(serializers.ModelSerializer):
