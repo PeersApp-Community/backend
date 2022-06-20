@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # added
     # "debug_toolbar",
+    "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
     "djoser",
@@ -123,9 +124,20 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "base.User"
 
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5500",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://127.0.0.1:5500",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
@@ -135,7 +147,7 @@ REST_FRAMEWORK = {
     #     'DEFAULT_PARSER_CLASSES': [
     #         'rest_framework.parsers.JSONParser',
     #     ]
-    # 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 SIMPLE_JWT = {

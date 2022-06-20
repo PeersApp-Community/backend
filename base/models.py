@@ -12,12 +12,12 @@ class User(AbstractUser):
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
     otp = models.CharField(max_length=6, blank=True, null=True)
 
-    USERNAME_FIELD = "phone" or "email"
-    REQUIRED_FIELDS = ["username"]
+    USERNAME_FIELD = "phone"
+    REQUIRED_FIELDS = ["username", "email"]
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_query_name="")
     first_name = models.CharField(max_length=255, null=True, blank=True)
     last_name = models.CharField(max_length=255, null=True, blank=True)
     bio = models.CharField(max_length=100, null=True, blank=True)

@@ -5,6 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # Register your models here.
 @admin.register(User)
 class UserdAdmin(BaseUserAdmin):
+    list_editable = ("otp","phone")
     add_fieldsets = (
         (
             None,
@@ -16,6 +17,7 @@ class UserdAdmin(BaseUserAdmin):
                     "phone",
                     "password1",
                     "password2",
+                    "otp",
                 ),
             },
         ),
@@ -29,6 +31,7 @@ class UserdAdmin(BaseUserAdmin):
         "date_joined",
         "is_phone_verified",
         "is_email_verified",
+        "is_active"
     ]
 
 

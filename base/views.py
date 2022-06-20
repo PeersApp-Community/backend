@@ -8,14 +8,26 @@ from .models import Profile, User
 from rest_framework import status
 from rest_framework.response import Response
 from .serializers import GetOtpSerializer, ProfileSerializer, UserCreateSerializer
-import random
-import math
 
 
 class UserCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
     permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+
+# @api_view(["POST"])
+# @permission_classes([AllowAny])
+# def user_create(request):
+#     if request.method == "POST":
+#         serializer = UserCreateSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         # return Response("serializer", status=status.HTTP_201_CREATED)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(["PATCH"])
@@ -27,7 +39,7 @@ def validate_user(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
-            {"Message": "You are now Validated"}, status=status.HTTP_201_CREATED
+            {"Message": "You are now Validated, happy learning"}, status=status.HTTP_201_CREATED
         )
 
 

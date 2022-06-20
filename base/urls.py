@@ -12,4 +12,5 @@ urlpatterns = [
     path("reg/", UserCreateAPIView.as_view()),
     path("reg/val/", validate_user),
 ]
+
 urlpatterns += router.urls

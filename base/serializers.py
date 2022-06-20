@@ -33,7 +33,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(style={"input_type": "password"}, write_only=True)
 
     class Meta(DjoserUserCreateSerializer.Meta):
-        # model = User
+        model = User
         fields = ["id", "username", "email", "phone", "password", "otp"]
 
     def validate_phone(self, value):
