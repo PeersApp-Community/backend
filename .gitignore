@@ -1,9 +1,10 @@
 */__pycache__/
-vscode
+/.vscode/
+.vscode
 __pycache__
 PeersApp/settings/dev.py
 *.pyc
 .env
 db.sqlite3
-.vscode
+.vscode/
 # /staticfiles/
