@@ -1,13 +1,10 @@
+import datetime
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-
+from datetime import datetime
 
 User = settings.AUTH_USER_MODEL
-
-
-# class Friend(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class FriendChat(models.Model):
@@ -19,6 +16,7 @@ class FriendChat(models.Model):
     body = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     pinned = models.BooleanField(default=False)
+    stared = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.BooleanField(default=False)
     retrieved = models.BooleanField(default=False)
@@ -30,7 +28,7 @@ class FriendChat(models.Model):
 class Organisation(models.Model):
     host = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=100)
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
     members = models.ManyToManyField(User, related_name="members", blank=True)
 
@@ -38,20 +36,9 @@ class Organisation(models.Model):
         return self.name
 
 
-class Topic(models.Model):
-    title = models.CharField(max_length=200)
-    organisation = models.ForeignKey(
-        Organisation, on_delete=models.CASCADE, related_name="topics"
-    )
-
-    def __str__(self):
-        return self.title
-
-
 class Room(models.Model):
     name = models.CharField(max_length=200)
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     organisation = models.ForeignKey(
         Organisation, related_name="rooms", on_delete=models.CASCADE
     )
@@ -77,6 +64,7 @@ class RoomChat(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     pinned = models.BooleanField(default=False)
+    stared = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     retrieved = models.BooleanField(default=False)
 
@@ -87,13 +75,38 @@ class RoomChat(models.Model):
         return self.body[0:50]
 
 
-class Stared(models.Model):
+class Status(models.Model):
     user = models.OneToOneField(
-        User, verbose_name=_("Users stared messages"), on_delete=models.CASCADE
+        User, verbose_name=_("status"), on_delete=models.CASCADE
     )
-    stared_room_msg = models.ForeignKey(
-        RoomChat, verbose_name=_("Stared Room Messages"), on_delete=models.CASCADE
-    )
-    stared_friend_msg = models.ForeignKey(
-        FriendChat, verbose_name=_("Stared Friends Messages"), on_delete=models.CASCADE
-    )
+    post = models.FileField()
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+
+#
+#
+#
+# class Stared(models.Model):
+#     user = models.OneToOneField(
+#         User, verbose_name=_("Users stared messages"), on_delete=models.CASCADE
+#     )
+#     stared_room_msg = models.ForeignKey(
+#         RoomChat, verbose_name=_("Stared Room Messages"), on_delete=models.CASCADE
+#     )
+#     stared_friend_msg = models.ForeignKey(
+#         FriendChat, verbose_name=_("Stared Friends Messages"), on_delete=models.CASCADE
+#     )
+
+
+# class Topic(models.Model):
+#     title = models.CharField(max_length=200)
+#     organisation = models.ForeignKey(
+#         Organisation, on_delete=models.CASCADE, related_name="topics"
+#     )
+
+#     def __str__(self):
+#         return self.title
+
+# class Friend(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
