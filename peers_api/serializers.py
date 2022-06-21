@@ -58,18 +58,18 @@ class RoomSerializer(serializers.ModelSerializer):
 class RoomChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoomChat
-        fields = ["id", "host", "name", "members"]
+        fields = ["id", "author", "room", "organisation", "body"]
 
 
 # FriendChat
 class FriendChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = FriendChat
-        fields = ["id", "host", "name", "members"]
+        fields = ["id", "sender", "receiver", "body"]
 
 
 # Status
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
-        fields = ["id", "host", "name", "members"]
+        fields = ["id", "user", "post"]
