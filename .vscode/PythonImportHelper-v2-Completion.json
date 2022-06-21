@@ -115,11 +115,43 @@
         "documentation": {}
     },
     {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
         "label": "static",
         "importPath": "django.conf.urls.static",
         "description": "django.conf.urls.static",
         "isExtraImport": true,
         "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
         "documentation": {}
     },
     {
@@ -317,6 +349,14 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -326,6 +366,134 @@
     },
     {
         "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -391,11 +559,27 @@
         "documentation": {}
     },
     {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
         "label": "timezone",
         "importPath": "django.utils",
         "description": "django.utils",
         "isExtraImport": true,
         "detail": "django.utils",
+        "documentation": {}
+    },
+    {
+        "label": "gettext_lazy",
+        "importPath": "django.utils.translation",
+        "description": "django.utils.translation",
+        "isExtraImport": true,
+        "detail": "django.utils.translation",
         "documentation": {}
     },
     {
@@ -558,6 +742,22 @@
         "description": "django.test",
         "isExtraImport": true,
         "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
         "documentation": {}
     },
     {
@@ -726,7 +926,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.common",
         "description": "PeersApp.settings.common",
-        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5500\",\n    \"http://localhost:8000\",\n    \"http://127.0.0.1:8000\",\n    \"http://127.0.0.1:5500\",\n]\nCORS_ALLOW_ALL_ORIGINS = True\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticatedOrReadOnly\"],",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5500\",\n    \"http://localhost:8000\",\n    \"http://127.0.0.1:8000\",\n    \"http://127.0.0.1:5500\",\n]\nCORS_ALLOW_ALL_ORIGINS = True\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    \"DEFAULT_PERMISSION_CLASSES\": [",
         "detail": "PeersApp.settings.common",
         "documentation": {}
     },
@@ -735,7 +935,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.common",
         "description": "PeersApp.settings.common",
-        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticatedOrReadOnly\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ],\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],",
+        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\nREST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    \"DEFAULT_PERMISSION_CLASSES\": [\n        \"rest_framework.permissions.IsAuthenticatedOrReadOnly\"\n    ],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ],\n    #     'DEFAULT_RENDERER_CLASSES': [",
         "detail": "PeersApp.settings.common",
         "documentation": {}
     },
@@ -744,7 +944,7 @@
         "kind": 5,
         "importPath": "PeersApp.settings.common",
         "description": "PeersApp.settings.common",
-        "peekOfCode": "REST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    \"DEFAULT_PERMISSION_CLASSES\": [\"rest_framework.permissions.IsAuthenticatedOrReadOnly\"],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ],\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',\n    #     ],\n    #     'DEFAULT_PARSER_CLASSES': [",
+        "peekOfCode": "REST_FRAMEWORK = {\n    \"COERCE_DECIMAL_TO_STRING\": False,\n    \"DEFAULT_PERMISSION_CLASSES\": [\n        \"rest_framework.permissions.IsAuthenticatedOrReadOnly\"\n    ],\n    \"DEFAULT_AUTHENTICATION_CLASSES\": [\n        \"rest_framework_simplejwt.authentication.JWTAuthentication\",\n    ],\n    #     'DEFAULT_RENDERER_CLASSES': [\n    #         'rest_framework.renderers.JSONRenderer',",
         "detail": "PeersApp.settings.common",
         "documentation": {}
     },
@@ -956,6 +1156,33 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "base.migrations.0007_profile_dept_profile_level_profile_location",
+        "description": "base.migrations.0007_profile_dept_profile_level_profile_location",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"base\", \"0006_alter_profile_user\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"profile\",\n            name=\"dept\",\n            field=models.CharField(default=\"MTS\", max_length=100),\n            preserve_default=False,",
+        "detail": "base.migrations.0007_profile_dept_profile_level_profile_location",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "base.migrations.0008_rename_dept_profile_course_profile_department_and_more",
+        "description": "base.migrations.0008_rename_dept_profile_course_profile_department_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"base\", \"0007_profile_dept_profile_level_profile_location\"),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name=\"profile\",\n            old_name=\"dept\",\n            new_name=\"course\",\n        ),",
+        "detail": "base.migrations.0008_rename_dept_profile_course_profile_department_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "base.migrations.0009_profile_gender",
+        "description": "base.migrations.0009_profile_gender",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"base\", \"0008_rename_dept_profile_course_profile_department_and_more\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"profile\",\n            name=\"gender\",\n            field=models.CharField(\n                choices=[(\"M\", \"Male\"), (\"F\", \"Female\"), (\"P\", \"Prefer not to say\")],",
+        "detail": "base.migrations.0009_profile_gender",
+        "documentation": {}
+    },
+    {
         "label": "UserdAdmin",
         "kind": 6,
         "importPath": "base.admin",
@@ -996,7 +1223,7 @@
         "kind": 6,
         "importPath": "base.models",
         "description": "base.models",
-        "peekOfCode": "class Profile(models.Model):\n    user = models.OneToOneField(User, on_delete=models.CASCADE, related_query_name=\"\")\n    first_name = models.CharField(max_length=255, null=True, blank=True)\n    last_name = models.CharField(max_length=255, null=True, blank=True)\n    bio = models.CharField(max_length=100, null=True, blank=True)\n    avatar = models.ImageField(null=True, blank=True, default=\"avatar.svg\")\n    updated = models.DateTimeField(auto_now=True)",
+        "peekOfCode": "class Profile(models.Model):\n    MALE = \"M\"\n    FEMALE = \"F\"\n    PREFER_NOT_TO_SAY = \"P\"\n    GENDER_CHOICES = [\n        (MALE, \"Male\"),\n        (FEMALE, \"Female\"),\n        (PREFER_NOT_TO_SAY, \"Prefer not to say\"),\n    ]\n    user = models.OneToOneField(User, on_delete=models.CASCADE, related_query_name=\"\")",
         "detail": "base.models",
         "documentation": {}
     },
@@ -1005,7 +1232,7 @@
         "kind": 6,
         "importPath": "base.serializers",
         "description": "base.serializers",
-        "peekOfCode": "class UserCreateSerializer(serializers.ModelSerializer):\n    otp = serializers.CharField(read_only=True)\n    password = serializers.CharField(style={\"input_type\": \"password\"}, write_only=True)\n    class Meta(DjoserUserCreateSerializer.Meta):\n        model = User\n        fields = [\"id\", \"username\", \"email\", \"phone\", \"password\", \"otp\"]\n    def validate_phone(self, value):\n        if User.objects.filter(phone=value).exists():\n            raise serializers.ValidationError(\n                \"User with the given phone number already exists.\"",
+        "peekOfCode": "class UserCreateSerializer(serializers.ModelSerializer):\n    otp = serializers.CharField(read_only=True)\n    password = serializers.CharField(style={\"input_type\": \"password\"}, write_only=True)\n    class Meta():\n        model = User\n        fields = [\"id\", \"username\", \"email\", \"phone\", \"password\", \"otp\"]\n    def validate_phone(self, value):\n        if User.objects.filter(phone=value).exists():\n            raise serializers.ValidationError(\n                \"User with the given phone number already exists.\"",
         "detail": "base.serializers",
         "documentation": {}
     },
@@ -1127,11 +1354,56 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "peers_api.migrations.0002_organisation_members_alter_friendchat_receiver_and_more",
+        "description": "peers_api.migrations.0002_organisation_members_alter_friendchat_receiver_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        (\"peers_api\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"organisation\",\n            name=\"members\",\n            field=models.ManyToManyField(",
+        "detail": "peers_api.migrations.0002_organisation_members_alter_friendchat_receiver_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "peers_api.migrations.0003_alter_room_participants",
+        "description": "peers_api.migrations.0003_alter_room_participants",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"peers_api\", \"0002_organisation_members_alter_friendchat_receiver_and_more\"),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name=\"room\",\n            name=\"participants\",\n            field=models.ManyToManyField(\n                blank=True,",
+        "detail": "peers_api.migrations.0003_alter_room_participants",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "peers_api.migrations.0004_rename_name_topic_title_alter_room_participants",
+        "description": "peers_api.migrations.0004_rename_name_topic_title_alter_room_participants",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        (\"peers_api\", \"0003_alter_room_participants\"),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name=\"topic\",\n            old_name=\"name\",\n            new_name=\"title\",",
+        "detail": "peers_api.migrations.0004_rename_name_topic_title_alter_room_participants",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "peers_api.migrations.0005_friendchat_created_friendchat_updated_and_more",
+        "description": "peers_api.migrations.0005_friendchat_created_friendchat_updated_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"peers_api\", \"0004_rename_name_topic_title_alter_room_participants\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"friendchat\",\n            name=\"created\",\n            field=models.DateTimeField(\n                auto_now_add=True, default=django.utils.timezone.now",
+        "detail": "peers_api.migrations.0005_friendchat_created_friendchat_updated_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "peers_api.migrations.0006_stared",
+        "description": "peers_api.migrations.0006_stared",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        (\"peers_api\", \"0005_friendchat_created_friendchat_updated_and_more\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Stared\",\n            fields=[\n                (",
+        "detail": "peers_api.migrations.0006_stared",
+        "documentation": {}
+    },
+    {
         "label": "OrganizationAdmin",
         "kind": 6,
         "importPath": "peers_api.admin",
         "description": "peers_api.admin",
-        "peekOfCode": "class OrganizationAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Room)\nclass RoomAdmin(admin.ModelAdmin):\n    pass\n@admin.register(RoomChat)\nclass RoomChatAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Topic)\nclass TopicAdmin(admin.ModelAdmin):",
+        "peekOfCode": "class OrganizationAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"host\", \"created\"]\n@admin.register(Room)\nclass RoomAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"host\", \"organisation\", \"created\", \"updated\"]\n@admin.register(RoomChat)\nclass RoomChatAdmin(admin.ModelAdmin):\n    list_display = [\n        \"author\",\n        \"room\",",
         "detail": "peers_api.admin",
         "documentation": {}
     },
@@ -1140,7 +1412,7 @@
         "kind": 6,
         "importPath": "peers_api.admin",
         "description": "peers_api.admin",
-        "peekOfCode": "class RoomAdmin(admin.ModelAdmin):\n    pass\n@admin.register(RoomChat)\nclass RoomChatAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Topic)\nclass TopicAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Friend)\nclass FriendChatAdmin(admin.ModelAdmin):",
+        "peekOfCode": "class RoomAdmin(admin.ModelAdmin):\n    list_display = [\"name\", \"host\", \"organisation\", \"created\", \"updated\"]\n@admin.register(RoomChat)\nclass RoomChatAdmin(admin.ModelAdmin):\n    list_display = [\n        \"author\",\n        \"room\",\n        \"organisation\",\n        \"updated\",\n        \"pinned\",",
         "detail": "peers_api.admin",
         "documentation": {}
     },
@@ -1149,7 +1421,7 @@
         "kind": 6,
         "importPath": "peers_api.admin",
         "description": "peers_api.admin",
-        "peekOfCode": "class RoomChatAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Topic)\nclass TopicAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Friend)\nclass FriendChatAdmin(admin.ModelAdmin):\n    pass\n@admin.register(FriendChat)\nclass FriendChatAdmin(admin.ModelAdmin):",
+        "peekOfCode": "class RoomChatAdmin(admin.ModelAdmin):\n    list_display = [\n        \"author\",\n        \"room\",\n        \"organisation\",\n        \"updated\",\n        \"pinned\",\n        \"retrieved\",\n        \"deleted\",\n    ]",
         "detail": "peers_api.admin",
         "documentation": {}
     },
@@ -1158,7 +1430,7 @@
         "kind": 6,
         "importPath": "peers_api.admin",
         "description": "peers_api.admin",
-        "peekOfCode": "class TopicAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Friend)\nclass FriendChatAdmin(admin.ModelAdmin):\n    pass\n@admin.register(FriendChat)\nclass FriendChatAdmin(admin.ModelAdmin):\n    pass",
+        "peekOfCode": "class TopicAdmin(admin.ModelAdmin):\n    list_display = [\"title\"]\n@admin.register(FriendChat)\nclass FriendChatAdmin(admin.ModelAdmin):\n    list_display = [\"sender\", \"receiver\", \"updated\", \"pinned\", \"retrieved\", \"deleted\"]",
         "detail": "peers_api.admin",
         "documentation": {}
     },
@@ -1167,16 +1439,7 @@
         "kind": 6,
         "importPath": "peers_api.admin",
         "description": "peers_api.admin",
-        "peekOfCode": "class FriendChatAdmin(admin.ModelAdmin):\n    pass\n@admin.register(FriendChat)\nclass FriendChatAdmin(admin.ModelAdmin):\n    pass",
-        "detail": "peers_api.admin",
-        "documentation": {}
-    },
-    {
-        "label": "FriendChatAdmin",
-        "kind": 6,
-        "importPath": "peers_api.admin",
-        "description": "peers_api.admin",
-        "peekOfCode": "class FriendChatAdmin(admin.ModelAdmin):\n    pass",
+        "peekOfCode": "class FriendChatAdmin(admin.ModelAdmin):\n    list_display = [\"sender\", \"receiver\", \"updated\", \"pinned\", \"retrieved\", \"deleted\"]",
         "detail": "peers_api.admin",
         "documentation": {}
     },
@@ -1190,20 +1453,11 @@
         "documentation": {}
     },
     {
-        "label": "Friend",
-        "kind": 6,
-        "importPath": "peers_api.models",
-        "description": "peers_api.models",
-        "peekOfCode": "class Friend(models.Model):\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\nclass FriendChat(models.Model):\n    sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name=\"sender\")\n    receiver = models.ForeignKey(\n        Friend, on_delete=models.PROTECT, related_name=\"receiver\"\n    )\n    body = models.CharField(max_length=255)\n    pinned = models.BooleanField(default=False)\n    deleted = models.BooleanField(default=False)",
-        "detail": "peers_api.models",
-        "documentation": {}
-    },
-    {
         "label": "FriendChat",
         "kind": 6,
         "importPath": "peers_api.models",
         "description": "peers_api.models",
-        "peekOfCode": "class FriendChat(models.Model):\n    sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name=\"sender\")\n    receiver = models.ForeignKey(\n        Friend, on_delete=models.PROTECT, related_name=\"receiver\"\n    )\n    body = models.CharField(max_length=255)\n    pinned = models.BooleanField(default=False)\n    deleted = models.BooleanField(default=False)\n    retrieved = models.BooleanField(default=False)\nclass Organisation(models.Model):",
+        "peekOfCode": "class FriendChat(models.Model):\n    sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name=\"sender\")\n    receiver = models.ForeignKey(\n        User, on_delete=models.PROTECT, related_name=\"receiver\"\n    )\n    body = models.CharField(max_length=255)\n    created = models.DateTimeField(auto_now_add=True)\n    pinned = models.BooleanField(default=False)\n    updated = models.DateTimeField(auto_now=True)\n    deleted = models.BooleanField(default=False)",
         "detail": "peers_api.models",
         "documentation": {}
     },
@@ -1212,7 +1466,7 @@
         "kind": 6,
         "importPath": "peers_api.models",
         "description": "peers_api.models",
-        "peekOfCode": "class Organisation(models.Model):\n    host = models.ForeignKey(User, on_delete=models.PROTECT)\n    name = models.CharField(max_length=100)\n    created = models.DateTimeField(auto_now=True)\n    description = models.TextField()\n    participants = models.ManyToManyField(User, related_name=\"participants\", blank=True)\nclass Topic(models.Model):\n    name = models.CharField(max_length=200)\nclass Room(models.Model):\n    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)",
+        "peekOfCode": "class Organisation(models.Model):\n    host = models.ForeignKey(User, on_delete=models.PROTECT)\n    name = models.CharField(max_length=100)\n    created = models.DateTimeField(auto_now=True)\n    description = models.TextField()\n    members = models.ManyToManyField(User, related_name=\"members\", blank=True)\n    def __str__(self):\n        return self.name\nclass Topic(models.Model):\n    title = models.CharField(max_length=200)",
         "detail": "peers_api.models",
         "documentation": {}
     },
@@ -1221,7 +1475,7 @@
         "kind": 6,
         "importPath": "peers_api.models",
         "description": "peers_api.models",
-        "peekOfCode": "class Topic(models.Model):\n    name = models.CharField(max_length=200)\nclass Room(models.Model):\n    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)\n    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)\n    name = models.CharField(max_length=200)\n    organisation = models.ForeignKey(\n        Organisation, related_name=\"rooms\", on_delete=models.CASCADE\n    )\n    description = models.TextField(null=True, blank=True)",
+        "peekOfCode": "class Topic(models.Model):\n    title = models.CharField(max_length=200)\n    organisation = models.ForeignKey(\n        Organisation, on_delete=models.CASCADE, related_name=\"topics\"\n    )\n    def __str__(self):\n        return self.title\nclass Room(models.Model):\n    name = models.CharField(max_length=200)\n    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)",
         "detail": "peers_api.models",
         "documentation": {}
     },
@@ -1230,7 +1484,7 @@
         "kind": 6,
         "importPath": "peers_api.models",
         "description": "peers_api.models",
-        "peekOfCode": "class Room(models.Model):\n    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)\n    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)\n    name = models.CharField(max_length=200)\n    organisation = models.ForeignKey(\n        Organisation, related_name=\"rooms\", on_delete=models.CASCADE\n    )\n    description = models.TextField(null=True, blank=True)\n    participants = models.ManyToManyField(User, related_name=\"participants\", blank=True)\n    updated = models.DateTimeField(auto_now=True)",
+        "peekOfCode": "class Room(models.Model):\n    name = models.CharField(max_length=200)\n    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)\n    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)\n    organisation = models.ForeignKey(\n        Organisation, related_name=\"rooms\", on_delete=models.CASCADE\n    )\n    description = models.TextField(null=True, blank=True)\n    participants = models.ManyToManyField(User, related_name=\"participants\")\n    created = models.DateTimeField(auto_now_add=True)",
         "detail": "peers_api.models",
         "documentation": {}
     },
@@ -1244,11 +1498,20 @@
         "documentation": {}
     },
     {
+        "label": "Stared",
+        "kind": 6,
+        "importPath": "peers_api.models",
+        "description": "peers_api.models",
+        "peekOfCode": "class Stared(models.Model):\n    user = models.OneToOneField(\n        User, verbose_name=_(\"Users stared messages\"), on_delete=models.CASCADE\n    )\n    stared_room_msg = models.ForeignKey(\n        RoomChat, verbose_name=_(\"Stared Room Messages\"), on_delete=models.CASCADE\n    )\n    stared_friend_msg = models.ForeignKey(\n        FriendChat, verbose_name=_(\"Stared Friends Messages\"), on_delete=models.CASCADE\n    )",
+        "detail": "peers_api.models",
+        "documentation": {}
+    },
+    {
         "label": "User",
         "kind": 5,
         "importPath": "peers_api.models",
         "description": "peers_api.models",
-        "peekOfCode": "User = settings.AUTH_USER_MODEL\nclass Friend(models.Model):\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\nclass FriendChat(models.Model):\n    sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name=\"sender\")\n    receiver = models.ForeignKey(\n        Friend, on_delete=models.PROTECT, related_name=\"receiver\"\n    )\n    body = models.CharField(max_length=255)\n    pinned = models.BooleanField(default=False)",
+        "peekOfCode": "User = settings.AUTH_USER_MODEL\n# class Friend(models.Model):\n#     user = models.ForeignKey(User, on_delete=models.CASCADE)\nclass FriendChat(models.Model):\n    sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name=\"sender\")\n    receiver = models.ForeignKey(\n        User, on_delete=models.PROTECT, related_name=\"receiver\"\n    )\n    body = models.CharField(max_length=255)\n    created = models.DateTimeField(auto_now_add=True)",
         "detail": "peers_api.models",
         "documentation": {}
     },
@@ -1259,6 +1522,15 @@
         "description": "peers_api.urls",
         "peekOfCode": "urlpatterns = [\n    #  path(\"\", admin.site.urls),\n]",
         "detail": "peers_api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "ReportsConfig",
+        "kind": 6,
+        "importPath": "reports.apps",
+        "description": "reports.apps",
+        "peekOfCode": "class ReportsConfig(AppConfig):\n    default_auto_field = \"django.db.models.BigAutoField\"\n    name = \"reports\"",
+        "detail": "reports.apps",
         "documentation": {}
     },
     {

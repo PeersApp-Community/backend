@@ -17,9 +17,31 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
+
+    MALE = "M"
+    FEMALE = "F"
+    PREFER_NOT_TO_SAY = "P"
+
+    GENDER_CHOICES = [
+        (MALE, "Male"),
+        (FEMALE, "Female"),
+        (PREFER_NOT_TO_SAY, "Prefer not to say"),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_query_name="")
     first_name = models.CharField(max_length=255, null=True, blank=True)
     last_name = models.CharField(max_length=255, null=True, blank=True)
     bio = models.CharField(max_length=100, null=True, blank=True)
+    gender = models.CharField(
+        max_length=6, choices=GENDER_CHOICES, default=PREFER_NOT_TO_SAY
+    )
     avatar = models.ImageField(null=True, blank=True, default="avatar.svg")
+    location = models.CharField(max_length=100)
+    institution = models.CharField(max_length=100)
+    department = models.CharField(max_length=100)
+    level = models.CharField(max_length=100)
+    course = models.CharField(max_length=100)
     updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.user.username

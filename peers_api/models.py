@@ -1,24 +1,30 @@
 from django.db import models
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 
 User = settings.AUTH_USER_MODEL
 
 
-class Friend(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+# class Friend(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class FriendChat(models.Model):
     sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name="sender")
     receiver = models.ForeignKey(
-        Friend, on_delete=models.PROTECT, related_name="receiver"
+        User, on_delete=models.PROTECT, related_name="receiver"
     )
 
     body = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
     pinned = models.BooleanField(default=False)
+    updated = models.DateTimeField(auto_now=True)
     deleted = models.BooleanField(default=False)
     retrieved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.sender
 
 
 class Organisation(models.Model):
@@ -26,24 +32,33 @@ class Organisation(models.Model):
     name = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now=True)
     description = models.TextField()
-    participants = models.ManyToManyField(User, related_name="participants", blank=True)
+    members = models.ManyToManyField(User, related_name="members", blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Topic(models.Model):
-    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    organisation = models.ForeignKey(
+        Organisation, on_delete=models.CASCADE, related_name="topics"
+    )
+
+    def __str__(self):
+        return self.title
 
 
 class Room(models.Model):
+    name = models.CharField(max_length=200)
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200)
     organisation = models.ForeignKey(
         Organisation, related_name="rooms", on_delete=models.CASCADE
     )
     description = models.TextField(null=True, blank=True)
-    participants = models.ManyToManyField(User, related_name="participants", blank=True)
-    updated = models.DateTimeField(auto_now=True)
+    participants = models.ManyToManyField(User, related_name="participants")
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-updated", "-created"]
@@ -72,5 +87,13 @@ class RoomChat(models.Model):
         return self.body[0:50]
 
 
-# class Organisation(models.Model):
-#     pass
+class Stared(models.Model):
+    user = models.OneToOneField(
+        User, verbose_name=_("Users stared messages"), on_delete=models.CASCADE
+    )
+    stared_room_msg = models.ForeignKey(
+        RoomChat, verbose_name=_("Stared Room Messages"), on_delete=models.CASCADE
+    )
+    stared_friend_msg = models.ForeignKey(
+        FriendChat, verbose_name=_("Stared Friends Messages"), on_delete=models.CASCADE
+    )

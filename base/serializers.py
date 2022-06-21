@@ -32,7 +32,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
     otp = serializers.CharField(read_only=True)
     password = serializers.CharField(style={"input_type": "password"}, write_only=True)
 
-    class Meta(DjoserUserCreateSerializer.Meta):
+    class Meta():
         model = User
         fields = ["id", "username", "email", "phone", "password", "otp"]
 

@@ -137,7 +137,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+    ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
@@ -193,7 +195,7 @@ DJOSER = {
         "username_reset": "djoser.serializers.SendEmailResetSerializer",
         "username_reset_confirm": "djoser.serializers.UsernameResetConfirmSerializer",
         "username_reset_confirm_retype": "djoser.serializers.UsernameResetConfirmRetypeSerializer",
-        "user_create": "djoser.serializers.UserCreateSerializer",
+        "user_create": "base.serializers.UserCreateSerializer",
         "user_create_password_retype": "djoser.serializers.UserCreatePasswordRetypeSerializer",
         "user_delete": "djoser.serializers.UserDeleteSerializer",
         "user": "djoser.serializers.UserSerializer",
