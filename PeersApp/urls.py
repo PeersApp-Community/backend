@@ -24,7 +24,7 @@ urlpatterns = [
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("__debug__/", include("debug_toolbar.urls")),
+    path("docs/", include_docs_urls(title="PeersApp API")),
     path(
         "api/schema/",
         get_schema_view(
@@ -32,6 +32,7 @@ urlpatterns = [
         ),
         name="PeersApp-schema",
     ),
+    # path("__debug__/", include("debug_toolbar.urls")),
     # path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     # path("docs/", include_docs_urls(title="PeersApp API")),
     # path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
