@@ -88,13 +88,13 @@ class GetOtpSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user_id = serializers.IntegerField()
+    # user_id = serializers.IntegerField()
 
     class Meta:
         model = Profile
         fields = "__all__"
         # fields = ["id", "user_id", "first_name", "last_name", "bio", "avatar"]
 
-    def create(self, validated_data):
-        user_id = self.context["user_id"]
-        return Profile.objects.create(user_id=user_id, **validated_data)
+    # def create(self, validated_data):
+    #     user_id = self.context["user_id"]
+    #     return Profile.objects.create(user_id=user_id, **validated_data)

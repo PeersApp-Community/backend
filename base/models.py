@@ -21,14 +21,14 @@ class User(AbstractUser):
 
 class Profile(models.Model):
 
-    MALE = "M"
-    FEMALE = "F"
-    PREFER_NOT_TO_SAY = "P"
+    MALE = "male"
+    FEMALE = "female"
+    PREFER_NOT_TO_SAY = "null"
 
     GENDER_CHOICES = [
+        (PREFER_NOT_TO_SAY, "Prefer not to say"),
         (MALE, "Male"),
         (FEMALE, "Female"),
-        (PREFER_NOT_TO_SAY, "Prefer not to say"),
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_query_name="")
@@ -38,7 +38,7 @@ class Profile(models.Model):
     gender = models.CharField(
         max_length=6, choices=GENDER_CHOICES, default=PREFER_NOT_TO_SAY
     )
-    avatar = models.ImageField(null=True, blank=True, default="avatar.svg")
+    avatar = models.ImageField(null=True, blank=True, default="avatar.svg", upload_to="imgs")
     location = models.CharField(max_length=100)
     institution = models.CharField(max_length=100)
     department = models.CharField(max_length=100)
