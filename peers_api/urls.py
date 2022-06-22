@@ -1,6 +1,19 @@
 from django.urls import path
-from .views import *
+from rest_framework.routers import DefaultRouter
+from .views import (
+    OrganisationModelViewSet,
+    RoomModelViewSet,
+    RoomChatModelViewSet,
+    FriendChatModelViewSet,
+    StatusModelViewSet,
+)
 
-urlpatterns = [
-    #  path("", admin.site.urls),
-]
+router = DefaultRouter()
+
+router.register("orgs", OrganisationModelViewSet)
+router.register("rooms", RoomModelViewSet)
+router.register("room-chats", RoomChatModelViewSet)
+router.register("friendchat", FriendChatModelViewSet)
+router.register("status", StatusModelViewSet)
+
+urlpatterns = router.urls

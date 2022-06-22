@@ -1,10 +1,14 @@
 from django.contrib import admin
-from .models import RoomChat, Room, Organisation, Topic, FriendChat
+from .models import RoomChat, Room, Organisation, FriendChat, Status
+from django.db import models
 
 # Register your models here.
 @admin.register(Organisation)
 class OrganizationAdmin(admin.ModelAdmin):
     list_display = ["name", "host", "created"]
+    formfield_overrides = {
+        models.DateTimeField: {"input_formats": ("%d/%m/%Y",)},
+    }
 
 
 @admin.register(Room)
@@ -23,11 +27,14 @@ class RoomChatAdmin(admin.ModelAdmin):
         "retrieved",
         "deleted",
     ]
+    formfield_overrides = {
+        models.DateTimeField: {"input_formats": ("%d/%m/%Y",)},
+    }
 
 
-@admin.register(Topic)
-class TopicAdmin(admin.ModelAdmin):
-    list_display = ["title"]
+@admin.register(Status)
+class StatusAdmin(admin.ModelAdmin):
+    list_display = ["user", "post", "created", "updated"]
 
 
 @admin.register(FriendChat)
