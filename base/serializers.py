@@ -32,7 +32,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
     otp = serializers.CharField(read_only=True)
     password = serializers.CharField(style={"input_type": "password"}, write_only=True)
 
-    class Meta():
+    class Meta:
         model = User
         fields = ["id", "username", "email", "phone", "password", "otp"]
 
@@ -92,7 +92,8 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ["id", "user_id", "first_name", "last_name", "bio", "avatar"]
+        fields = "__all__"
+        # fields = ["id", "user_id", "first_name", "last_name", "bio", "avatar"]
 
     def create(self, validated_data):
         user_id = self.context["user_id"]
