@@ -12,9 +12,9 @@ class FriendChat(models.Model):
     receiver = models.ForeignKey(
         User, on_delete=models.PROTECT, related_name="receiver"
     )
-
     body = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
+    seen = models.BooleanField(default=False)
     pinned = models.BooleanField(default=False)
     stared = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
@@ -62,8 +62,9 @@ class RoomChat(models.Model):
     )
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.uateTimeField(auto_now_add=True)
     pinned = models.BooleanField(default=False)
+    seen = models.BooleanField(default=False)
     stared = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     retrieved = models.BooleanField(default=False)
@@ -82,6 +83,7 @@ class Status(models.Model):
     post = models.FileField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    seen = models.BooleanField(default=False)
 
 
 #
