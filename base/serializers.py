@@ -27,12 +27,12 @@ def otp_create(phone):
     return otp
 
 
-# class UserCreateSerializer(DjoserUserCreateSerializer):
-class UserCreateSerializer(serializers.ModelSerializer):
+class UserCreateSerializer(DjoserUserCreateSerializer):
+    # class UserCreateSerializer(serializers.ModelSerializer):
     otp = serializers.CharField(read_only=True)
     password = serializers.CharField(style={"input_type": "password"}, write_only=True)
 
-    class Meta:
+    class Meta(DjoserUserCreateSerializer.Meta):
         model = User
         fields = ["id", "username", "email", "phone", "password", "otp"]
 
@@ -88,7 +88,7 @@ class GetOtpSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    # user_id = serializers.IntegerField()
+    # user = serializers.For(read_only=True)
 
     class Meta:
         model = Profile
