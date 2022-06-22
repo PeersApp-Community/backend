@@ -11,6 +11,33 @@ import math
 #     )
 
 # send_otp(otp, validated_data["phone"])
+#
+#
+#
+
+#     def create(self, validated_data):
+#         user = User(
+#             username=validated_data['username']
+#         )
+#         user.set_password(validated_data['password'])
+#         user.save()
+#         return user
+#
+#
+# def create(self, validated_data):
+#     user = User(
+#         username=validated_data['username']
+#     )
+#     user.set_password(make_password(validated_data['password']))
+#     user.save()
+#     return user
+#
+#
+#     def create(self, validated_data):
+#         return User.objects.create_user(**validated_data)
+#
+#
+#
 
 
 def otp_create(phone):
@@ -46,9 +73,8 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
         return value
 
     def create(self, validated_data):
-        user = User(**validated_data)
+        user = User.objects.create_user(**validated_data)
         user.otp = otp_create(validated_data["phone"])
-        user.save()
         return user
 
 
