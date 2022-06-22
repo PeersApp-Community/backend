@@ -48,8 +48,8 @@ class ProfileViewSet(ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = [AllowAny]
 
-    def get_serializer_context(self):
-        return {"user_id": self.request.user.id}
+    # def get_serializer_context(self):
+    #     return {"user_id": self.request.user.id}
 
     # def create(self, request, *args, **kwargs):
     #     serializer = UserCreateSerializer(

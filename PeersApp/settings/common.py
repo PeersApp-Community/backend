@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
     "djoser",
     # apps
     "base",
@@ -138,7 +139,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+        "rest_framework.permissions.AllowAny"
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -204,6 +205,14 @@ DJOSER = {
         "token_create": "djoser.serializers.TokenCreateSerializer",
     },
 }
+
+# ACCOUNT_EMAIL_VERIFICATION = "none"
+
+# ACCOUNT_AUTHENTICATION_METHOD = "username"
+
+# ACCOUNT_EMAIL_REQUIRED = False
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 # Available endpoints

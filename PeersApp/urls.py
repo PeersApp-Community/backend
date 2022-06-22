@@ -29,7 +29,7 @@ urlpatterns = [
     # path("__debug__/", include("debug_toolbar.urls")),
     path("docs/", include_docs_urls(title="PeersApp API")),
     path(
-        "base/schema/",
+        "api/schema/",
         get_schema_view(
             title="PeersApp", description="API for the PeersApp", version="1.0.0"
         ),
