@@ -7,24 +7,6 @@ from datetime import datetime
 User = settings.AUTH_USER_MODEL
 
 
-class FriendChat(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name="sender")
-    receiver = models.ForeignKey(
-        User, on_delete=models.PROTECT, related_name="receiver"
-    )
-    body = models.CharField(max_length=255)
-    created = models.DateTimeField(auto_now_add=True)
-    seen = models.BooleanField(default=False)
-    pinned = models.BooleanField(default=False)
-    stared = models.BooleanField(default=False)
-    updated = models.DateTimeField(auto_now=True)
-    deleted = models.BooleanField(default=False)
-    retrieved = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.sender
-
-
 class Organisation(models.Model):
     host = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=100)
@@ -84,6 +66,24 @@ class Status(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False)
+
+
+class FriendChat(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name="sender")
+    receiver = models.ForeignKey(
+        User, on_delete=models.PROTECT, related_name="receiver"
+    )
+    body = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+    seen = models.BooleanField(default=False)
+    pinned = models.BooleanField(default=False)
+    stared = models.BooleanField(default=False)
+    updated = models.DateTimeField(auto_now=True)
+    deleted = models.BooleanField(default=False)
+    retrieved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.sender
 
 
 #
