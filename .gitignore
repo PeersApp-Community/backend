@@ -10,3 +10,4 @@ db.sqlite3
 base/__pycache__/serializers.cpython-39.pyc
 base/__pycache__/views.cpython-39.pyc
 PeersApp/__pycache__/urls.cpython-39.pyc
+db.sqlite3
