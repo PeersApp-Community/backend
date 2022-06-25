@@ -75,6 +75,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         user.otp = otp_create(validated_data["phone"])
+        user.is_active = False
         user.save()
         return user
 
@@ -106,6 +107,7 @@ class GetOtpSerializer(serializers.ModelSerializer):
             if self.instance.is_phone_verified == False:
                 self.instance.is_phone_verified = True
                 self.instance.otp = ""
+                self.instance.is_active = True
                 self.instance.save()
             return self.instance
         except User.DoesNotExist:

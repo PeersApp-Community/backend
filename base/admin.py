@@ -1,11 +1,34 @@
 from django.contrib import admin
 from .models import User, Profile
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils.translation import gettext_lazy as _
+
 
 # Register your models here.
 @admin.register(User)
 class UserdAdmin(BaseUserAdmin):
-    list_editable = ("otp","phone")
+    list_editable = ("otp", "phone")
+
+    fieldsets = (
+        (None, {"fields": ("username", "password")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name", "phone", "email")}),
+        (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "is_phone_verified",
+                    "is_email_verified",
+                    "groups",
+                    "user_permissions",
+                ),
+            },
+        ),
+        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+    )
+
     add_fieldsets = (
         (
             None,
@@ -31,7 +54,7 @@ class UserdAdmin(BaseUserAdmin):
         "date_joined",
         "is_phone_verified",
         "is_email_verified",
-        "is_active"
+        "is_active",
     ]
 
 
