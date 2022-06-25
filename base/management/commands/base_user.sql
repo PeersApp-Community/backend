@@ -1,8 +1,6 @@
 insert into base_user
     (id, username, phone, email, password, is_superuser, is_staff, is_active, date_joined, first_name, last_name, is_phone_verified, is_email_verified)
 values
-    (1, 'pmccoy0', '650-471-1339', 'pmccoy0@google.co.jp', 'G4stPeaAe', true, true, true, '10/29/2021', 'Pascale', 'McCoy', true, false
-)   ,
     (2, 'eboardman1', '793-850-3312', 'eboardman1@meetup.com', 'xh2OqefQPz', true, false, true, '12/8/2021', 'Ethelind', 'Boardman', true, false)   ,
     (3, 'adurston2', '753-341-8139', 'adurston2@timesonline.co.uk', 'vSLITDfCi0', false, true, false, '9/26/2021', 'Addi', 'Durston', true, true)   ,
     (4, 'bmacnelly3', '820-594-4439', 'bmacnelly3@de.vu', 'ecJqFyABIn0q', true, true, true, '12/29/2021', 'Brander', 'MacNelly', false, false)   ,
