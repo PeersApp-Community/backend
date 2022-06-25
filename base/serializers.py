@@ -75,6 +75,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         user.otp = otp_create(validated_data["phone"])
+        user.save()
         return user
 
 

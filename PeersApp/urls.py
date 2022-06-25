@@ -12,7 +12,7 @@ from django.views.generic import TemplateView
 # )
 
 admin.site.site_header = "PeersApp Admin"
-admin.site.index_title = "Admin"
+admin.site.index_title = "Administrator"
 
 
 urlpatterns = [
@@ -20,6 +20,7 @@ urlpatterns = [
     path("peers-admin/", admin.site.urls),
     path("api/", include("peers_api.urls")),
     path("base/", include("base.urls")),
+    path("reports/", include("reports.urls")),
     #
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),

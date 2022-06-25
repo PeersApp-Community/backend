@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # apps
     "base",
     "peers_api",
+    "reports"
 ]
 
 MIDDLEWARE = [

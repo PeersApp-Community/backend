@@ -5,9 +5,10 @@ __pycache__
 PeersApp/settings/dev.py
 *.pyc
 .env
-db.sqlite3
 .vscode
 base/__pycache__/serializers.cpython-39.pyc
 base/__pycache__/views.cpython-39.pyc
 PeersApp/__pycache__/urls.cpython-39.pyc
+peers_api/__pycache__
+PeersApp/settings/__pycache__
 db.sqlite3
