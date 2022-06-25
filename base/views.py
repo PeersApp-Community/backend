@@ -39,7 +39,7 @@ def validate_user(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
-            {"Message": "You are now Validated, happy learning"}, status=status.HTTP_201_CREATED
+            {"Validation Successful, Happy Learning"}, status=status.HTTP_200_OK
         )
 
 
