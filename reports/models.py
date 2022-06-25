@@ -15,3 +15,6 @@ class Rating(models.Model):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     rating = models.SmallIntegerField(choices=RATE_CHOICES)
+
+    def __str__(self) -> str:
+        return f"{self.user}--{self.rating}"
