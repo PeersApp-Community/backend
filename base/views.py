@@ -7,7 +7,12 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Profile, User
 from rest_framework import status
 from rest_framework.response import Response
-from .serializers import GetOtpSerializer, ProfileSerializer, UserCreateSerializer
+from .serializers import (
+    GetOtpSerializer,
+    ProfileEditSerializer,
+    ProfileSerializer,
+    UserCreateSerializer,
+)
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -45,8 +50,37 @@ def validate_user(request):
 
 class ProfileViewSet(ModelViewSet):
     queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
     permission_classes = [AllowAny]
+    http_method_names = ["get", "patch"]
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return ProfileSerializer
+        elif self.request.method == "PATCH":
+            return ProfileEditSerializer
+
+    def update(self, request, *args, **kwargs):
+        serializer = ProfileEditSerializer(
+            data=request.data, context={"user_id": self.request.user.id}, partial=True
+        )
+        serializer.is_valid(raise_exception=True)
+        user = User.objects.get(id=kwargs["pk"])
+        user.first_name = request.data["first_name"]
+        user.last_name = request.data["last_name"]
+        user.save()
+        serializer.save()
+        return Response(serializer.data)
+        # return
+
+    # def get_queryset(self):
+    #     user = self.request.user
+
+    #     if user.is_staff:
+    #         return Profile.objects.all()
+
+    #     profile_id = Profile.objects.only(
+    #         'id').get(user_id=user.id)
+    #     return Profile.objects.filter(profile_id=profile_id)
 
     # def get_serializer_context(self):
     #     return {"user_id": self.request.user.id}
@@ -65,10 +99,3 @@ class ProfileViewSet(ModelViewSet):
     # def post(self, request, *args, **kwargs):
     #     id = request.user.id
     #     return self.create(request, *args, **kwargs)
-
-
-# class ValidateUser(UpdateAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = GetOtpSerializer
-#     permission_classes = [AllowAny]
-#     http_method_names = ["patch"]

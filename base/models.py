@@ -23,7 +23,7 @@ class Profile(models.Model):
 
     MALE = "male"
     FEMALE = "female"
-    PREFER_NOT_TO_SAY = "null"
+    PREFER_NOT_TO_SAY = None
 
     GENDER_CHOICES = [
         (PREFER_NOT_TO_SAY, "Prefer not to say"),
@@ -32,22 +32,48 @@ class Profile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_query_name="")
-    first_name = models.CharField(max_length=255, null=True, blank=True)
-    last_name = models.CharField(max_length=255, null=True, blank=True)
     bio = models.CharField(max_length=100, null=True, blank=True)
     gender = models.CharField(
         max_length=6, choices=GENDER_CHOICES, default=PREFER_NOT_TO_SAY
     )
-    avatar = models.ImageField(null=True, blank=True, default="avatar.svg", upload_to="imgs")
-    location = models.CharField(max_length=100)
-    institution = models.CharField(max_length=100)
-    department = models.CharField(max_length=100)
-    level = models.CharField(max_length=100)
-    course = models.CharField(max_length=100)
+    avatar = models.ImageField(
+        null=True, blank=True, default="avatar.svg", upload_to="imgs"
+    )
+    institution = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+    educational_level = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+    course = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+    location = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+    )
     updated = models.DateTimeField(auto_now=True)
+
+    def first_name(self):
+        return self.user.first_name
+
+    def last_name(self):
+        return self.user.last_name
 
     def __str__(self) -> str:
         return self.user.username
+
+    # end def
+
+    # first_name = models.CharField(max_length=255, null=True, blank=True)
+    # last_name = models.CharField(max_length=255, null=True, blank=True)
 
 
 # "id": 1,

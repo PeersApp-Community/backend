@@ -3,7 +3,6 @@ from .views import ProfileViewSet, validate_user
 from django.urls import path
 
 router = DefaultRouter()
-# router.register("reg", UserCreateViewSet, basename="reg")
 router.register("profile", ProfileViewSet)
 
 # Routers provide an easy way of automatically determining the URL conf.

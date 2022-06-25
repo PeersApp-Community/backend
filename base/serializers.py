@@ -5,41 +5,6 @@ import random
 import math
 
 
-# def send_otp(otp, VERIFIED_NUMBER):
-#     client.messages.create(
-#         body=f"Your OTP is {otp}", from_="+2348069051233", to=[VERIFIED_NUMBER]
-#     )
-
-# send_otp(otp, validated_data["phone"])
-#
-#
-#
-
-#     def create(self, validated_data):
-#         user = User(
-#             username=validated_data['username']
-#         )
-#         user.set_password(validated_data['password'])
-#         user.save()
-#         return user
-#
-#
-# def create(self, validated_data):
-#     user = User(
-#         username=validated_data['username']
-#     )
-#     user.set_password(make_password(validated_data['password']))
-#     user.save()
-#     return user
-#
-#
-#     def create(self, validated_data):
-#         return User.objects.create_user(**validated_data)
-#
-#
-#
-
-
 def otp_create(phone):
     num = []
     num[:0] = str(phone)
@@ -55,7 +20,6 @@ def otp_create(phone):
 
 
 class UserCreateSerializer(DjoserUserCreateSerializer):
-    # class UserCreateSerializer(serializers.ModelSerializer):
     otp = serializers.CharField(read_only=True)
     password = serializers.CharField(style={"input_type": "password"}, write_only=True)
 
@@ -116,14 +80,90 @@ class GetOtpSerializer(serializers.ModelSerializer):
         # return self.instance
 
 
+class UserSimpleerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["username", "email", "phone"]
+
+
 class ProfileSerializer(serializers.ModelSerializer):
-    # user = serializers.For(read_only=True)
+    user = UserSimpleerializer()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
 
     class Meta:
         model = Profile
         fields = "__all__"
-        # fields = ["id", "user_id", "first_name", "last_name", "bio", "avatar"]
+        fields = ["id", "user", "first_name", "last_name", "bio", "avatar"]
+
+
+class ProfileEditSerializer(serializers.ModelSerializer):
+    # user = UserSimpleerializer(read_only=True)
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+
+    class Meta:
+        model = Profile
+        fields = "__all__"
+        fields = ["first_name", "last_name", "bio", "avatar"]
+
+    def save(self, **kwargs):
+        first_name = self.validated_data["first_name"]
+        last_name = self.validated_data["last_name"]
+        try:
+            user = User.objects.get(user_id=self.context["user_id"])
+            print(
+                """
+               ============= lodsafjnjfdsan
+               ====== asdfjsdfl;kajdsfk
+                =======adskfsjdfk;ads;lf
+               ========== dsafjskd;fj';adsf
+                ===========asdflasmdf;a
+                """
+            )
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+
+            return super().save(**kwargs)
+        except:
+            print("error")
 
     # def create(self, validated_data):
     #     user_id = self.context["user_id"]
     #     return Profile.objects.create(user_id=user_id, **validated_data)
+
+
+# def send_otp(otp, VERIFIED_NUMBER):
+#     client.messages.create(
+#         body=f"Your OTP is {otp}", from_="+2348069051233", to=[VERIFIED_NUMBER]
+#     )
+
+# send_otp(otp, validated_data["phone"])
+#
+#
+#
+
+#     def create(self, validated_data):
+#         user = User(
+#             username=validated_data['username']
+#         )
+#         user.set_password(validated_data['password'])
+#         user.save()
+#         return user
+#
+#
+# def create(self, validated_data):
+#     user = User(
+#         username=validated_data['username']
+#     )
+#     user.set_password(make_password(validated_data['password']))
+#     user.save()
+#     return user
+#
+#
+#     def create(self, validated_data):
+#         return User.objects.create_user(**validated_data)
+#
+#
+#

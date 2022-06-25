@@ -1,4 +1,3 @@
-from django.conf import settings
 from rest_framework import serializers
 from base.models import User
 from .models import FriendChat, Organisation, Room, RoomChat, Status
