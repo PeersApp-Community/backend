@@ -6,11 +6,11 @@ from django.utils.translation import gettext_lazy as _
 User = settings.AUTH_USER_MODEL
 
 
-class Topic(models.Model):
-    name = models.CharField(max_length=200)
+# class Topic(models.Model):
+#     name = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
 class ChatManager(models.Manager):
@@ -32,7 +32,7 @@ class Space(models.Model):
     description = models.TextField(null=True, blank=True)
     participants = models.ManyToManyField(User, related_name="participants")
     created = models.DateTimeField(auto_now_add=True)
-    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, blank=True)
+    # topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     archived = models.DateTimeField(auto_now=True)
     pinned = models.DateTimeField(auto_now=True)
