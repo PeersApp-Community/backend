@@ -31,10 +31,14 @@ class Profile(models.Model):
         (FEMALE, "Female"),
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_query_name="")
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=100, null=True, blank=True)
     gender = models.CharField(
-        max_length=6, choices=GENDER_CHOICES, default=PREFER_NOT_TO_SAY
+        null=True,
+        blank=True,
+        max_length=6,
+        choices=GENDER_CHOICES,
+        default=PREFER_NOT_TO_SAY,
     )
     avatar = models.ImageField(
         null=True, blank=True, default="avatar.svg", upload_to="imgs"
