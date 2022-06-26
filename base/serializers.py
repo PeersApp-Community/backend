@@ -94,13 +94,26 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = "__all__"
-        fields = ["id", "user", "first_name", "last_name", "bio", "avatar"]
+        fields = [
+            "id",
+            "user",
+            "first_name",
+            "last_name",
+            "bio",
+            "gender",
+            "institution",
+            "educational_level",
+            "course",
+            "location",
+            "updated",
+            "avatar",
+        ]
 
 
 class ProfileEditSerializer(serializers.ModelSerializer):
     # user = UserSimpleerializer(read_only=True)
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
+    first_name = serializers.CharField(allow_blank=True, allow_null=True)
+    last_name = serializers.CharField(allow_blank=True, allow_null=True)
 
     class Meta:
         model = Profile

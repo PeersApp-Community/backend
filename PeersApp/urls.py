@@ -27,7 +27,7 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("docs/", include_docs_urls(title="PeersApp API")),
     path(
-        "api/schema/",
+        "schema/",
         get_schema_view(
             title="PeersApp", description="API for the PeersApp", version="1.0.0"
         ),

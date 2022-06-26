@@ -1,9 +1,12 @@
+from django.forms import ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
-from rest_framework.generics import ListCreateAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.generics import (
+    ListAPIView,
+    CreateAPIView,
+    UpdateAPIView,
+    RetrieveAPIView,
+)
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView
-from rest_framework.viewsets import ModelViewSet
 from .models import Profile, User
 from rest_framework import status
 from rest_framework.response import Response
@@ -48,29 +51,44 @@ def validate_user(request):
         )
 
 
-class ProfileViewSet(ModelViewSet):
-    queryset = Profile.objects.all()
+class ProfileUpdateAPIView(UpdateAPIView):
+    serializer_class = ProfileEditSerializer
     permission_classes = [AllowAny]
-    http_method_names = ["get", "patch"]
-
-    def get_serializer_class(self):
-        if self.request.method == "GET":
-            return ProfileSerializer
-        elif self.request.method == "PATCH":
-            return ProfileEditSerializer
+    http_method_names = [
+        "patch",
+    ]
 
     def update(self, request, *args, **kwargs):
         serializer = ProfileEditSerializer(
             data=request.data, context={"user_id": self.request.user.id}, partial=True
         )
         serializer.is_valid(raise_exception=True)
-        user = User.objects.get(id=kwargs["pk"])
-        user.first_name = request.data["first_name"]
-        user.last_name = request.data["last_name"]
-        user.save()
-        serializer.save()
-        return Response(serializer.data)
-        # return
+        user = User.objects.get(id=kwargs["id"])
+        if user.id == kwargs["id"]:
+            user.first_name = request.data["first_name"]
+            user.last_name = request.data["last_name"]
+            user.save()
+            serializer.save()
+            return Response(serializer.data)
+        return ValidationError("Profile does not match")
+
+
+class ProfileListAPIView(ListAPIView):
+    queryset = Profile.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = ProfileSerializer
+    # http_method_names = [
+    #     "get",
+    # ]
+
+
+class ProfileRetrieveAPIView(RetrieveAPIView):
+    queryset = Profile.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = ProfileSerializer
+    # http_method_names = [
+    #     "get",
+    # ]
 
     # def get_queryset(self):
     #     user = self.request.user
