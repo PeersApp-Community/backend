@@ -60,7 +60,7 @@ class SpaceMsg(models.Model):
         ordering = ["-updated", "-created"]
 
     def __str__(self):
-        return self.body[0:50]
+        return self.author
 
 
 class Chat(models.Model):
