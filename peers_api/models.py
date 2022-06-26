@@ -93,7 +93,7 @@ class ChatMsg(models.Model):
     retrieved = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.chat.sender
+        return self.message
 
 
 class Status(models.Model):
