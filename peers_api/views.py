@@ -1,41 +1,44 @@
 from rest_framework.viewsets import ModelViewSet
 
 from .serializers import (
-    FriendChatSerializer,
-    OrganisationSerializer,
-    RoomChatSerializer,
-    RoomSerializer,
+    ChatMsgSerializer,
+    ChatSerializer,
+    SpaceMsgSerializer,
+    SpaceSerializer,
     StatusSerializer,
 )
 
-from .models import FriendChat, Organisation, Room, RoomChat, Status
+from .models import Chat, ChatMsg, Space, SpaceMsg, Status
 
 
-# Organisation
-class OrganisationModelViewSet(ModelViewSet):
-    queryset = Organisation.objects.all()
-    serializer_class = OrganisationSerializer
-
-
-# Room
+# Space
 class RoomModelViewSet(ModelViewSet):
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
+    queryset = Space.objects.all()
+    serializer_class = SpaceSerializer
     # read_only_fields = ('account_name',)
     # write_only_fields = ('password',)  # Note: Password field is write-only
 
 
-
 # RoomChat
-class RoomChatModelViewSet(ModelViewSet):
-    queryset = RoomChat.objects.all()
-    serializer_class = RoomChatSerializer
+class RoomMsgModelViewSet(ModelViewSet):
+    queryset = SpaceMsg.objects.all()
+    serializer_class = SpaceMsgSerializer
+
+
+# Chat
+class ChatModelViewSet(ModelViewSet):
+    
+    serializer_class = ChatSerializer
+    
+    def get_queryset(self):
+        queryset =   Chat.objects.by_user(user=self.request.user).prefetch_related("chatmsg")
+        return queryset
 
 
 # FriendChat
-class FriendChatModelViewSet(ModelViewSet):
-    queryset = FriendChat.objects.all()
-    serializer_class = FriendChatSerializer
+class ChatModelViewSet(ModelViewSet):
+    queryset = ChatMsg.objects.all()
+    serializer_class = ChatMsgSerializer
 
 
 # Status

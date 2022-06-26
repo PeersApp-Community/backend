@@ -1,42 +1,35 @@
 from django.contrib import admin
-from .models import RoomChat, Room, Organisation, FriendChat, Status
-from django.db import models
-
-# Register your models here.
-@admin.register(Organisation)
-class OrganizationAdmin(admin.ModelAdmin):
-    list_display = ["name", "host", "created"]
-    formfield_overrides = {
-        models.DateTimeField: {"input_formats": ("%d/%m/%Y",)},
-    }
+from .models import Chat, ChatMsg, Space, SpaceMsg, Status
 
 
-@admin.register(Room)
-class RoomAdmin(admin.ModelAdmin):
-    list_display = ["name", "host", "organisation", "created", "updated"]
+class SpaceMsgInline(admin.TabularInline):
+    model = SpaceMsg
+    # autocomplete_fields = ['product']
+    min_num = 0
+    max_num = 10
+    extra = 0
 
 
-@admin.register(RoomChat)
-class RoomChatAdmin(admin.ModelAdmin):
-    list_display = [
-        "author",
-        "room",
-        "organisation",
-        "updated",
-        "pinned",
-        "retrieved",
-        "deleted",
-    ]
-    formfield_overrides = {
-        models.DateTimeField: {"input_formats": ("%d/%m/%Y",)},
-    }
+@admin.register(Space)
+class SpaceAdmin(admin.ModelAdmin):
+    list_display = ["name", "host", "created", "updated"]
+    inlines = [SpaceMsgInline]
 
 
-@admin.register(Status)
-class StatusAdmin(admin.ModelAdmin):
-    list_display = ["user", "post", "created", "updated"]
+class StatusInline(admin.TabularInline):
+    model = Status
+    min_num = 0
+    max_num = 10
 
 
-@admin.register(FriendChat)
-class FriendChatAdmin(admin.ModelAdmin):
-    list_display = ["sender", "receiver", "updated", "pinned", "retrieved", "deleted"]
+class ChatMsgInline(admin.TabularInline):
+    model = ChatMsg
+    min_num = 0
+    max_num = 10
+    extra = 1
+
+
+@admin.register(Chat)
+class ChatAdmin(admin.ModelAdmin):
+    list_display = ["sender", "receiver", "pinned", "deleted", "retrieved"]
+    inlines = [ChatMsgInline]

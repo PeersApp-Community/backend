@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from base.models import User
-from .models import FriendChat, Organisation, Room, RoomChat, Status
+from .models import Chat, ChatMsg, Space, SpaceMsg, Status
 
 
 class UserSimpleSerializer(serializers.ModelSerializer):
@@ -9,44 +9,30 @@ class UserSimpleSerializer(serializers.ModelSerializer):
         fields = ["id", "email", "phone"]
 
 
-class OrganisationSimpleSerializer(serializers.ModelSerializer):
+class SpaceSimpleSerializer(serializers.ModelSerializer):
     host = UserSimpleSerializer()
 
     class Meta:
-        model = Organisation
-        fields = ["id", "name", "host", "created"]
-
-
-class RoomSimpleSerializer(serializers.ModelSerializer):
-    host = UserSimpleSerializer()
-
-    class Meta:
-        model = Room
+        model = Space
         fields = ["id", "name", "host", "created", "updated"]
 
 
 # Organisation
-class OrganisationSerializer(serializers.ModelSerializer):
-    host = UserSimpleSerializer()
-    members = UserSimpleSerializer(many=True)
-
-    class Meta:
-        model = Organisation
-        fields = ["id", "host", "name", "members", "created"]
 
 
 # Room
-class RoomSerializer(serializers.ModelSerializer):
+class SpaceSerializer(serializers.ModelSerializer):
     host = UserSimpleSerializer()
+    participants = UserSimpleSerializer(many=True)
+
 
     class Meta:
-        model = Room
+        model = Space
         fields = [
             "id",
             "name",
             "host",
             "description",
-            "organisation",
             "created",
             "participants",
             "updated",
@@ -54,17 +40,24 @@ class RoomSerializer(serializers.ModelSerializer):
 
 
 # RoomChat
-class RoomChatSerializer(serializers.ModelSerializer):
+class SpaceMsgSerializer(serializers.ModelSerializer):
     class Meta:
-        model = RoomChat
-        fields = ["id", "author", "room", "organisation", "body"]
+        model = SpaceMsg
+        fields = ["id", "author", "room", "message"]
 
 
 # FriendChat
-class FriendChatSerializer(serializers.ModelSerializer):
+class ChatSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FriendChat
-        fields = ["id", "sender", "receiver", "body"]
+        model = Chat
+        fields = ["id", "sender", "receiver", "updated"]
+
+
+# FriendChat
+class ChatMsgSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChatMsg
+        fields = ["id", "chat", "message", "updated"]
 
 
 # Status
