@@ -111,13 +111,11 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class ProfileEditSerializer(serializers.ModelSerializer):
-    # user = UserSimpleerializer(read_only=True)
     first_name = serializers.CharField(allow_blank=True, allow_null=True)
     last_name = serializers.CharField(allow_blank=True, allow_null=True)
 
     class Meta:
         model = Profile
-        fields = "__all__"
         fields = [
             "first_name",
             "last_name",
@@ -128,25 +126,41 @@ class ProfileEditSerializer(serializers.ModelSerializer):
             "course",
             "location",
             "avatar",
-            "updated"
+            "updated",
         ]
 
     def save(self, **kwargs):
         first_name = self.validated_data["first_name"]
         last_name = self.validated_data["last_name"]
+
+        print(kwargs)
+        print(self.context)
+        print("=================================")
         try:
-            user = User.objects.get(user_id=self.context["user_id"])
+            user = User.objects.get(id=self.context["user_id"])
             user.first_name = first_name
             user.last_name = last_name
             user.save()
-
             return super().save(**kwargs)
         except:
-            print("error")
+            raise ValueError("error")
 
-    # def create(self, validated_data):
-    #     user_id = self.context["user_id"]
-    #     return Profile.objects.create(user_id=user_id, **validated_data)
+
+# ===================================================
+
+# def create(self, validated_data):
+#     first_name = validated_data["first_name"]
+#     last_name = validated_data["last_name"]
+#     user_id = self.context["user_id"]
+
+#     try:
+#         user = User.objects.get(id=self.validated_data["id"])
+#         user.first_name = first_name
+#         user.last_name = last_name
+#         user.save()
+#         return Profile.objects.create(user_id=user_id, **validated_data)
+#     except:
+#         raise ValueError("error")
 
 
 # def send_otp(otp, VERIFIED_NUMBER):

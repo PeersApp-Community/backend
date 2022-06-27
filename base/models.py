@@ -21,8 +21,8 @@ class User(AbstractUser):
 
 class Profile(models.Model):
 
-    MALE = "male"
-    FEMALE = "female"
+    MALE = "M"
+    FEMALE = "F"
     PREFER_NOT_TO_SAY = None
 
     GENDER_CHOICES = [

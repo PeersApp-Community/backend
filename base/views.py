@@ -53,24 +53,28 @@ def validate_user(request):
 
 class ProfileUpdateAPIView(UpdateAPIView):
     serializer_class = ProfileEditSerializer
+    queryset = Profile.objects.all()
     permission_classes = [AllowAny]
+    lookup_field = "id"
     http_method_names = [
         "patch",
     ]
 
-    def update(self, request, *args, **kwargs):
-        serializer = ProfileEditSerializer(
-            data=request.data, context={"user_id": self.request.user.id}, partial=True
-        )
-        serializer.is_valid(raise_exception=True)
-        user = User.objects.get(id=kwargs["id"])
-        if user.id == kwargs["id"]:
-            user.first_name = request.data["first_name"]
-            user.last_name = request.data["last_name"]
-            user.save()
-            serializer.save()
-            return Response(serializer.data)
-        return ValidationError("Profile does not match")
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs["id"]}
+
+    # def update(self, request, *args, **kwargs):
+    #     serializer = ProfileEditSerializer(data=request.data, partial=True)
+
+    #     serializer.is_valid(raise_exception=True)
+    #     user = User.objects.get(id=kwargs["id"])
+    #     if user.id == kwargs["id"]:
+    #         user.first_name = request.data["first_name"]
+    #         user.last_name = request.data["last_name"]
+    #         user.save()
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return ValidationError("Profile does not match")
 
 
 class ProfileListAPIView(ListAPIView):
@@ -89,6 +93,22 @@ class ProfileRetrieveAPIView(RetrieveAPIView):
     # http_method_names = [
     #     "get",
     # ]
+
+
+@api_view(["PATCH"])
+@permission_classes([AllowAny])
+def updateUserProfile(request, id):
+    serializer = ProfileEditSerializer(data=request.data, partial=True)
+    serializer.is_valid(raise_exception=True)
+    user = User.objects.get(id=id)
+    if user.id == id:
+        user.first_name = request.data["first_name"]
+        user.last_name = request.data["last_name"]
+        user.save()
+        serializer.save()
+        print("saving")
+        return Response(serializer.data)
+    return ValidationError("Profile does not match")
 
     # def get_queryset(self):
     #     user = self.request.user
