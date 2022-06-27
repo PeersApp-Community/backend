@@ -118,22 +118,24 @@ class ProfileEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = "__all__"
-        fields = ["first_name", "last_name", "bio", "avatar"]
+        fields = [
+            "first_name",
+            "last_name",
+            "bio",
+            "gender",
+            "institution",
+            "educational_level",
+            "course",
+            "location",
+            "avatar",
+            "updated"
+        ]
 
     def save(self, **kwargs):
         first_name = self.validated_data["first_name"]
         last_name = self.validated_data["last_name"]
         try:
             user = User.objects.get(user_id=self.context["user_id"])
-            print(
-                """
-               ============= lodsafjnjfdsan
-               ====== asdfjsdfl;kajdsfk
-                =======adskfsjdfk;ads;lf
-               ========== dsafjskd;fj';adsf
-                ===========asdflasmdf;a
-                """
-            )
             user.first_name = first_name
             user.last_name = last_name
             user.save()
