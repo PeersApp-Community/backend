@@ -2,6 +2,7 @@ from email.policy import default
 from django.db import models
 from django.conf import settings
 from django.db.models import Q
+from django.forms import FileField
 from django.utils.translation import gettext_lazy as _
 
 User = settings.AUTH_USER_MODEL
@@ -49,6 +50,7 @@ class SpaceMsg(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Space, on_delete=models.CASCADE)
     message = models.TextField()
+    file = models.FileField(upload_to="uploads/", null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     pinned = models.BooleanField(default=False)
@@ -86,6 +88,7 @@ class Chat(models.Model):
 class ChatMsg(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="chatmsg")
     message = models.CharField(max_length=255)
+    file = models.FileField(upload_to="uploads/% Y/% m/% d/", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     seen = models.BooleanField(default=False)

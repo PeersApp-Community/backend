@@ -53,11 +53,16 @@ class ChatSerializer(serializers.ModelSerializer):
         fields = ["id", "sender", "receiver", "updated"]
 
 
-# FriendChat
+# ChatMsg
 class ChatMsgSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatMsg
         fields = ["id", "chat", "message", "updated"]
+        
+    def create(self, validated_data):
+        chat_id = self.context['chat_id']
+        return ChatMsg.objects.create(chat_id=chat_id, **validated_data)
+
 
 
 # Status
