@@ -40,9 +40,7 @@ class UserCreateAPIView(CreateAPIView):
 )
 @permission_classes([AllowAny])
 def login_view(request):
-    print("serialize======111=============================")
     serializer = LoginSerializer(data=request.data)
-    print("serialize=========222==========================")
     serializer.is_valid()
     print("serialize============333=======================")
     user = authenticate(**serializer.data)
@@ -52,7 +50,11 @@ def login_view(request):
         print(user)
         print(user.otp.otp_num + "asfdsaf")
         user.otp.otp_num = set_otp(user.phone)
-        print(user.otp.otp_num)
+        otp = OTP.objects.select_related("user").get(user__phone=request.data["phone"])
+        print("serialize============444=======================")
+        otp.otp_num = set_otp(request.data["phone"])
+        otp.save()
+        
         user.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
