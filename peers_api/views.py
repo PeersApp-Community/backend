@@ -31,9 +31,6 @@ class ChatModelViewSet(ModelViewSet):
     ordering_fields = ['updated', "created"]
     
     def get_queryset(self):
-        print("==============================================")
-        print(self.kwargs)
-        print("==============================================")
         # queryset =   Chat.objects.by_user(user=self.request.user).prefetch_related("chatmsg")
         # return queryset
         return Chat.objects.all()

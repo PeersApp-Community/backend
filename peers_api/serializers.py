@@ -25,7 +25,6 @@ class SpaceSerializer(serializers.ModelSerializer):
     host = UserSimpleSerializer()
     participants = UserSimpleSerializer(many=True)
 
-
     class Meta:
         model = Space
         fields = [
@@ -58,15 +57,14 @@ class ChatMsgSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatMsg
         fields = ["id", "chat", "message", "updated"]
-        
-    def create(self, validated_data):
-        chat_id = self.context['chat_id']
-        return ChatMsg.objects.create(chat_id=chat_id, **validated_data)
 
+    def create(self, validated_data):
+        chat_id = self.context["chat_id"]
+        return ChatMsg.objects.create(chat_id=chat_id, **validated_data)
 
 
 # Status
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
-        fields = ["id", "user", "post"]
+        fields = ["id", "user", "post", "text", "seen", "created", "updated"]

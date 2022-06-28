@@ -61,7 +61,15 @@ class ProfileUpdateAPIView(UpdateAPIView):
     ]
 
     def get_serializer_context(self):
-        return {"user_id": self.kwargs["id"]}
+        try:
+            print("==============================================")
+            print(self)
+            print(self.kwargs)
+            print("==============================================")
+            return {"user_id": self.kwargs["id"]}
+        except:
+            pass
+            
 
     # def update(self, request, *args, **kwargs):
     #     serializer = ProfileEditSerializer(data=request.data, partial=True)

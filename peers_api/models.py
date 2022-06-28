@@ -47,10 +47,10 @@ class Space(models.Model):
 
 
 class SpaceMsg(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE , related_name="room_msgs")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="room_msgs")
     room = models.ForeignKey(Space, on_delete=models.CASCADE)
     message = models.TextField()
-    file = models.FileField(upload_to="uploads/", null=True, blank=True)
+    file = models.FileField(upload_to="rooms/", null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     pinned = models.BooleanField(default=False)
@@ -89,7 +89,7 @@ class ChatMsg(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="chat_msgs")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.CharField(max_length=255)
-    file = models.FileField(upload_to="uploads/% Y/% m/% d/", null=True, blank=True)
+    file = models.FileField(upload_to="chats/% Y/% m/% d/", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     seen = models.BooleanField(default=False)
@@ -104,8 +104,8 @@ class ChatMsg(models.Model):
 
 class Status(models.Model):
     user = models.ForeignKey(User, verbose_name=_("status"), on_delete=models.CASCADE)
-    post = models.FileField()
-    text = models.CharField(_("text"), max_length=50)
+    file = models.FileField(upload_to="status", null=True, blank=True)
+    text = models.CharField(_("text"), max_length=50, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False)
