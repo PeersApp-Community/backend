@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.conf import settings
 from django.db.models import Q
@@ -31,11 +32,11 @@ class Space(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = models.TextField(null=True, blank=True)
     participants = models.ManyToManyField(User, related_name="participants")
+    archived = models.DateTimeField(default=False)
+    pinned = models.DateTimeField(default=False)
     created = models.DateTimeField(auto_now_add=True)
-    # topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
-    archived = models.DateTimeField(auto_now=True)
-    pinned = models.DateTimeField(auto_now=True)
+    # topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         ordering = ["-updated", "-created"]
@@ -73,6 +74,7 @@ class Chat(models.Model):
     pinned = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     retrieved = models.BooleanField(default=False)
+    archived = models.BooleanField(default=False)
 
     objects = ChatManager()
 

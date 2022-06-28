@@ -17,6 +17,7 @@ whitenoise = "*"
 twilio = "*"
 pyyaml = "*"
 coreapi = "*"
+drf-nested-routers = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

@@ -27,16 +27,20 @@ class RoomMsgModelViewSet(ModelViewSet):
 
 # Chat
 class ChatModelViewSet(ModelViewSet):
-    
     serializer_class = ChatSerializer
+    ordering_fields = ['updated', "created"]
     
     def get_queryset(self):
-        queryset =   Chat.objects.by_user(user=self.request.user).prefetch_related("chatmsg")
-        return queryset
+        print("==============================================")
+        print(self.kwargs)
+        print("==============================================")
+        # queryset =   Chat.objects.by_user(user=self.request.user).prefetch_related("chatmsg")
+        # return queryset
+        return Chat.objects.all()
 
 
 # FriendChat
-class ChatModelViewSet(ModelViewSet):
+class ChatMsgModelViewSet(ModelViewSet):
     queryset = ChatMsg.objects.all()
     serializer_class = ChatMsgSerializer
 
