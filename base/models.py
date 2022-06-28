@@ -10,13 +10,28 @@ class User(AbstractUser):
     is_phone_verified = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
-    otp = models.CharField(max_length=6, blank=True, null=True)
 
     USERNAME_FIELD = "phone"
     REQUIRED_FIELDS = ["username", "email"]
 
     def __str__(self) -> str:
         return self.email
+
+    # def ottp(self):
+    #     return self.otp.otp_num
+
+
+class OTP(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="otp")
+    otp_num = models.CharField(max_length=6, blank=True, null=True)
+    created = models.DateTimeField(default=timezone.now)
+
+    def expiry(self):
+        expiry_date = self.created
+        return expiry_date
+
+    def __str__(self):
+        return str(self.otp_num)
 
 
 class Profile(models.Model):

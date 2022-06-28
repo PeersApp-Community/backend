@@ -10,7 +10,7 @@ from rest_framework.generics import (
 )
 
 from rest_framework.decorators import api_view, permission_classes
-from .models import Profile, User
+from .models import OTP, Profile, User
 from rest_framework.response import Response
 from .serializers import (
     LoginSerializer,
@@ -50,9 +50,9 @@ def login_view(request):
     if user is not None:
         print(serializer.data)
         print(user)
-        print(user.otp + "asfdsaf")
-        user.otp = set_otp(user.phone)
-        print(user.otp)
+        print(user.otp.otp_num + "asfdsaf")
+        user.otp.otp_num = set_otp(user.phone)
+        print(user.otp.otp_num)
         user.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -84,16 +84,13 @@ class RefreshOtpAPIView(GenericAPIView):
 )
 @permission_classes([AllowAny])
 def refresh_OTP_view(request):
-    print("serialize======111=============================")
     serializer = RefreshOTPSerializer(data=request.data)
-    print("serialize=========222==========================")
-    print("serialize============333=======================")
 
-    print("serialize============444=======================")
     if serializer.is_valid():
-        user = User.objects.get(phone=request.data["phone"])
-        user.otp = set_otp(request.data["phone"])
-        user.save()
+        otp = OTP.objects.select_related("user").get(user__phone=request.data["phone"])
+        print("serialize============444=======================")
+        otp.otp_num = set_otp(request.data["phone"])
+        otp.save()
         return Response(
             f" Refresh Successful for {serializer.data}", status=status.HTTP_200_OK
         )

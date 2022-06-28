@@ -1,15 +1,19 @@
 from django.contrib import admin
 from peers_api.admin import StatusInline
-from .models import User, Profile
+from .models import User, Profile, OTP
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 
 
 # Register your models here.
+class OTPInline(admin.TabularInline):
+    model = OTP
+
+
 @admin.register(User)
 class UserdAdmin(BaseUserAdmin):
-    list_editable = ("otp", "phone")
-    inlines = [StatusInline]
+    list_editable = ("phone", )
+    inlines = [OTPInline, StatusInline]
 
     fieldsets = (
         (None, {"fields": ("username", "password")}),
@@ -42,7 +46,6 @@ class UserdAdmin(BaseUserAdmin):
                     "phone",
                     "password1",
                     "password2",
-                    "otp",
                 ),
             },
         ),
@@ -52,12 +55,14 @@ class UserdAdmin(BaseUserAdmin):
         "id",
         "email",
         "phone",
-        "otp",
         "date_joined",
         "is_phone_verified",
         "is_email_verified",
         "is_active",
     ]
+    
+    # def ottp(self, user):
+    #     return user.ottp
 
 
 @admin.register(Profile)

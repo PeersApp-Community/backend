@@ -13,7 +13,7 @@ from rest_framework_simplejwt.authentication import AUTH_HEADER_TYPES
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 
 
-from .models import User
+from .models import OTP, User
 
 
 if api_settings.BLACKLIST_AFTER_ROTATION:
@@ -56,26 +56,31 @@ class TokenObtainSerializer(serializers.Serializer):
         otp = attrs["otp"]
 
         try:
-            # print(my_phone[0] + "gg================hh")
-            # print(otp)
-            my_user = User.objects.get(phone=my_phone[0], otp=otp)
-            # print(otp)
-            # print("otp")
-            self.instance = my_user
+            my_user = User.objects.get(phone=my_phone[0])
+            my_otp = OTP.objects.select_related("user").get(user__phone=my_phone[0], otp_num=otp)
+            my_otp.otp_num = ""
+            my_otp.save()
+            print(my_otp)
+            print("otp")
+            print("serialize============444=======================")
+            # self.instance = my_user
             # print(self.instance)
-            # print(my_phone[0] + "gg======dfasdf==========hh")
-            if self.instance.is_phone_verified == False:
-                self.instance.is_phone_verified = True
+            if my_user.is_phone_verified == False:
+                my_user.is_phone_verified = True
                 # print("o=============tp")
 
-            self.instance.otp = ""
-            print(self.instance.otp)
-            print(self.instance.phone)
+            my_user.otp.otp_num = ""
+            print(my_user.otp.otp_num)
+            print(my_phone[0] + "-------------gg======dfasdf==========hh")
+            print(my_user.phone)
             # self.instance.is_active = True
-            self.instance.save()
+            my_user.save()
             # print("==================================")
         except User.DoesNotExist:
             raise ValidationError("No user with the given credentials was found.")
+
+        except OTP.DoesNotExist:
+            raise ValidationError("Incorrect credentials")
 
         authenticate_kwargs = {
             self.username_field: attrs[self.username_field],
