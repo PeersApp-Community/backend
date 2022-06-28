@@ -67,4 +67,4 @@ class ChatMsgSerializer(serializers.ModelSerializer):
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
-        fields = ["id", "user", "post", "text", "seen", "created", "updated"]
+        fields = ["id", "user", "file", "text", "seen", "created", "updated"]
