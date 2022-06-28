@@ -35,7 +35,6 @@ def validate_with_otp():
 
 
 class TokenObtainSerializer(serializers.Serializer):
-    # otp = serializers.CharField(max_length=6, min_length=6, write_only=True)
     username_field = get_user_model().USERNAME_FIELD
 
     default_error_messages = {
@@ -57,25 +56,18 @@ class TokenObtainSerializer(serializers.Serializer):
 
         try:
             my_user = User.objects.get(phone=my_phone[0])
-            my_otp = OTP.objects.select_related("user").get(user__phone=my_phone[0], otp_num=otp)
+            my_otp = OTP.objects.select_related("user").get(
+                user__phone=my_phone[0], otp_num=otp
+            )
             my_otp.otp_num = ""
+            my_user.otp.otp_num = ""
             my_otp.save()
-            print(my_otp)
-            print("otp")
-            print("serialize============444=======================")
-            # self.instance = my_user
-            # print(self.instance)
+
             if my_user.is_phone_verified == False:
                 my_user.is_phone_verified = True
-                # print("o=============tp")
 
-            my_user.otp.otp_num = ""
-            print(my_user.otp.otp_num)
-            print(my_phone[0] + "-------------gg======dfasdf==========hh")
-            print(my_user.phone)
-            # self.instance.is_active = True
             my_user.save()
-            # print("==================================")
+
         except User.DoesNotExist:
             raise ValidationError("No user with the given credentials was found.")
 
