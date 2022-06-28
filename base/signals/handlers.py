@@ -8,5 +8,5 @@ from base.models import OTP, Profile
 def create_customer_for_new_user(sender, **kwargs):
     if kwargs["created"]:
         Profile.objects.create(user=kwargs["instance"])
-        OTP.objects.create(user=kwargs["instance"])
+        OTP.objects.create(user_id=kwargs["instance"].id)
         print("user created")
