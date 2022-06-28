@@ -47,7 +47,7 @@ class Space(models.Model):
 
 
 class SpaceMsg(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE , related_name="room_msgs")
     room = models.ForeignKey(Space, on_delete=models.CASCADE)
     message = models.TextField()
     file = models.FileField(upload_to="uploads/", null=True, blank=True)
@@ -86,7 +86,7 @@ class Chat(models.Model):
 
 
 class ChatMsg(models.Model):
-    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="chatmsg")
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="chat_msgs")
     message = models.CharField(max_length=255)
     file = models.FileField(upload_to="uploads/% Y/% m/% d/", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
