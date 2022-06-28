@@ -5,7 +5,7 @@ import random
 import math
 
 
-def otp_create(phone):
+def set_otp(phone):
     num = []
     num[:0] = str(phone)
     random_num = int(num[1] + num[3] + num[2] + num[5] + num[4])
@@ -38,52 +38,22 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
-        user.otp = otp_create(validated_data["phone"])
+        user.otp = set_otp(validated_data["phone"])
         # user.is_active = False
         user.save()
         return user
-
-
-class GetOtpSerializer(serializers.ModelSerializer):
-    phone = serializers.CharField()
-    otp = serializers.CharField(max_length=6, min_length=6, write_only=True)
-
-    class Meta:
-        model = User
-        fields = ["otp", "phone"]
-
-    def validate_phone(self, value):
-        if not User.objects.filter(phone=value).exists():
-            raise serializers.ValidationError(
-                "No user with the given phone number was found."
-            )
-        return value
-
-    def save(self, **kwargs):
-        phone = self.validated_data["phone"]
-        otp = self.validated_data["otp"]
-
-        try:
-            user = User.objects.get(phone=phone, otp=otp)
-
-            # updating an existing user
-            self.instance = user
-            if self.instance.is_phone_verified == False:
-                self.instance.is_phone_verified = True
-                self.instance.otp = ""
-                # self.instance.is_active = True
-                self.instance.save()
-            return self.instance
-        except User.DoesNotExist:
-            raise serializers.ValidationError("The OTP is Wrong.")
-
-        # return self.instance
 
 
 class UserSimpleerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["username", "email", "phone"]
+
+
+class LoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["phone", "password"]
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -146,21 +116,24 @@ class ProfileEditSerializer(serializers.ModelSerializer):
             raise ValueError("error")
 
 
+class RefreshOTPSerializer(serializers.ModelSerializer):
+    phone = serializers.CharField()
+
+    class Meta:
+        model = User
+        fields = ["phone"]
+
+    def validate_phone(self, value):
+        if not User.objects.filter(phone=value).exists():
+            raise serializers.ValidationError(
+                "No user with the given credentials exists."
+            )
+        return value
+
+
 # ===================================================
-
-# def create(self, validated_data):
-#     first_name = validated_data["first_name"]
-#     last_name = validated_data["last_name"]
-#     user_id = self.context["user_id"]
-
-#     try:
-#         user = User.objects.get(id=self.validated_data["id"])
-#         user.first_name = first_name
-#         user.last_name = last_name
-#         user.save()
-#         return Profile.objects.create(user_id=user_id, **validated_data)
-#     except:
-#         raise ValueError("error")
+# ===================================================
+# ===================================================
 
 
 # def send_otp(otp, VERIFIED_NUMBER):
@@ -169,30 +142,36 @@ class ProfileEditSerializer(serializers.ModelSerializer):
 #     )
 
 # send_otp(otp, validated_data["phone"])
-#
-#
-#
 
-#     def create(self, validated_data):
-#         user = User(
-#             username=validated_data['username']
+# class GetOtpSerializer(serializers.ModelSerializer):
+# phone = serializers.CharField()
+# otp = serializers.CharField(max_length=6, min_length=6, write_only=True)
+
+# class Meta:
+#     model = User
+#     fields = ["otp", "phone"]
+
+# def validate_phone(self, value):
+#     if not User.objects.filter(phone=value).exists():
+#         raise serializers.ValidationError(
+#             "No user with the given phone number was found."
 #         )
-#         user.set_password(validated_data['password'])
-#         user.save()
-#         return user
-#
-#
-# def create(self, validated_data):
-#     user = User(
-#         username=validated_data['username']
-#     )
-#     user.set_password(make_password(validated_data['password']))
-#     user.save()
-#     return user
-#
-#
-#     def create(self, validated_data):
-#         return User.objects.create_user(**validated_data)
-#
-#
-#
+#     return value
+
+# def save(self, **kwargs):
+#     phone = self.validated_data["phone"]
+#     otp = self.validated_data["otp"]
+
+#     try:
+#     user = User.objects.get(phone=phone, otp=otp)
+
+#     # updating an existing user
+#     self.instance = user
+#     if self.instance.is_phone_verified == False:
+#         self.instance.is_phone_verified = True
+#         self.instance.otp = ""
+#         # self.instance.is_active = True
+#         self.instance.save()
+#     return self.instance
+# except User.DoesNotExist:
+#     raise serializers.ValidationError("The OTP is Wrong.")
