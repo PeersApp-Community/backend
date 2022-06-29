@@ -32,7 +32,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
 
     # def get_otp(self, user: User):
     #     return user.otp.otp_num
-    
+
     def validate_phone(self, value):
         if User.objects.filter(phone=value).exists():
             raise serializers.ValidationError(
@@ -46,16 +46,10 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
         my_phone = validated_data["phone"]
         user = User.objects.create_user(**validated_data)
         user.save()
-        print("serialize============444=======================")
-        # try:
         otp = Otp.objects.get(user__phone=my_phone)
         otp.otp_num = set_otp(my_phone)
         otp.save()
-        print("success================sss==")
-        # except Otp.DoesNotExist:
-            # print('An exception occurred')
-            # pass
-            
+
         return user
 
 
@@ -136,7 +130,9 @@ class RefreshOTPSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["phone",]
+        fields = [
+            "phone",
+        ]
 
     def validate_phone(self, value):
         if not User.objects.filter(phone=value).exists():
