@@ -46,12 +46,8 @@ def login_view(request):
     user = authenticate(**serializer.data)
     print("serialize============444=======================")
     if user is not None:
-        print(serializer.data)
-        print(user)
-        # user.otp.otp_num = set_otp(user.phone)
-        print(request.data["phone"])
-        otp = Otp.objects.get(user__phone=request.data["phone"])
-        print("serialize============444=======================")
+        # otp = Otp.objects.get(user_id=request.data["phone"])
+        otp = Otp.objects.get(user_id=user.id)
         otp.otp_num = set_otp(request.data["phone"])
         otp.save()
 
