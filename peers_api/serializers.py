@@ -62,10 +62,11 @@ class ChatSerializer(serializers.ModelSerializer):
 class ChatMsgSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatMsg
-        fields = ["id", "user", "chat", "message", "updated"]
+        # fields = ["id", "user", "chat", "file","message", "created", "updated","seen", ]
+        fields = "__all__"
 
     def create(self, validated_data):
-        chat_id = self.context["chat_id"]
+        chat_id = self.context.get("chat_id")
         return ChatMsg.objects.create(chat_id=chat_id, **validated_data)
 
 
@@ -74,3 +75,4 @@ class StorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Story
         fields = ["id", "user", "file", "text", "seen", "created", "updated"]
+        fields = "__all__"

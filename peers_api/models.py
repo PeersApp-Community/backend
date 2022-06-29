@@ -82,7 +82,7 @@ class Chat(models.Model):
 class ChatMsg(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="chat_msgs")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.CharField(max_length=255)
+    message = models.CharField(max_length=255, null=True, blank=True)
     file = models.FileField(upload_to="chats/% Y/% m/% d/", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -105,7 +105,7 @@ class Story(models.Model):
     seen = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return self.user
+        return self.user.username
 
 
 #

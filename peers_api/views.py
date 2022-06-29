@@ -106,15 +106,25 @@ class ChatMsgModelViewSet(ModelViewSet):
     def get_queryset(self):
         queryset = ChatMsg.objects.filter(chat_id=self.kwargs.get("chat_pk"))
         return queryset
+    
+    def get_serializer_context(self):
+        return {
+            "chat_id": self.kwargs.get("chat_pk")
+        }
 
 
 # Story
 class StoryModelViewSet(ModelViewSet):
-    queryset = Story.objects.all()
     serializer_class = StorySerializer
 
-    # def get_queryset(self):
-    #     return Review.objects.filter(product_id=self.kwargs['product_pk'])
+    def get_queryset(self):
+        return Story.objects.filter(user_id=self.kwargs['person_pk'])
 
     # def get_serializer_context(self):
     #     return {'product_id': self.kwargs['product_pk']}
+
+
+# All Story
+class AllStoryModelViewSet(ModelViewSet):
+    queryset = Story.objects.all()
+    serializer_class = StorySerializer
