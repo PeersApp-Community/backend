@@ -8,21 +8,29 @@ from .views import (
     RoomModelViewSet,
     RoomMsgModelViewSet,
     StatusModelViewSet,
+    UserInfo,
 )
 
 router = routers.DefaultRouter()
 
-router.register("chats", ChatModelViewSet, basename="chats")
+router.register("persons", UserInfo, basename="persons")
+# router.register("chats", ChatModelViewSet, basename="chats")
 router.register("chat-msg", ChatMsgModelViewSet)
 router.register("rooms", RoomModelViewSet)
 router.register("room-msg", RoomMsgModelViewSet)
 router.register("status", StatusModelViewSet)
 
 # Nested
+persons_router =routers.NestedDefaultRouter(router, "persons", lookup="person")
+persons_router.register("chats", ChatModelViewSet, basename="person-chats")
 
-chats_router = routers.NestedDefaultRouter(router, "chats", lookup="chat")
+# chats
+chats_router = routers.NestedDefaultRouter(persons_router, "chats", lookup="chat")
 chats_router.register("msgs", ChatMsgModelViewSet, basename="chat-msgs")
 # chats_router.register("images", views.chatImageViewSet, basename="chat-images")
 
+urlpatterns = [
+    # path("users/<int:pk>/chats", None)
+]
 
-urlpatterns = router.urls
+urlpatterns += router.urls + chats_router.urls + persons_router.urls

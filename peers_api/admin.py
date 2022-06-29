@@ -31,5 +31,5 @@ class ChatMsgInline(admin.TabularInline):
 
 @admin.register(Chat)
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ["sender", "receiver", "pinned", "deleted", "retrieved"]
+    list_display = ["id", "person1", "person2", "pinned", "deleted", "retrieved"]
     inlines = [ChatMsgInline]

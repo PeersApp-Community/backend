@@ -9,6 +9,12 @@ class UserSimpleSerializer(serializers.ModelSerializer):
         fields = ["id", "email", "phone"]
 
 
+class UserInfoSimpleerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "email", "phone"]
+
+
 class SpaceSimpleSerializer(serializers.ModelSerializer):
     host = UserSimpleSerializer()
 
@@ -49,14 +55,14 @@ class SpaceMsgSerializer(serializers.ModelSerializer):
 class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
-        fields = ["id", "sender", "receiver", "updated"]
+        fields = ["id", "person1", "person1_id", "person2","person2_id", "updated"]
 
 
 # ChatMsg
 class ChatMsgSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatMsg
-        fields = ["id", "chat", "message", "updated"]
+        fields = ["id", "user", "chat", "message", "updated"]
 
     def create(self, validated_data):
         chat_id = self.context["chat_id"]

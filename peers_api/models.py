@@ -11,7 +11,7 @@ User = settings.AUTH_USER_MODEL
 class ChatManager(models.Manager):
     def by_user(self, **kwargs):
         user = kwargs.get("user")
-        lookup = Q(sender=user) | Q(receiver=user)
+        lookup = Q(person1=user) | Q(person2=user)
         qs = self.get_queryset().filter(lookup).distinct()
         return qs
 
@@ -60,10 +60,8 @@ class SpaceMsg(models.Model):
 
 
 class Chat(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.PROTECT, related_name="sender")
-    receiver = models.ForeignKey(
-        User, on_delete=models.PROTECT, related_name="receiver"
-    )
+    person1 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="person1")
+    person2 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="person2")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     pinned = models.BooleanField(default=False)
@@ -73,9 +71,12 @@ class Chat(models.Model):
 
     objects = ChatManager()
 
+    def __str__(self) -> str:
+        return f"{self.person1} to {self.person2}"
+
     class Meta:
         ordering = ["-updated", "-created"]
-        unique_together = ["sender", "receiver"]
+        unique_together = ["person1", "person2"]
 
 
 class ChatMsg(models.Model):
@@ -92,7 +93,7 @@ class ChatMsg(models.Model):
     retrieved = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.message
+        return f"{self.user} -- { self.message}"
 
 
 class Status(models.Model):
@@ -102,6 +103,9 @@ class Status(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return self.user
 
 
 #
