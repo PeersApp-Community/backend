@@ -48,35 +48,35 @@ def login_view(request):
     if user is not None:
         print(serializer.data)
         print(user)
-        print(user.otp.otp_num + "asfdsaf")
         user.otp.otp_num = set_otp(user.phone)
+        print(user.otp.otp_num + "asfdsaf")
         otp = Otp.objects.select_related("user").get(user__phone=request.data["phone"])
         print("serialize============444=======================")
         otp.otp_num = set_otp(request.data["phone"])
         otp.save()
 
         user.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"otp": otp.otp_num}, status=status.HTTP_200_OK)
 
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class RefreshOtpAPIView(GenericAPIView):
-    serializer_class = RefreshOTPSerializer
-    queryset = User
+# class RefreshOtpAPIView(GenericAPIView):
+#     serializer_class = RefreshOTPSerializer
+#     queryset = User
 
-    def post(self):
-        print("serialize======111=============================")
-        serializer = RefreshOtpSerializer(data=self.request.data)
-        print("serialize=========222==========================")
-        valid = serializer.is_valid()
-        print("serialize============333=======================")
+#     def post(self):
+#         print("serialize======111=============================")
+#         serializer = RefreshOtpSerializer(data=self.request.data)
+#         print("serialize=========222==========================")
+#         valid = serializer.is_valid()
+#         print("serialize============333=======================")
 
-        print("serialize============444=======================")
-        if valid:
-            return Response(serializer.data, status=status.HTTP_200_OK)
+#         print("serialize============444=======================")
+#         if valid:
+#             return Response(serializer.data, status=status.HTTP_200_OK)
 
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+#         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(
