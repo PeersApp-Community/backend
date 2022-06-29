@@ -96,7 +96,7 @@ class ChatMsg(models.Model):
         return f"{self.user} -- { self.message}"
 
 
-class Status(models.Model):
+class Story(models.Model):
     user = models.ForeignKey(User, verbose_name=_("status"), on_delete=models.CASCADE)
     file = models.FileField(upload_to="status", null=True, blank=True)
     text = models.CharField(_("text"), max_length=50, null=True, blank=True)

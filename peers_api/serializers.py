@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from base.models import User
-from .models import Chat, ChatMsg, Space, SpaceMsg, Status
+from .models import Chat, ChatMsg, Space, SpaceMsg, Story
 
 
 class UserSimpleSerializer(serializers.ModelSerializer):
@@ -55,7 +55,7 @@ class SpaceMsgSerializer(serializers.ModelSerializer):
 class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
-        fields = ["id", "person1", "person1_id", "person2","person2_id", "updated"]
+        fields = ["id", "person1", "person1_id", "person2", "person2_id", "updated"]
 
 
 # ChatMsg
@@ -69,8 +69,8 @@ class ChatMsgSerializer(serializers.ModelSerializer):
         return ChatMsg.objects.create(chat_id=chat_id, **validated_data)
 
 
-# Status
-class StatusSerializer(serializers.ModelSerializer):
+# Story
+class StorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Status
+        model = Story
         fields = ["id", "user", "file", "text", "seen", "created", "updated"]

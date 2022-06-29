@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Chat, ChatMsg, Space, SpaceMsg, Status
+from .models import Chat, ChatMsg, Space, SpaceMsg, Story
 
 
 class SpaceMsgInline(admin.TabularInline):
@@ -16,8 +16,8 @@ class SpaceAdmin(admin.ModelAdmin):
     inlines = [SpaceMsgInline]
 
 
-class StatusInline(admin.TabularInline):
-    model = Status
+class StoryInline(admin.TabularInline):
+    model = Story
     min_num = 0
     max_num = 10
 

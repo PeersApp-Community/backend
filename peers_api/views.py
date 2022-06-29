@@ -5,13 +5,13 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Chat, ChatMsg, Space, SpaceMsg, Status
+from .models import Chat, ChatMsg, Space, SpaceMsg, Story
 from .serializers import (
     ChatMsgSerializer,
     ChatSerializer,
     SpaceMsgSerializer,
     SpaceSerializer,
-    StatusSerializer,
+    StorySerializer,
     UserInfoSimpleerializer,
 )
 
@@ -27,48 +27,49 @@ class UserInfo(ModelViewSet):
     #     return Response('ok')
 
     # def chats(self, request):
-    @action(
-        detail=True,
-        methods=["GET", "PUT", "POST"],
-        permission_classes=[AllowAny],
-    )
-    def chat(self, *args, **kwargs):
-        print("==============================================")
-        print("==============================================")
-        user = Chat.objects.filter(sender=self.request.user.id)
-        serializer = ChatSerializer(user)
-        print("==============================================")
-        # serializer.is_valid(raise_exception=True)
-        # serializer.save()
-        return Response(serializer.data)
+    # @action(
+    #     detail=True,
+    #     methods=["GET", "PUT", "POST"],
+    #     permission_classes=[AllowAny],
+    # )
+    # def chat(self, *args, **kwargs):
+    #     print("==============================================")
+    #     print("==============================================")
+    #     user = Chat.objects.filter(sender=self.request.user.id)
+    #     serializer = ChatSerializer(user)
+    #     print("==============================================")
+    #     # serializer.is_valid(raise_exception=True)
+    #     # serializer.save()
+    #     return Response(serializer.data)
 
-    @action(
-        detail=False,
-        methods=["GET", "PUT", "POST"],
-        permission_classes=[AllowAny],
-    )
-    def chats1(self):
-        user_chat = Chat.objects.filter(sender_id=request.user.id)
-        serializer = ChatSerializer(user_chat)
-        # serializer.is_valid(raise_exception=True)
-        # serializer.save()
-        return Response(serializer.data)
+    # @action(
+    #     detail=False,
+    #     methods=["GET", "PUT", "POST"],
+    #     permission_classes=[AllowAny],
+    # )
+    # def chats1(self):
+    #     user_chat = Chat.objects.filter(sender_id=request.user.id)
+    #     serializer = ChatSerializer(user_chat)
+    #     # serializer.is_valid(raise_exception=True)
+    #     # serializer.save()
+    #     return Response(serializer.data)
 
-    @action(
-        detail=True,
-        methods=["GET", "PUT", "POST"],
-        permission_classes=[AllowAny],
-    )
-    def chats2(self, request):
-        user = User.objects.get(id=request.user.id)
-        serializer = UserInfoSimpleerializer(user, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+    # @action(
+    #     detail=True,
+    #     methods=["GET", "PUT", "POST"],
+    #     permission_classes=[AllowAny],
+    # )
+    
+    # def chats2(self, request):
+    #     user = User.objects.get(id=request.user.id)
+    #     serializer = UserInfoSimpleerializer(user, data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response(serializer.data)
 
 
 # Space
-class RoomModelViewSet(ModelViewSet):
+class SpaceModelViewSet(ModelViewSet):
     queryset = Space.objects.all()
     serializer_class = SpaceSerializer
     # read_only_fields = ('account_name',)
@@ -76,7 +77,7 @@ class RoomModelViewSet(ModelViewSet):
 
 
 # RoomChat
-class RoomMsgModelViewSet(ModelViewSet):
+class SpaceMsgModelViewSet(ModelViewSet):
     queryset = SpaceMsg.objects.all()
     serializer_class = SpaceMsgSerializer
 
@@ -107,10 +108,10 @@ class ChatMsgModelViewSet(ModelViewSet):
         return queryset
 
 
-# Status
-class StatusModelViewSet(ModelViewSet):
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
+# Story
+class StoryModelViewSet(ModelViewSet):
+    queryset = Story.objects.all()
+    serializer_class = StorySerializer
 
     # def get_queryset(self):
     #     return Review.objects.filter(product_id=self.kwargs['product_pk'])

@@ -75,6 +75,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = "__all__"
         fields = [
             "id",
+            "user_id",
             "user",
             "first_name",
             "last_name",
