@@ -13,7 +13,7 @@ from rest_framework_simplejwt.authentication import AUTH_HEADER_TYPES
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 
 
-from .models import OTP, User
+from .models import Otp, User
 
 
 if api_settings.BLACKLIST_AFTER_ROTATION:
@@ -56,7 +56,7 @@ class TokenObtainSerializer(serializers.Serializer):
 
         try:
             my_user = User.objects.get(phone=my_phone[0])
-            my_otp = OTP.objects.select_related("user").get(
+            my_otp = Otp.objects.select_related("user").get(
                 user__phone=my_phone[0], otp_num=otp
             )
             my_otp.otp_num = ""
@@ -71,7 +71,7 @@ class TokenObtainSerializer(serializers.Serializer):
         except User.DoesNotExist:
             raise ValidationError("No user with the given credentials was found.")
 
-        except OTP.DoesNotExist:
+        except Otp.DoesNotExist:
             raise ValidationError("Incorrect credentials")
 
         authenticate_kwargs = {

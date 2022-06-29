@@ -1,13 +1,13 @@
 from django.contrib import admin
 from peers_api.admin import StatusInline
-from .models import User, Profile, OTP
+from .models import User, Profile, Otp
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 
 
 # Register your models here.
 class OTPInline(admin.TabularInline):
-    model = OTP
+    model = Otp
 
 
 @admin.register(User)

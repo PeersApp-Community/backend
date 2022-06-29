@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer as DjoserUserCreateSerializer
-from .models import OTP, Profile, User
+from .models import Otp, Profile, User
 import random
 import math
 
@@ -48,11 +48,11 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
         user.save()
         print("serialize============444=======================")
         # try:
-        #     otp = OTP.objects.get(user__phone=my_phone)
+        #     otp = Otp.objects.get(user__phone=my_phone)
         #     otp.otp_num = set_otp(my_phone)
         #     otp.save()
         #     print("success================sss==")
-        # except OTP.DoesNotExist:
+        # except Otp.DoesNotExist:
         #     print('An exception occurred')
         #     pass
             

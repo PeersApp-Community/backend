@@ -10,7 +10,7 @@ from rest_framework.generics import (
 )
 
 from rest_framework.decorators import api_view, permission_classes
-from .models import OTP, Profile, User
+from .models import Otp, Profile, User
 from rest_framework.response import Response
 from .serializers import (
     LoginSerializer,
@@ -50,11 +50,11 @@ def login_view(request):
         print(user)
         print(user.otp.otp_num + "asfdsaf")
         user.otp.otp_num = set_otp(user.phone)
-        otp = OTP.objects.select_related("user").get(user__phone=request.data["phone"])
+        otp = Otp.objects.select_related("user").get(user__phone=request.data["phone"])
         print("serialize============444=======================")
         otp.otp_num = set_otp(request.data["phone"])
         otp.save()
-        
+
         user.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -89,7 +89,7 @@ def refresh_OTP_view(request):
     serializer = RefreshOTPSerializer(data=request.data)
 
     if serializer.is_valid():
-        otp = OTP.objects.select_related("user").get(user__phone=request.data["phone"])
+        otp = Otp.objects.select_related("user").get(user__phone=request.data["phone"])
         print("serialize============444=======================")
         otp.otp_num = set_otp(request.data["phone"])
         otp.save()

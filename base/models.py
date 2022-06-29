@@ -21,7 +21,7 @@ class User(AbstractUser):
     #     return self.otp.otp_num
 
 
-class OTP(models.Model):
+class Otp(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="otp")
     otp_num = models.CharField(max_length=6, blank=True, null=True)
     created = models.DateTimeField(default=timezone.now)
