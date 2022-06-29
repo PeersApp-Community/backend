@@ -66,7 +66,6 @@ def refresh_OTP_view(request):
 
     if serializer.is_valid():
         otp = Otp.objects.select_related("user").get(user__phone=request.data["phone"])
-        print("serialize============444=======================")
         otp.otp_num = set_otp(request.data["phone"])
         otp.save()
         return Response(

@@ -13,6 +13,9 @@ ALLOWED_HOSTS = ["https://peers-app-sh.herokuapp.com"]
 DATABASES = {
     "default": dj_database_url.config()
 }
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 
 # EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
 # EMAIL_HOST_USER =os.environ['MAILGUN_SMTP_LOGIN']

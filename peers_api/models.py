@@ -8,13 +8,6 @@ from django.utils.translation import gettext_lazy as _
 User = settings.AUTH_USER_MODEL
 
 
-# class Topic(models.Model):
-#     name = models.CharField(max_length=200)
-
-#     def __str__(self):
-#         return self.name
-
-
 class ChatManager(models.Manager):
     def by_user(self, **kwargs):
         user = kwargs.get("user")
