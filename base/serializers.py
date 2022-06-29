@@ -48,13 +48,13 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
         user.save()
         print("serialize============444=======================")
         # try:
-        #     otp = Otp.objects.get(user__phone=my_phone)
-        #     otp.otp_num = set_otp(my_phone)
-        #     otp.save()
-        #     print("success================sss==")
+        otp = Otp.objects.get(user__phone=my_phone)
+        otp.otp_num = set_otp(my_phone)
+        otp.save()
+        print("success================sss==")
         # except Otp.DoesNotExist:
-        #     print('An exception occurred')
-        #     pass
+            # print('An exception occurred')
+            # pass
             
         return user
 
