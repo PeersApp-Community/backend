@@ -42,9 +42,7 @@ class UserCreateAPIView(CreateAPIView):
 def login_view(request):
     serializer = LoginSerializer(data=request.data)
     serializer.is_valid()
-    print("serialize============333=======================")
     user = authenticate(**serializer.data)
-    print("serialize============444=======================")
     if user is not None:
         # otp = Otp.objects.get(user_id=request.data["phone"])
         otp = Otp.objects.get(user_id=user.id)
@@ -55,24 +53,6 @@ def login_view(request):
         return Response({"otp": otp.otp_num}, status=status.HTTP_200_OK)
 
     return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
-# class RefreshOtpAPIView(GenericAPIView):
-#     serializer_class = RefreshOTPSerializer
-#     queryset = User
-
-#     def post(self):
-#         print("serialize======111=============================")
-#         serializer = RefreshOtpSerializer(data=self.request.data)
-#         print("serialize=========222==========================")
-#         valid = serializer.is_valid()
-#         print("serialize============333=======================")
-
-#         print("serialize============444=======================")
-#         if valid:
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-
-#         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(
@@ -100,9 +80,6 @@ class ProfileListAPIView(ListAPIView):
     queryset = Profile.objects.all()
     permission_classes = [AllowAny]
     serializer_class = ProfileSerializer
-    # http_method_names = [
-    #     "get",
-    # ]
 
 
 class ProfileRetrieveAPIView(RetrieveAPIView):
@@ -125,10 +102,6 @@ class ProfileUpdateAPIView(UpdateAPIView):
 
     def get_serializer_context(self):
         try:
-            print("==============================================")
-            print(self)
-            print(self.kwargs)
-            print("==============================================")
             return {"user_id": self.kwargs["id"]}
         except:
             pass
@@ -213,3 +186,21 @@ class ProfileUpdateAPIView(UpdateAPIView):
 #         return Response(
 #             {"Validation Successful, Happy Learning"}, status=status.HTTP_200_OK
 #         )
+
+
+# class RefreshOtpAPIView(GenericAPIView):
+#     serializer_class = RefreshOTPSerializer
+#     queryset = User
+
+#     def post(self):
+#         print("serialize======111=============================")
+#         serializer = RefreshOtpSerializer(data=self.request.data)
+#         print("serialize=========222==========================")
+#         valid = serializer.is_valid()
+#         print("serialize============333=======================")
+
+#         print("serialize============444=======================")
+#         if valid:
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+
+#         return Response(status=status.HTTP_400_BAD_REQUEST)
