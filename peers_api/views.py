@@ -99,7 +99,7 @@ class SpaceModelViewSet(ModelViewSet):
         queryset = Space.objects.filter()
         return super().get_queryset()
 
-
+# 
 # SpaceChat
 class SpaceMsgModelViewSet(ModelViewSet):
     queryset = SpaceMsg.objects.all()
