@@ -10,6 +10,7 @@ from rest_framework.generics import (
 )
 
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.viewsets import ModelViewSet
 from .models import Otp, Profile, User
 from rest_framework.response import Response
 from .serializers import (
@@ -104,6 +105,27 @@ class ProfileUpdateAPIView(UpdateAPIView):
             return {"user_id": self.kwargs["id"]}
         except:
             pass
+
+
+# class ProfileInlineAPIView(ModelViewSet):
+#     serializer_class = ProfileEditSerializer
+#     queryset = Profile.objects.all()
+#     permission_classes = [AllowAny]
+#     lookup_field = "id"
+
+#     def get_serializer_context(self):
+#         try:
+#             return {"user_id": self.kwargs["person_pk"]}
+#         except:
+#             pass
+        
+#     def get_serializer_class(self):
+        
+#         try:
+#             if self.request.
+        
+        
+#         return ProfileEditSerializer
 
 
 # @api_view(["PATCH"])

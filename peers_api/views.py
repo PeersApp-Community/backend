@@ -1,17 +1,20 @@
+# from rest_framework.response import Response
 from django.contrib.auth import get_user_model
-from django.db.models import Q
-from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated,
+)
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
-from rest_framework.response import Response
 
-from .models import Chat, ChatMsg, Space, SpaceMsg, Story
+from .models import Chat, ChatMsg, Space, SpaceMsg
 from .serializers import (
+    ChatCreateSerializer,
     ChatMsgSerializer,
     ChatSerializer,
     SpaceMsgSerializer,
     SpaceSerializer,
-    StorySerializer,
     UserInfoSimpleerializer,
 )
 
@@ -21,6 +24,9 @@ User = get_user_model()
 class UserInfo(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserInfoSimpleerializer
+    # permission_classes = [
+    #     IsAuthenticated,
+    # ]
 
     # @action(detail=True, permission_classes=[ViewCustomerHistoryPermission])
     # def history(self, request, pk):
@@ -59,13 +65,24 @@ class UserInfo(ModelViewSet):
     #     methods=["GET", "PUT", "POST"],
     #     permission_classes=[AllowAny],
     # )
-    
+
     # def chats2(self, request):
     #     user = User.objects.get(id=request.user.id)
     #     serializer = UserInfoSimpleerializer(user, data=request.data)
     #     serializer.is_valid(raise_exception=True)
     #     serializer.save()
     #     return Response(serializer.data)
+
+
+# All Spaces
+class SpaceModelViewSet(ModelViewSet):
+    queryset = Space.objects.all()
+    serializer_class = SpaceSerializer
+    # read_only_fields = ('account_name',)
+    # write_only_fields = ('password',)  # Note: Password field is write-only
+
+    def get_serializer_context(self):
+        return {"person1_id": self.kwargs.get("person_pk")}
 
 
 # Space
@@ -75,8 +92,15 @@ class SpaceModelViewSet(ModelViewSet):
     # read_only_fields = ('account_name',)
     # write_only_fields = ('password',)  # Note: Password field is write-only
 
+    def get_serializer_context(self):
+        return {"person1_id": self.kwargs.get("person_pk")}
 
-# RoomChat
+    def get_queryset(self):
+        queryset = Space.objects.filter()
+        return super().get_queryset()
+
+
+# SpaceChat
 class SpaceMsgModelViewSet(ModelViewSet):
     queryset = SpaceMsg.objects.all()
     serializer_class = SpaceMsgSerializer
@@ -86,7 +110,7 @@ class SpaceMsgModelViewSet(ModelViewSet):
 class ChatModelViewSet(ModelViewSet):
     serializer_class = ChatSerializer
     ordering_fields = ["updated", "created"]
-    # queryset= Chat.objects.all()
+    http_method_names = ["get", "post", "delete", "head", "options"]
 
     def get_queryset(self):
         queryset = Chat.objects.by_user(user=self.kwargs.get("person_pk"))
@@ -97,8 +121,28 @@ class ChatModelViewSet(ModelViewSet):
         # )
         return queryset
 
+    def get_serializer_context(self):
+        return {"person1_id": self.kwargs.get("person_pk")}
 
-# FriendChat
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return ChatSerializer
+            return ChatCreateSerializer
+        except:
+            pass
+
+        return ChatCreateSerializer
+
+
+# Chat
+class AllChatModelViewSet(ModelViewSet):
+    serializer_class = ChatSerializer
+    ordering_fields = ["updated", "created"]
+    queryset = Chat.objects.all()
+
+
+# FriendChatMsgs
 class ChatMsgModelViewSet(ModelViewSet):
     queryset = ChatMsg.objects.all()
     serializer_class = ChatMsgSerializer
@@ -106,25 +150,10 @@ class ChatMsgModelViewSet(ModelViewSet):
     def get_queryset(self):
         queryset = ChatMsg.objects.filter(chat_id=self.kwargs.get("chat_pk"))
         return queryset
-    
+
     def get_serializer_context(self):
-        return {
-            "chat_id": self.kwargs.get("chat_pk")
-        }
+        return {"chat_id": self.kwargs.get("chat_pk")}
 
 
-# Story
-class StoryModelViewSet(ModelViewSet):
-    serializer_class = StorySerializer
-
-    def get_queryset(self):
-        return Story.objects.filter(user_id=self.kwargs['person_pk'])
-
-    # def get_serializer_context(self):
-    #     return {'product_id': self.kwargs['product_pk']}
 
 
-# All Story
-class AllStoryModelViewSet(ModelViewSet):
-    queryset = Story.objects.all()
-    serializer_class = StorySerializer

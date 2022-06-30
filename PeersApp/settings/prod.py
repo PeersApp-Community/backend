@@ -10,9 +10,7 @@ DEBUG = os.environ["DEBUG"]
 
 ALLOWED_HOSTS = ["https://peers-app-sh.herokuapp.com"]
 
-DATABASES = {
-    "default": dj_database_url.config()
-}
+DATABASES = {"default": dj_database_url.config()}
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
@@ -22,7 +20,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
 # EMAIL_PORT = os.environ['MAILGUN_SMTP_PORT']
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Configure Django App for Heroku.

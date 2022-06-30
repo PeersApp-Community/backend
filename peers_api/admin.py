@@ -1,25 +1,15 @@
 from django.contrib import admin
-from .models import Chat, ChatMsg, Space, SpaceMsg, Story
+
+from extras.admin import SpaceTaskInline
+from .models import Chat, ChatMsg, Space, SpaceMsg
 
 
 class SpaceMsgInline(admin.TabularInline):
-    model = SpaceMsg
     # autocomplete_fields = ['product']
+    model = SpaceMsg
     min_num = 0
     max_num = 10
     extra = 0
-
-
-@admin.register(Space)
-class SpaceAdmin(admin.ModelAdmin):
-    list_display = ["name", "host", "created", "updated"]
-    inlines = [SpaceMsgInline]
-
-
-class StoryInline(admin.TabularInline):
-    model = Story
-    min_num = 0
-    max_num = 10
 
 
 class ChatMsgInline(admin.TabularInline):
@@ -32,4 +22,12 @@ class ChatMsgInline(admin.TabularInline):
 @admin.register(Chat)
 class ChatAdmin(admin.ModelAdmin):
     list_display = ["id", "person1", "person2", "pinned", "deleted", "retrieved"]
-    inlines = [ChatMsgInline]
+    inlines = [
+        ChatMsgInline,
+    ]
+
+
+@admin.register(Space)
+class SpaceAdmin(admin.ModelAdmin):
+    list_display = ["name", "host", "created", "updated"]
+    inlines = [SpaceMsgInline, SpaceTaskInline]

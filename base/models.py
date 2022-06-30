@@ -15,7 +15,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ["username", "email"]
 
     def __str__(self) -> str:
-        return self.email
+        return self.username
 
     # def ottp(self):
     #     return self.otp.otp_num
@@ -55,9 +55,7 @@ class Profile(models.Model):
         choices=GENDER_CHOICES,
         default=PREFER_NOT_TO_SAY,
     )
-    avatar = models.ImageField(
-        null=True, blank=True, default="avatar.svg", upload_to="imgs"
-    )
+    avatar = models.ImageField(null=True, blank=True, upload_to="imgs")
     institution = models.CharField(
         max_length=100,
         null=True,

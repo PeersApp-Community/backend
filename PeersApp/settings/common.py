@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     # apps
     "base",
     "peers_api",
-    "reports"
+    "reports",
+    "extras",
 ]
 
 MIDDLEWARE = [
@@ -119,9 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 # Default primary key field type
@@ -143,9 +143,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny"
-    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
@@ -158,9 +156,10 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1500),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=500),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": False,
@@ -183,6 +182,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
+
 
 DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
@@ -218,11 +218,9 @@ DJOSER = {
 # ACCOUNT_EMAIL_REQUIRED = False
 
 
-DEFAULT_FROM_EMAIL = 'rojitech9@gmail.com'
+DEFAULT_FROM_EMAIL = "rojitech9@gmail.com"
 
-ADMINS = [
-    ('ROJ', 'roj@admin.com')
-]
+ADMINS = [("ROJ", "roj@admin.com")]
 
 # Available endpoints
 #

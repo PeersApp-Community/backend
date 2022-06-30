@@ -6,10 +6,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-# from rest_framework_simplejwt.views import (
-#     TokenObtainPairView,
-#     TokenRefreshView,
-# )
 
 admin.site.site_header = "PeersApp Admin"
 admin.site.index_title = "Administrator"
@@ -23,7 +19,6 @@ urlpatterns = [
     path("reports/", include("reports.urls")),
     #
     path("auth/", include("djoser.urls")),
-    path("auth/", include("djoser.urls.jwt")),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("docs/", include_docs_urls(title="PeersApp API")),
     path(
@@ -33,10 +28,8 @@ urlpatterns = [
         ),
         name="PeersApp-schema",
     ),
-    # path("__debug__/", include("debug_toolbar.urls")),
-    # path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    # path("docs/", include_docs_urls(title="PeersApp API")),
-    # path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("__debug__/", include("debug_toolbar.urls")),
+    # path("auth/", include("djoser.urls.jwt")),
 ]
 
 if settings.DEBUG:

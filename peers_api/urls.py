@@ -1,30 +1,32 @@
 from rest_framework_nested import routers
 from .views import (
-    AllStoryModelViewSet,
     ChatMsgModelViewSet,
     ChatModelViewSet,
     SpaceModelViewSet,
     SpaceMsgModelViewSet,
-    StoryModelViewSet,
     UserInfo,
 )
+from extras.views import AllStoryModelViewSet, StoryModelViewSet
+
+# from base.models import Profile
+# from base.views import ProfileViewSet
 
 
 router = routers.DefaultRouter()
 
 
 router.register("persons", UserInfo, basename="persons")
-# router.register("chats", ChatModelViewSet, basename="chats")
-# router.register("chat-msg", ChatMsgModelViewSet)
+router.register("chats", ChatModelViewSet, basename="chats")
 router.register("space", SpaceModelViewSet)
 router.register("room-msg", SpaceMsgModelViewSet)
 router.register("story", AllStoryModelViewSet)
+# router.register("chat-msg", ChatMsgModelViewSet)
 
 
 # Nested
 persons_router = routers.NestedDefaultRouter(router, "persons", lookup="person")
 persons_router.register("chats", ChatModelViewSet, basename="person-chats")
-persons_router.register("spaces", ChatModelViewSet, basename="person-spaces")
+persons_router.register("spaces", SpaceModelViewSet, basename="person-spaces")
 persons_router.register("stories", StoryModelViewSet, basename="person-story")
 
 
@@ -35,7 +37,7 @@ chats_router.register("msgs", ChatMsgModelViewSet, basename="chat-msgs")
 
 # Space
 space_router = routers.NestedDefaultRouter(persons_router, "spaces", lookup="space")
-space_router.register("msgs", ChatMsgModelViewSet, basename="space-msgs")
+space_router.register("msgs", SpaceMsgModelViewSet, basename="space-msgs")
 
 
 # Story

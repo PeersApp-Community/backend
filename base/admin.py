@@ -1,5 +1,5 @@
 from django.contrib import admin
-from peers_api.admin import StoryInline
+from extras.admin import LibraryInline, MyTaskInline, StoryInline
 from .models import User, Profile, Otp
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
@@ -10,10 +10,16 @@ class OTPInline(admin.TabularInline):
     model = Otp
 
 
+class ProfileInline(admin.TabularInline):
+    model = Profile
+    min_num = 0
+    max_num = 10
+
+
 @admin.register(User)
 class UserdAdmin(BaseUserAdmin):
-    list_editable = ("phone", )
-    inlines = [OTPInline, StoryInline]
+    list_editable = ("phone",)
+    inlines = [OTPInline, StoryInline, ProfileInline, LibraryInline, MyTaskInline]
 
     fieldsets = (
         (None, {"fields": ("username", "password")}),
@@ -60,7 +66,7 @@ class UserdAdmin(BaseUserAdmin):
         "is_email_verified",
         "is_active",
     ]
-    
+
     # def ottp(self, user):
     #     return user.ottp
 

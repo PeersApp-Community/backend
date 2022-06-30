@@ -1,8 +1,6 @@
-from email.policy import default
 from django.db import models
 from django.conf import settings
 from django.db.models import Q
-from django.forms import FileField
 from django.utils.translation import gettext_lazy as _
 
 User = settings.AUTH_USER_MODEL
@@ -26,8 +24,8 @@ class Space(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = models.TextField(null=True, blank=True)
     participants = models.ManyToManyField(User, related_name="participants")
-    archived = models.DateTimeField(default=False)
-    pinned = models.DateTimeField(default=False)
+    archived = models.BooleanField(default=False)
+    pinned = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     # topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, blank=True)
@@ -96,41 +94,3 @@ class ChatMsg(models.Model):
         return f"{self.user} -- { self.message}"
 
 
-class Story(models.Model):
-    user = models.ForeignKey(User, verbose_name=_("status"), on_delete=models.CASCADE)
-    file = models.FileField(upload_to="status", null=True, blank=True)
-    text = models.CharField(_("text"), max_length=50, null=True, blank=True)
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-    seen = models.BooleanField(default=False)
-
-    def __str__(self) -> str:
-        return self.user.username
-
-
-#
-#
-#
-# class Stared(models.Model):
-#     user = models.OneToOneField(
-#         User, verbose_name=_("Users stared messages"), on_delete=models.CASCADE
-#     )
-#     stared_room_msg = models.ForeignKey(
-#         RoomChat, verbose_name=_("Stared Room Messages"), on_delete=models.CASCADE
-#     )
-#     stared_friend_msg = models.ForeignKey(
-#         FriendChat, verbose_name=_("Stared Friends Messages"), on_delete=models.CASCADE
-#     )
-
-
-# class Topic(models.Model):
-#     title = models.CharField(max_length=200)
-#     organisation = models.ForeignKey(
-#         Organisation, on_delete=models.CASCADE, related_name="topics"
-#     )
-
-#     def __str__(self):
-#         return self.title
-
-# class Friend(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
