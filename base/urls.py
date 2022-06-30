@@ -16,10 +16,10 @@ from rest_framework_simplejwt.views import (
 #
 urlpatterns = [
     path("validate/", my_token_obtain_pair),
-    path("validate/refresh/", refresh_OTP_view),
+    path("validate/refresh/", TokenRefreshView.as_view()),
     path("profile/", ProfileListAPIView.as_view()),
     path("profile/<int:pk>/", ProfileRetrieveAPIView.as_view()),
     path("profile/<int:id>/update/", ProfileUpdateAPIView.as_view()),
     path("login/", login_view),
-    path("resend-otp/", TokenRefreshView.as_view()),
+    path("resend-otp/", refresh_OTP_view),
 ]

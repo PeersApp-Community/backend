@@ -2,6 +2,7 @@ from rest_framework_nested import routers
 from .views import (
     ChatMsgModelViewSet,
     ChatModelViewSet,
+    ProfileInlineAPIView,
     SpaceModelViewSet,
     SpaceMsgModelViewSet,
     UserInfo,
@@ -28,6 +29,7 @@ persons_router = routers.NestedDefaultRouter(router, "persons", lookup="person")
 persons_router.register("chats", ChatModelViewSet, basename="person-chats")
 persons_router.register("spaces", SpaceModelViewSet, basename="person-spaces")
 persons_router.register("stories", StoryModelViewSet, basename="person-story")
+persons_router.register("profile", ProfileInlineAPIView, basename="person-profile")
 
 
 # chats
@@ -40,8 +42,8 @@ space_router = routers.NestedDefaultRouter(persons_router, "spaces", lookup="spa
 space_router.register("msgs", SpaceMsgModelViewSet, basename="space-msgs")
 
 
-# Story
-# story_router = routers.NestedDefaultRouter(persons_router, "stories", lookup="story")
-# space_router.register("posts", ChatMsgModelViewSet, basename="space-post")
+# Profile
+# profile_router = routers.NestedDefaultRouter(persons_router, "profiles", lookup="profile")
+# profile_router.register("posts", ChatMsgModelViewSet, basename="space-post")
 
 urlpatterns = router.urls + persons_router.urls + chats_router.urls + space_router.urls

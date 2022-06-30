@@ -109,27 +109,6 @@ class ProfileUpdateAPIView(UpdateAPIView):
             pass
 
 
-# class ProfileInlineAPIView(ModelViewSet):
-#     serializer_class = ProfileEditSerializer
-#     queryset = Profile.objects.all()
-#     permission_classes = [AllowAny]
-#     lookup_field = "id"
-
-#     def get_serializer_context(self):
-#         try:
-#             return {"user_id": self.kwargs["person_pk"]}
-#         except:
-#             pass
-
-#     def get_serializer_class(self):
-
-#         try:
-#             if self.request.
-
-
-#         return ProfileEditSerializer
-
-
 # @api_view(["PATCH"])
 # @permission_classes([AllowAny])
 # def updateUserProfile(request, id):

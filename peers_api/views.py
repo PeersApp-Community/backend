@@ -8,6 +8,8 @@ from rest_framework.permissions import (
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 
+from base.serializers import ProfileEditSerializer, ProfileSerializer
+
 from .models import Chat, ChatMsg, Space, SpaceMsg
 from .serializers import (
     ChatCreateSerializer,
@@ -17,6 +19,7 @@ from .serializers import (
     SpaceSerializer,
     UserInfoSimpleerializer,
 )
+from base.models import Profile
 
 User = get_user_model()
 
@@ -155,5 +158,23 @@ class ChatMsgModelViewSet(ModelViewSet):
         return {"chat_id": self.kwargs.get("chat_pk")}
 
 
+class ProfileInlineAPIView(ModelViewSet):
+    serializer_class = ProfileEditSerializer
+    queryset = Profile.objects.all()
+    permission_classes = [AllowAny]
 
+    def get_serializer_context(self):
+        try:
+            return {"user_id": self.kwargs["person_pk"]}
+        except:
+            pass
 
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return ProfileSerializer
+
+        except:
+            pass
+
+        return ProfileEditSerializer
