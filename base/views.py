@@ -53,7 +53,9 @@ def login_view(request):
         user.save()
         return Response({"otp": otp.otp_num}, status=status.HTTP_200_OK)
 
-    return Response(status=status.HTTP_400_BAD_REQUEST)
+    return Response(
+        {"error": "Incorrect credentials"}, status=status.HTTP_400_BAD_REQUEST
+    )
 
 
 @api_view(
@@ -118,13 +120,13 @@ class ProfileUpdateAPIView(UpdateAPIView):
 #             return {"user_id": self.kwargs["person_pk"]}
 #         except:
 #             pass
-        
+
 #     def get_serializer_class(self):
-        
+
 #         try:
 #             if self.request.
-        
-        
+
+
 #         return ProfileEditSerializer
 
 
