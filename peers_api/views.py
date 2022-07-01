@@ -15,6 +15,7 @@ from .serializers import (
     ChatCreateSerializer,
     ChatMsgSerializer,
     ChatSerializer,
+    ProfileInlineSerializer,
     SpaceMsgSerializer,
     SpaceSerializer,
     UserInfoSimpleerializer,
@@ -158,10 +159,15 @@ class ChatMsgModelViewSet(ModelViewSet):
         return {"chat_id": self.kwargs.get("chat_pk")}
 
 
-class ProfileInlineAPIView(ModelViewSet):
-    serializer_class = ProfileEditSerializer
+class ProfileModelViewSet(ModelViewSet):
+    serializer_class = ProfileInlineSerializer
     queryset = Profile.objects.all()
     permission_classes = [AllowAny]
+    http_method_names = ["get", "patch", "put", "head", "options"]
+
+    def get_queryset(self):
+        queryset = Profile.objects.filter(user_id=self.kwargs.get("person_pk"))
+        return queryset
 
     def get_serializer_context(self):
         try:

@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from base.models import User
+from base.models import Profile, User
 from .models import Chat, ChatMsg, Space, SpaceMsg
 
 
 class UserSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "phone"]
+        fields = ["id", "email", "phone", "username"]
 
 
 class UserInfoSimpleerializer(serializers.ModelSerializer):
@@ -80,3 +80,47 @@ class ChatMsgSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         chat_id = self.context.get("chat_id")
         return ChatMsg.objects.create(chat_id=chat_id, **validated_data)
+
+
+class ProfileInlineSerializer(serializers.ModelSerializer):
+    user = UserSimpleSerializer()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+
+    class Meta:
+        model = Profile
+        fields = "__all__"
+        # fields = [
+        #     "id",
+        #     "user_id",
+        #     "user",
+        #     "first_name",
+        #     "last_name",
+        #     "bio",
+        #     "gender",
+        #     "institution",
+        #     "educational_level",
+        #     "course",
+        #     "location",
+        #     "updated",
+        #     "avatar",
+        # ]
+        
+        
+    def save(self, **kwargs):
+        first_name = self.validated_data["first_name"]
+        last_name = self.validated_data["last_name"]
+
+        print(kwargs)
+        print(self.context)
+        print("=================================")
+        try:
+            user = User.objects.get(id=self.context["user_id"])
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+            print("==============PROFILE=UPDATED==================")
+            return super().save(**kwargs)
+        except:
+            print("=============PROFILE=ERROR===================")
+            raise ValueError("error")
