@@ -143,7 +143,9 @@ class ChatModelViewSet(ModelViewSet):
         return queryset
 
     def get_serializer_context(self):
-        return {"user1_id": self.kwargs.get("user_pk")}
+        return {
+            "user1_id": self.kwargs.get("user_pk"),
+        }
 
     def get_serializer_class(self):
         try:
@@ -173,4 +175,7 @@ class ChatMsgModelViewSet(ModelViewSet):
         return queryset
 
     def get_serializer_context(self):
-        return {"chat_id": self.kwargs.get("chat_pk")}
+        return {
+            "chat_id": self.kwargs.get("chat_pk"),
+            "user_id": self.kwargs.get("user_pk"),
+        }

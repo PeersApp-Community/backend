@@ -77,6 +77,12 @@ class ChatCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
         fields = ["id", "user2"]
+        
+    # def validate(self, attrs):
+    #     user2 = attrs["user2"]
+        
+        
+    #     return super().validate(attrs)
 
     def create(self, validated_data):
         user1_id = self.context.get("user1_id")
@@ -89,14 +95,28 @@ class ChatCreateSerializer(serializers.ModelSerializer):
 class ChatMsgSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatMsg
-        # fields = ["id", "user", "chat", "file","message", "created", "updated","seen", ]
-        fields = "__all__"
+        fields = [
+            "id",
+            "file",
+            "message",
+            "created",
+            "updated",
+            "seen",
+            "pinned",
+            "stared",
+            "deleted",
+            "retrieved",
+        ]
+        # fields = "__all__"
         # read_only_fields = ('account_name',)
         # write_only_fields = ('password',)  # Note: Password field is write-only
 
     def create(self, validated_data):
         chat_id = self.context.get("chat_id")
-        return ChatMsg.objects.create(chat_id=chat_id, **validated_data)
+        user_id = self.context.get("user_id")
+        return ChatMsg.objects.create(
+            chat_id=chat_id, user_id=user_id, **validated_data
+        )
 
 
 class ProfileInlineSerializer(serializers.ModelSerializer):
