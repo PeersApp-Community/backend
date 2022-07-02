@@ -66,9 +66,11 @@ class SpaceMsgSerializer(serializers.ModelSerializer):
 
 # FriendChat
 class ChatSerializer(serializers.ModelSerializer):
+    user2 = UserSimpleSerializer()
+
     class Meta:
         model = Chat
-        fields = ["id", "user1", "user1_id", "user2", "user2_id", "updated"]
+        fields = ["id", "user2", "updated", "created"]
 
 
 class ChatCreateSerializer(serializers.ModelSerializer):
