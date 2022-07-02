@@ -21,7 +21,7 @@ class ChatMsgInline(admin.TabularInline):
 
 @admin.register(Chat)
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ["id", "person1", "person2", "pinned", "deleted", "retrieved"]
+    list_display = ["id", "user1", "user2", "pinned", "deleted", "retrieved"]
     inlines = [
         ChatMsgInline,
     ]
@@ -29,5 +29,5 @@ class ChatAdmin(admin.ModelAdmin):
 
 @admin.register(Space)
 class SpaceAdmin(admin.ModelAdmin):
-    list_display = ["name", "host", "created", "updated"]
+    list_display = ["name", "id", "host", "created", "updated"]
     inlines = [SpaceMsgInline, SpaceTaskInline]

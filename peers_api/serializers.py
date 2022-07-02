@@ -44,6 +44,19 @@ class SpaceSerializer(serializers.ModelSerializer):
         ]
 
 
+# Room
+class SpaceCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Space
+        fields = [
+            "id",
+            "name",
+            "host",
+            "description",
+            "participants",
+        ]
+
+
 # RoomChat
 class SpaceMsgSerializer(serializers.ModelSerializer):
     class Meta:
@@ -55,19 +68,19 @@ class SpaceMsgSerializer(serializers.ModelSerializer):
 class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
-        fields = ["id", "person1", "person1_id", "person2", "person2_id", "updated"]
+        fields = ["id", "user1", "user1_id", "user2", "user2_id", "updated"]
 
 
 class ChatCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
-        fields = ["id", "person2"]
+        fields = ["id", "user2"]
 
     def create(self, validated_data):
-        person1_id = self.context.get("person1_id")
-        print(person1_id)
+        user1_id = self.context.get("user1_id")
+        print(user1_id)
         print("chat created")
-        return Chat.objects.create(person1_id=person1_id, **validated_data)
+        return Chat.objects.create(user1_id=user1_id, **validated_data)
 
 
 # ChatMsg
@@ -76,6 +89,8 @@ class ChatMsgSerializer(serializers.ModelSerializer):
         model = ChatMsg
         # fields = ["id", "user", "chat", "file","message", "created", "updated","seen", ]
         fields = "__all__"
+        # read_only_fields = ('account_name',)
+        # write_only_fields = ('password',)  # Note: Password field is write-only
 
     def create(self, validated_data):
         chat_id = self.context.get("chat_id")
@@ -90,23 +105,22 @@ class ProfileInlineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = "__all__"
-        # fields = [
-        #     "id",
-        #     "user_id",
-        #     "user",
-        #     "first_name",
-        #     "last_name",
-        #     "bio",
-        #     "gender",
-        #     "institution",
-        #     "educational_level",
-        #     "course",
-        #     "location",
-        #     "updated",
-        #     "avatar",
-        # ]
-        
-        
+        fields = [
+            "id",
+            "user_id",
+            "user",
+            "first_name",
+            "last_name",
+            "bio",
+            "gender",
+            "institution",
+            "educational_level",
+            "course",
+            "location",
+            "updated",
+            "avatar",
+        ]
+
     def save(self, **kwargs):
         first_name = self.validated_data["first_name"]
         last_name = self.validated_data["last_name"]

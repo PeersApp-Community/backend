@@ -58,8 +58,8 @@ class UserdAdmin(BaseUserAdmin):
     )
 
     list_display = [
-        "id",
         "email",
+        "id",
         "phone",
         "date_joined",
         "is_phone_verified",

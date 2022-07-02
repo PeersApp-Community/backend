@@ -1,4 +1,5 @@
-# from rest_framework.response import Response
+from rest_framework.response import Response
+from django.db.models import Q
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import (
     AllowAny,
@@ -16,8 +17,10 @@ from .serializers import (
     ChatMsgSerializer,
     ChatSerializer,
     ProfileInlineSerializer,
+    SpaceCreateSerializer,
     SpaceMsgSerializer,
     SpaceSerializer,
+    SpaceSimpleSerializer,
     UserInfoSimpleerializer,
 )
 from base.models import Profile
@@ -25,83 +28,97 @@ from base.models import Profile
 User = get_user_model()
 
 
+class ProfileModelViewSet(ModelViewSet):
+    serializer_class = ProfileInlineSerializer
+    queryset = Profile.objects.all()
+    permission_classes = [AllowAny]
+    http_method_names = ["get", "patch", "head", "options"]
+
+    def get_queryset(self):
+        queryset = Profile.objects.filter(user_id=self.kwargs.get("user_pk"))
+        return queryset
+
+    def get_serializer_context(self):
+        try:
+            return {"user_id": self.kwargs["user_pk"]}
+        except:
+            pass
+
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return ProfileSerializer
+
+        except:
+            pass
+
+        return ProfileEditSerializer
+
+
 class UserInfo(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserInfoSimpleerializer
+    http_method_names = ["get", "head", "options"]
+
     # permission_classes = [
     #     IsAuthenticated,
     # ]
 
-    # @action(detail=True, permission_classes=[ViewCustomerHistoryPermission])
-    # def history(self, request, pk):
-    #     return Response('ok')
-
-    # def chats(self, request):
-    # @action(
-    #     detail=True,
-    #     methods=["GET", "PUT", "POST"],
-    #     permission_classes=[AllowAny],
-    # )
-    # def chat(self, *args, **kwargs):
-    #     print("==============================================")
-    #     print("==============================================")
-    #     user = Chat.objects.filter(sender=self.request.user.id)
-    #     serializer = ChatSerializer(user)
-    #     print("==============================================")
-    #     # serializer.is_valid(raise_exception=True)
-    #     # serializer.save()
-    #     return Response(serializer.data)
-
-    # @action(
-    #     detail=False,
-    #     methods=["GET", "PUT", "POST"],
-    #     permission_classes=[AllowAny],
-    # )
-    # def chats1(self):
-    #     user_chat = Chat.objects.filter(sender_id=request.user.id)
-    #     serializer = ChatSerializer(user_chat)
-    #     # serializer.is_valid(raise_exception=True)
-    #     # serializer.save()
-    #     return Response(serializer.data)
-
-    # @action(
-    #     detail=True,
-    #     methods=["GET", "PUT", "POST"],
-    #     permission_classes=[AllowAny],
-    # )
-
-    # def chats2(self, request):
-    #     user = User.objects.get(id=request.user.id)
-    #     serializer = UserInfoSimpleerializer(user, data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(serializer.data)
-
 
 # All Spaces
-class SpaceModelViewSet(ModelViewSet):
+class AllSpaceModelViewSet(ModelViewSet):
     queryset = Space.objects.all()
     serializer_class = SpaceSerializer
     # read_only_fields = ('account_name',)
     # write_only_fields = ('password',)  # Note: Password field is write-only
 
-    def get_serializer_context(self):
-        return {"person1_id": self.kwargs.get("person_pk")}
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return SpaceSerializer
+            return SpaceCreateSerializer
+        except:
+            pass
+
+        return SpaceCreateSerializer
 
 
 # Space
 class SpaceModelViewSet(ModelViewSet):
     queryset = Space.objects.all()
     serializer_class = SpaceSerializer
-    # read_only_fields = ('account_name',)
-    # write_only_fields = ('password',)  # Note: Password field is write-only
+
+    # @action(
+    #     detail=False,
+    #     methods=[
+    #         "GET",
+    #     ],
+    #     permission_classes=[AllowAny],
+    # )
+    # def hosted(self, request, *args, **kwargs):
+    #     hosted_spaces = User.objects.get(
+    #         id=self.kwargs.get("user_pk")
+    #     ).hosted_spaces.all()
+
+    #     serializer = SpaceSerializer(hosted_spaces)
+    #     return Response(serializer.data)
 
     def get_serializer_context(self):
-        return {"person1_id": self.kwargs.get("person_pk")}
+        return {"user1_id": self.kwargs.get("user_pk")}
 
     def get_queryset(self):
-        queryset = Space.objects.filter()
-        return super().get_queryset()
+        queryset = User.objects.get(id=self.kwargs.get("user_pk")).spaces.all()
+        return queryset
+
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return SpaceSerializer
+            return SpaceCreateSerializer
+        except:
+            pass
+
+        return SpaceCreateSerializer
 
 
 # SpaceChat
@@ -117,16 +134,16 @@ class ChatModelViewSet(ModelViewSet):
     http_method_names = ["get", "post", "delete", "head", "options"]
 
     def get_queryset(self):
-        queryset = Chat.objects.by_user(user=self.kwargs.get("person_pk"))
+        queryset = Chat.objects.by_user(user=self.kwargs.get("user_pk"))
         # .prefetch_related("chat_msgs")
         # queryset = Chat.objects.filter(
-        #     Q(sender_id=self.kwargs.get("person_pk"))
-        #     | Q(receiver_id=self.kwargs.get("person_pk"))
+        #     Q(sender_id=self.kwargs.get("user_pk"))
+        #     | Q(receiver_id=self.kwargs.get("user_pk"))
         # )
         return queryset
 
     def get_serializer_context(self):
-        return {"person1_id": self.kwargs.get("person_pk")}
+        return {"user1_id": self.kwargs.get("user_pk")}
 
     def get_serializer_class(self):
         try:
@@ -157,30 +174,3 @@ class ChatMsgModelViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         return {"chat_id": self.kwargs.get("chat_pk")}
-
-
-class ProfileModelViewSet(ModelViewSet):
-    serializer_class = ProfileInlineSerializer
-    queryset = Profile.objects.all()
-    permission_classes = [AllowAny]
-    http_method_names = ["get", "patch", "put", "head", "options"]
-
-    def get_queryset(self):
-        queryset = Profile.objects.filter(user_id=self.kwargs.get("person_pk"))
-        return queryset
-
-    def get_serializer_context(self):
-        try:
-            return {"user_id": self.kwargs["person_pk"]}
-        except:
-            pass
-
-    def get_serializer_class(self):
-        try:
-            if self.request.method == "GET":
-                return ProfileSerializer
-
-        except:
-            pass
-
-        return ProfileEditSerializer

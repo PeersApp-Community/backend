@@ -15,7 +15,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ["username", "email"]
 
     def __str__(self) -> str:
-        return self.username
+        return f"{self.id}___{self.username}"
 
     # def ottp(self):
     #     return self.otp.otp_num

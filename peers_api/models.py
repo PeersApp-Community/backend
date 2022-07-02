@@ -9,7 +9,7 @@ User = settings.AUTH_USER_MODEL
 class ChatManager(models.Manager):
     def by_user(self, **kwargs):
         user = kwargs.get("user")
-        lookup = Q(person1=user) | Q(person2=user)
+        lookup = Q(user1=user) | Q(user2=user)
         qs = self.get_queryset().filter(lookup).distinct()
         return qs
 
@@ -21,9 +21,11 @@ class ChatManager(models.Manager):
 
 class Space(models.Model):
     name = models.CharField(max_length=200)
-    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    host = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name="hosted_spaces"
+    )
     description = models.TextField(null=True, blank=True)
-    participants = models.ManyToManyField(User, related_name="participants")
+    participants = models.ManyToManyField(User, related_name="spaces")
     archived = models.BooleanField(default=False)
     pinned = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -58,8 +60,8 @@ class SpaceMsg(models.Model):
 
 
 class Chat(models.Model):
-    person1 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="person1")
-    person2 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="person2")
+    user1 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="user1")
+    user2 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="user2")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     pinned = models.BooleanField(default=False)
@@ -70,11 +72,11 @@ class Chat(models.Model):
     objects = ChatManager()
 
     def __str__(self) -> str:
-        return f"{self.person1} to {self.person2}"
+        return f"{self.user1} to {self.user2}"
 
     class Meta:
         ordering = ["-updated", "-created"]
-        unique_together = ["person1", "person2"]
+        unique_together = ["user1", "user2"]
 
 
 class ChatMsg(models.Model):
@@ -92,5 +94,3 @@ class ChatMsg(models.Model):
 
     def __str__(self):
         return f"{self.user} -- { self.message}"
-
-
