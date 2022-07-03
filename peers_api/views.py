@@ -15,7 +15,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework import status
 
-from base.serializers import ProfileEditSerializer,  ProfileSerializer
+from base.serializers import ProfileEditSerializer, ProfileImageSerializer,  ProfileSerializer
 from extras.serializers import StorySerializer
 
 from .models import Chat, ChatMsg, Space, SpaceMsg
@@ -96,6 +96,8 @@ class UserInfo(ModelViewSet):
 class AllSpaceModelViewSet(ModelViewSet):
     queryset = Space.objects.all()
     serializer_class = SpaceSerializer
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
     # read_only_fields = ('account_name',)
     # write_only_fields = ('password',)  # Note: Password field is write-only
 
@@ -114,6 +116,7 @@ class AllSpaceModelViewSet(ModelViewSet):
 class SpaceModelViewSet(ModelViewSet):
     queryset = Space.objects.all()
     serializer_class = SpaceSerializer
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     # @action(
     #     detail=False,
@@ -152,6 +155,7 @@ class SpaceModelViewSet(ModelViewSet):
 class SpaceMsgModelViewSet(ModelViewSet):
     queryset = SpaceMsg.objects.all()
     serializer_class = SpaceMsgSerializer
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 # Chat
@@ -196,6 +200,7 @@ class AllChatModelViewSet(ModelViewSet):
 class ChatMsgModelViewSet(ModelViewSet):
     queryset = ChatMsg.objects.all()
     serializer_class = ChatMsgSerializer
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     def get_queryset(self):
         queryset = ChatMsg.objects.filter(chat_id=self.kwargs.get("chat_pk"))
