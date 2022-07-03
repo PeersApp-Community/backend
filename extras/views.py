@@ -17,10 +17,10 @@ class StoryModelViewSet(ModelViewSet):
     serializer_class = StorySerializer
 
     def get_queryset(self):
-        return Story.objects.filter(user_id=self.kwargs["person_pk"])
+        return Story.objects.filter(user_id=self.kwargs["user_pk"])
 
     def get_serializer_context(self):
-        return {"user_id": self.kwargs.get("person_pk")}
+        return {"user_id": self.kwargs.get("user_pk")}
 
 
 # All Story
