@@ -126,6 +126,14 @@ class ProfileEditSerializer(serializers.ModelSerializer):
             raise ValueError("error")
 
 
+# class ProfileImageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Profile
+#         fields = [
+#             "avatar",
+#         ]
+
+
 class RefreshOTPSerializer(serializers.ModelSerializer):
     phone = serializers.CharField()
 

@@ -6,10 +6,17 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAuthenticated,
 )
+from rest_framework.parsers import (
+    MultiPartParser,
+    FormParser,
+    JSONParser,
+)
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
+from rest_framework import status
 
-from base.serializers import ProfileEditSerializer, ProfileSerializer
+from base.serializers import ProfileEditSerializer,  ProfileSerializer
+from extras.serializers import StorySerializer
 
 from .models import Chat, ChatMsg, Space, SpaceMsg
 from .serializers import (
@@ -32,7 +39,8 @@ class ProfileModelViewSet(ModelViewSet):
     serializer_class = ProfileInlineSerializer
     queryset = Profile.objects.all()
     permission_classes = [AllowAny]
-    http_method_names = ["get", "patch", "head", "options"]
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+    # http_method_names = ["get", "patch", "head", "options"]
 
     def get_queryset(self):
         queryset = Profile.objects.filter(user_id=self.kwargs.get("user_pk"))
@@ -48,11 +56,30 @@ class ProfileModelViewSet(ModelViewSet):
         try:
             if self.request.method == "GET":
                 return ProfileSerializer
-
+            
+            if self.request.method == "PUT":
+                return ProfileEditSerializer
+            # if self.request.method == "PATCH":
+            #     return ProfileImageSerializer
         except:
             pass
 
         return ProfileEditSerializer
+
+    @action(
+        detail=True,
+        methods=[
+            "put",
+        ],
+    )
+    def upload(self, request, pk=None, *args, **kwargs):
+        profile = Profile.objects.get(id=self.kwargs["user_pk"])
+        serializer = ProfileImageSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserInfo(ModelViewSet):
