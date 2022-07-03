@@ -67,8 +67,7 @@ class LoginSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSimpleerializer()
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
+
 
     class Meta:
         model = Profile
