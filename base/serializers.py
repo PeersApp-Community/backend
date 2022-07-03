@@ -90,8 +90,6 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class ProfileEditSerializer(serializers.ModelSerializer):
-    first_name = serializers.CharField(allow_blank=True, allow_null=True)
-    last_name = serializers.CharField(allow_blank=True, allow_null=True)
 
     class Meta:
         model = Profile
