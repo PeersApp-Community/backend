@@ -77,8 +77,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "id",
             "user_id",
             "user",
-            "first_name",
-            "last_name",
+            "full_name",
             "bio",
             "gender",
             "institution",
@@ -97,8 +96,7 @@ class ProfileEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = [
-            "first_name",
-            "last_name",
+            "full_name",
             "bio",
             "gender",
             "institution",
@@ -109,21 +107,21 @@ class ProfileEditSerializer(serializers.ModelSerializer):
             "updated",
         ]
 
-    def save(self, **kwargs):
-        first_name = self.validated_data["first_name"]
-        last_name = self.validated_data["last_name"]
+    # def save(self, **kwargs):
+    #     first_name = self.validated_data["first_name"]
+    #     last_name = self.validated_data["last_name"]
 
-        print(kwargs)
-        print(self.context)
-        print("=================================")
-        try:
-            user = User.objects.get(id=self.context["user_id"])
-            user.first_name = first_name
-            user.last_name = last_name
-            user.save()
-            return super().save(**kwargs)
-        except:
-            raise ValueError("error")
+    #     print(kwargs)
+    #     print(self.context)
+    #     print("=================================")
+    #     try:
+    #         user = User.objects.get(id=self.context["user_id"])
+    #         user.first_name = first_name
+    #         user.last_name = last_name
+    #         user.save()
+    #         return super().save(**kwargs)
+    #     except:
+    #         raise ValueError("error")
 
 
 class ProfileImageSerializer(serializers.ModelSerializer):

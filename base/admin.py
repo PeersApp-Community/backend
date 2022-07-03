@@ -23,7 +23,7 @@ class UserdAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        (_("Personal info"), {"fields": ("first_name", "last_name", "phone", "email")}),
+        (_("Personal info"), {"fields": ("phone", "email")}),
         (
             _("Permissions"),
             {
@@ -74,4 +74,4 @@ class UserdAdmin(BaseUserAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user"]
-    list_display = ["user_id", "id", "user", "first_name", "last_name", "avatar"]
+    list_display = ["user", "id", "user", "full_name", "avatar"]

@@ -47,6 +47,7 @@ class Profile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100, null=True, blank=True)
     bio = models.CharField(max_length=100, null=True, blank=True)
     gender = models.CharField(
         null=True,
@@ -78,14 +79,10 @@ class Profile(models.Model):
     )
     updated = models.DateTimeField(auto_now=True)
 
-    def first_name(self):
-        return self.user.first_name
 
-    def last_name(self):
-        return self.user.last_name
 
     def __str__(self) -> str:
-        return self.user.username
+        return self.full_name
 
     # end def
 
