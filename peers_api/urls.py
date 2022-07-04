@@ -1,9 +1,10 @@
 from rest_framework_nested import routers
 from .views import (
+    AllChatModelViewSet,
+    AllSpaceModelViewSet,
     ChatMsgModelViewSet,
     ChatModelViewSet,
     ProfileModelViewSet,
-    AllSpaceModelViewSet,
     SpaceModelViewSet,
     SpaceMsgModelViewSet,
     UserInfo,
@@ -18,7 +19,7 @@ router = routers.DefaultRouter()
 
 
 router.register("users", UserInfo, basename="users")
-router.register("all-chats", ChatModelViewSet, basename="chats")
+router.register("all-chats", AllChatModelViewSet, basename="chats")
 router.register("all-spaces", AllSpaceModelViewSet)
 router.register("all-stories", AllStoryModelViewSet)
 # router.register("room-msg", SpaceMsgModelViewSet)

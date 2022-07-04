@@ -9,8 +9,9 @@ User = settings.AUTH_USER_MODEL
 class ChatManager(models.Manager):
     def by_user(self, **kwargs):
         user = kwargs.get("user")
-        lookup = Q(user1=user) | Q(user2=user)
-        qs = self.get_queryset().filter(lookup).distinct()
+        lookup1 = Q(user1=user) | Q(user2=user)
+        lookup3 = Q(user1=user) & Q(user2=user)
+        qs = self.get_queryset().filter(lookup1).exclude(lookup3).distinct()
         return qs
 
 
@@ -36,7 +37,7 @@ class Space(models.Model):
         ordering = ["-updated", "-created"]
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
 
 class SpaceMsg(models.Model):
@@ -51,12 +52,13 @@ class SpaceMsg(models.Model):
     stared = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     retrieved = models.BooleanField(default=False)
+    archived = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-updated", "-created"]
 
     def __str__(self):
-        return self.author.email
+        return f"{self.author.email}"
 
 
 class Chat(models.Model):

@@ -15,8 +15,11 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework import status
 
-from base.serializers import ProfileEditSerializer, ProfileImageSerializer,  ProfileSerializer
-from extras.serializers import StorySerializer
+from base.serializers import (
+    ProfileEditSerializer,
+    ProfileImageSerializer,
+    ProfileSerializer,
+)
 
 from .models import Chat, ChatMsg, Space, SpaceMsg
 from .serializers import (
@@ -27,7 +30,6 @@ from .serializers import (
     SpaceCreateSerializer,
     SpaceMsgSerializer,
     SpaceSerializer,
-    SpaceSimpleSerializer,
     UserInfoSimpleerializer,
 )
 from base.models import Profile
@@ -56,7 +58,7 @@ class ProfileModelViewSet(ModelViewSet):
         try:
             if self.request.method == "GET":
                 return ProfileSerializer
-            
+
             if self.request.method == "PUT":
                 return ProfileEditSerializer
             # if self.request.method == "PATCH":
@@ -96,10 +98,6 @@ class UserInfo(ModelViewSet):
 class AllSpaceModelViewSet(ModelViewSet):
     queryset = Space.objects.all()
     serializer_class = SpaceSerializer
-    parser_classes = (MultiPartParser, FormParser, JSONParser)
-
-    # read_only_fields = ('account_name',)
-    # write_only_fields = ('password',)  # Note: Password field is write-only
 
     def get_serializer_class(self):
         try:
@@ -188,12 +186,69 @@ class ChatModelViewSet(ModelViewSet):
 
         return ChatCreateSerializer
 
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        default_serializer = self.get_serializer(instance)
+        current_user = self.kwargs.get("user_pk")
+        serializer = default_serializer.data.copy()
+
+        try:
+            if int(serializer["user1"]["id"]) == int(current_user):
+                serializer.pop("user2")
+                serializer.pop("user1")
+                second = {"other_user": default_serializer.data.pop("user2")}
+                serializer.update(second)
+
+            else:
+                serializer.pop("user1")
+                serializer.pop("user2")
+                second = {"other_user": default_serializer.data.pop("user1")}
+                serializer.update(second)
+
+        except:
+            print(f"Something is wrong with user {current_user}'s chat list")
+            pass
+
+        return Response(serializer)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        default_serializer = self.get_serializer(queryset, many=True)
+
+        serializer = default_serializer.data.copy()
+
+        current_user = self.kwargs.get("user_pk")
+
+        try:
+            for item in serializer:
+                if int(item["user1"]["id"]) == int(current_user):
+                    second = {"other_user": item.pop("user2")}
+                    item.pop("user1")
+                    item.update(second)
+                else:
+                    second = {"other_user": item.pop("user1")}
+                    item.pop("user2")
+                    item.update(second)
+
+        except:
+            print(f"Something is wrong with {current_user}'s chat list")
+            pass
+
+        return Response(serializer)
+
 
 # Chat
 class AllChatModelViewSet(ModelViewSet):
     serializer_class = ChatSerializer
     ordering_fields = ["updated", "created"]
     queryset = Chat.objects.all()
+    http_method_names = ["get", "head", "options"]
 
 
 # FriendChatMsgs

@@ -16,7 +16,7 @@ class Story(models.Model):
     seen = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return self.user.username
+        return f"{self.user.username}"
 
     class Meta:
         ordering = ["-updated", "-created"]
@@ -40,7 +40,7 @@ class SpaceTask(models.Model):
     done = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return f"{self.title}"
 
 
 class MyTask(models.Model):
@@ -51,4 +51,4 @@ class MyTask(models.Model):
     done = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return f"{self.title}"

@@ -79,31 +79,5 @@ class Profile(models.Model):
     )
     updated = models.DateTimeField(auto_now=True)
 
-
-
     def __str__(self) -> str:
-        return self.full_name
-
-    # end def
-
-    # first_name = models.CharField(max_length=255, null=True, blank=True)
-    # last_name = models.CharField(max_length=255, null=True, blank=True)
-
-
-# "id": 1,
-# "password": "pbkdf2_sha256$390000$zMchlXYANNQ9Re82eBWkVg$yQVP0mkU1eidGIdTCfpC1YUnJMFoh4d3klLX7tM/zxw=",
-# "is_superuser": true,
-# "username": "admin",
-# "first_name": "",
-# "last_name": "",
-# "is_staff": true,
-# "is_active": true,
-# "email": "admin@domain.com",
-# "phone": "07015910956",
-# "date_joined": "2022-06-20T10:38:20.588375Z",
-# "is_phone_verified": false,
-# "is_email_verified": false,
-# "last_login": "2022-06-21T11:37:29.238857Z",
-# "otp": null,
-# "groups": [],
-# "user_permissions": []
+        return f"{self.full_name}"

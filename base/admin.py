@@ -3,7 +3,7 @@ from extras.admin import LibraryInline, MyTaskInline, StoryInline
 from .models import User, Profile, Otp
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
-
+from django.utils.html import format_html
 
 # Register your models here.
 class OTPInline(admin.TabularInline):
@@ -14,6 +14,12 @@ class ProfileInline(admin.TabularInline):
     model = Profile
     min_num = 0
     max_num = 10
+    readonly_fields = ["thumbnail",]
+
+    def thumbnail(self, instance):
+        if instance.avatar.name != "":
+            return format_html(f'<img src="{instance.avatar.url}" class="thumbnail" />')
+        return ""
 
 
 @admin.register(User)
@@ -67,6 +73,9 @@ class UserdAdmin(BaseUserAdmin):
         "is_active",
     ]
 
+    class Media:
+        css = {"all": ["styles.css"]}
+
     # def ottp(self, user):
     #     return user.ottp
 
@@ -74,4 +83,13 @@ class UserdAdmin(BaseUserAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user"]
-    list_display = ["user", "id", "user", "full_name", "avatar"]
+    list_display = [
+        "user",
+        "id",
+        "full_name",
+        "avatar",
+        "educational_level",
+        "location",
+        "course",
+        "updated",
+    ]
