@@ -34,7 +34,7 @@ class Space(models.Model):
     # topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
-        ordering = ["-updated", "-created"]
+        ordering = ["pinned", "-updated", "-created"]
 
     def __str__(self):
         return f"{self.name}"
@@ -76,7 +76,7 @@ class Chat(models.Model):
         return f"{self.user1} to {self.user2}"
 
     class Meta:
-        ordering = ["-updated", "-created"]
+        ordering = ["pinned", "-updated", "-created"]
         unique_together = ["user1", "user2"]
 
 

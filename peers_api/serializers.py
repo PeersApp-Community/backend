@@ -58,6 +58,16 @@ class SpaceCreateSerializer(serializers.ModelSerializer):
             "participants",
         ]
 
+    # def create(self, validated_data):
+    #     user = User.objects.get(id=user_id)
+    #     return Space.objects.create(host=user, **validated_data)
+
+    # def create(self, validated_data):
+    #     user_id = self.context.get("user_id")
+    #     host = {"host_id": user_id}
+    #     validated_data.update(host)
+    #     return super().create(validated_data)
+
 
 # RoomChat
 class SpaceMsgSerializer(serializers.ModelSerializer):

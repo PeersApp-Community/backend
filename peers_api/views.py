@@ -98,7 +98,7 @@ class UserInfo(ModelViewSet):
 
 # All Spaces
 class AllSpaceModelViewSet(ModelViewSet):
-    queryset = Space.objects.all()
+    queryset = Space.objects.filter(archived=False)
     serializer_class = SpaceSerializer
 
     def get_serializer_class(self):
@@ -114,7 +114,7 @@ class AllSpaceModelViewSet(ModelViewSet):
 
 # Space
 class SpaceModelViewSet(ModelViewSet):
-    queryset = Space.objects.all()
+    queryset = Space.objects.filter(archived=False)
     serializer_class = SpaceSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
@@ -132,10 +132,11 @@ class SpaceModelViewSet(ModelViewSet):
         return Response(serializer.data)
 
     def get_serializer_context(self):
-        return {"user1_id": self.kwargs.get("user_pk")}
+        return {"user_id": self.kwargs.get("user_pk")}
 
     def get_queryset(self):
         queryset = User.objects.get(id=self.kwargs.get("user_pk")).spaces.all()
+        # queryset = queryset.filter(archived=False)
         return queryset
 
     def get_serializer_class(self):

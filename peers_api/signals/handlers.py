@@ -8,6 +8,14 @@ from peers_api.models import Space
 def add_host_to_paticipant(sender, **kwargs):
     if kwargs["created"]:
         space = kwargs["instance"]
+        space1 = Space.objects.get(id=35)
         print("adding host")
-        space.participants.add(kwargs["instance"].host)
+        print(space.id)
+        print(space.name)
+        print(space.participants.all())
+        print(space1.participants.all())
+        space.participants.add(space.host_id)
+        space.save()
+        print(kwargs["instance"].participants)
+        print(space.participants.all())
         print("host added")
