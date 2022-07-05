@@ -40,9 +40,9 @@ class SpaceSerializer(serializers.ModelSerializer):
             "name",
             "host",
             "description",
+            "updated",
             "created",
             "participants",
-            "updated",
         ]
 
 

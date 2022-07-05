@@ -52,7 +52,6 @@ class SpaceMsg(models.Model):
     stared = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     retrieved = models.BooleanField(default=False)
-    archived = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-updated", "-created"]

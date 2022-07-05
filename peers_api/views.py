@@ -42,7 +42,7 @@ class ProfileModelViewSet(ModelViewSet):
     queryset = Profile.objects.all()
     permission_classes = [AllowAny]
     parser_classes = (MultiPartParser, FormParser, JSONParser)
-    # http_method_names = ["get", "patch", "head", "options"]
+    http_method_names = ["get", "put", "patch", "head", "options"]
 
     def get_queryset(self):
         queryset = Profile.objects.filter(user_id=self.kwargs.get("user_pk"))
@@ -75,6 +75,8 @@ class ProfileModelViewSet(ModelViewSet):
         ],
     )
     def upload(self, request, pk=None, *args, **kwargs):
+        print(request.data)
+        print(request.FILES)
         profile = Profile.objects.get(id=self.kwargs["user_pk"])
         serializer = ProfileImageSerializer(profile, data=request.data)
         if serializer.is_valid():
@@ -116,20 +118,18 @@ class SpaceModelViewSet(ModelViewSet):
     serializer_class = SpaceSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
-    # @action(
-    #     detail=False,
-    #     methods=[
-    #         "GET",
-    #     ],
-    #     permission_classes=[AllowAny],
-    # )
-    # def hosted(self, request, *args, **kwargs):
-    #     hosted_spaces = User.objects.get(
-    #         id=self.kwargs.get("user_pk")
-    #     ).hosted_spaces.all()
+    @action(
+        detail=False,
+        methods=[
+            "GET",
+        ],
+        permission_classes=[AllowAny],
+    )
+    def hosted(self, request, *args, **kwargs):
+        hosted_spaces = Space.objects.filter(host_id=kwargs.get("user_pk"))
 
-    #     serializer = SpaceSerializer(hosted_spaces)
-    #     return Response(serializer.data)
+        serializer = SpaceSerializer(hosted_spaces, many=True)
+        return Response(serializer.data)
 
     def get_serializer_context(self):
         return {"user1_id": self.kwargs.get("user_pk")}
