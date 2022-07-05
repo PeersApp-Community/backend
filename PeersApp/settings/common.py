@@ -25,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Application definition
 
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # added
     # "debug_toolbar",
+    "channels",
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
@@ -86,6 +88,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "PeersApp.wsgi.application"
+
+ASGI_APPLICATION = "PeersApp.asgi.application"
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -160,7 +164,7 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=500),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,

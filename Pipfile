@@ -18,6 +18,7 @@ twilio = "*"
 pyyaml = "*"
 coreapi = "*"
 drf-nested-routers = "*"
+channels = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
