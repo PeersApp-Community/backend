@@ -122,43 +122,41 @@ def check_phone_list(request):
     if serializer.is_valid():
         new_serializer = []
         users_phone_list = []
-        sliced_users_phone_list = []
+        sliced_users_phone_list_1 = []
+        sliced_users_phone_list_2 = []
+        users_dictionary = dict()
         users_list = User.objects.only("phone").order_by("id")
 
-        for item in users_list:
-            num = item.phone
-            users_phone_list.append(num)
+        try:
+            for item in users_list:
+                num = item.phone
+                users_phone_list.append(num)
 
-        for item in users_phone_list:
-            new = item[-8:]
-            sliced_users_phone_list.append(new)
+            for item in users_phone_list:
+                sliced_users_phone_list_1.append(str(item[-8:]))
+                sliced_users_phone_list_2.append(str(item[:-8]))
 
-        for item in serializer.data["phone_list"]:
-            try:
-                new_item = str(item)
-                digits = new_item[-8:]
+            for item in serializer.data["phone_list"]:
+                digits = str(item)[-8:]
                 new_serializer.append(digits)
-
-                if digits in users_phone_list:
+                if digits in sliced_users_phone_list_1:
                     print(True)
                     print(digits)
                 else:
                     print(False)
                     print(digits)
 
-            except:
-                print(f"==undone============")
-                pass
-        print(serializer.data)
-        print("====================")
-        print(sliced_users_phone_list)
+        except:
+            print(f"==ERRORR==ERRORR=========")
+            pass
 
-        ultimate = [new_serializer, {"default": serializer.data}]
-
-        if "15910956" in ["15910956"]:
-            print("yeahhhhhhh")
-        else:
-            print("Noooooo")
+        ultimate = [
+            new_serializer,
+            serializer.data,
+            sliced_users_phone_list_1,
+            sliced_users_phone_list_2,
+            users_phone_list,
+        ]
 
         return Response(ultimate, status=status.HTTP_200_OK)
 
