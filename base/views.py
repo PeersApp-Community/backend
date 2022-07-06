@@ -178,7 +178,7 @@ def check_phone_list(request):
 
         try:
             for item in serializer.data["phone_list"]:
-                digits = str(item)[-1:]
+                digits = str(item)[-9:]
                 person = (
                     User.objects.filter(phone__endswith=str(digits))
                     .select_related("profile")
