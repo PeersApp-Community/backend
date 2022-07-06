@@ -181,7 +181,7 @@ def check_phone_list(request):
 
         try:
             for item in serializer.data["phone_list"]:
-                digits = str(item)[-9:]
+                digits = str(item)[-1:]
                 person = (
                     User.objects.filter(phone__endswith=str(digits))
                     .select_related("profile")
@@ -199,19 +199,18 @@ def check_phone_list(request):
                         "profile__avatar",
                     )
                 )
+
                 if len(person) > 0:
-                    users_dictionary.update({item: person[0]})
-                    print(True)
+                    for person_item in person:
+                        users_dictionary.update({item: person_item})
+                        print(True)
                     print(digits)
                 else:
                     users_dictionary.update({item: "person not found"})
-                    print(False)
-                    print(digits)
 
-                for item in person:
-                    print("okay")
+
         except:
-            print(f"==ERRORR==ERRORR=========")
+            print(f"==ERRORR=PHONE---LIST=ERRORR=========")
             pass
 
         print(serializer.data)
