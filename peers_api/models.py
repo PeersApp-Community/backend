@@ -27,6 +27,7 @@ class Space(models.Model):
     )
     description = models.TextField(null=True, blank=True)
     participants = models.ManyToManyField(User, related_name="spaces")
+    admins = models.ManyToManyField(User, related_name="space_admins")
     archived = models.BooleanField(default=False)
     pinned = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)

@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from peers_api.models import Space
@@ -13,8 +12,10 @@ def add_host_to_paticipant(sender, **kwargs):
         print(space.id)
         print(space.name)
         print(space.participants.all())
+        print(space.admins.all())
         print(space1.participants.all())
         space.participants.add(space.host_id)
+        space.admins.add(space.host_id)
         space.save()
         print(kwargs["instance"].participants)
         print(space.participants.all())

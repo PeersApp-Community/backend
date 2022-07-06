@@ -19,6 +19,7 @@ pyyaml = "*"
 coreapi = "*"
 drf-nested-routers = "*"
 channels = "*"
+python-decouple = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
