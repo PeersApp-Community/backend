@@ -7,7 +7,7 @@ import dj_database_url
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = os.environ["DEBUG"]
-print(DEBUG)
+# print(DEBUG)
 ALLOWED_HOSTS = ["https://peers-app-sh.herokuapp.com"]
 
 DATABASES = {"default": dj_database_url.config()}
