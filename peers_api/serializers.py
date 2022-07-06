@@ -42,6 +42,7 @@ class SpaceSerializer(serializers.ModelSerializer):
             "description",
             "updated",
             "created",
+            "admins",
             "participants",
         ]
 
@@ -53,20 +54,30 @@ class SpaceCreateSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            "host",
+            # "host",
             "description",
+            "admins",
             "participants",
         ]
 
     # def create(self, validated_data):
-    #     user = User.objects.get(id=user_id)
-    #     return Space.objects.create(host=user, **validated_data)
 
-    # def create(self, validated_data):
-    #     user_id = self.context.get("user_id")
-    #     host = {"host_id": user_id}
-    #     validated_data.update(host)
-    #     return super().create(validated_data)
+    def create(self, validated_data):
+        new_validated_data = validated_data.copy()
+        user_id = self.context.get("user_id")
+        admins = new_validated_data.pop("admins")
+        participants = new_validated_data.pop("participants")
+        space = Space.objects.create(host_id=user_id, **new_validated_data)
+
+        space.admins.set(admins)
+        space.participants.set(participants)
+        space.admins.add(user_id)
+        space.participants.add(user_id)
+
+        for admin in admins:
+            space.participants.add(admin)
+
+        return space
 
 
 # RoomChat

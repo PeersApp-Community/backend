@@ -15,6 +15,7 @@ from .models import Otp, Profile, User
 from rest_framework.response import Response
 from .serializers import (
     LoginSerializer,
+    PhoneListSerializer,
     ProfileEditSerializer,
     ProfileSerializer,
     RefreshOTPSerializer,
@@ -109,100 +110,109 @@ class ProfileUpdateAPIView(UpdateAPIView):
             pass
 
 
-# @api_view(["PATCH"])
+# @api_view(
+#     [
+#         "POST",
+#     ]
+# )
 # @permission_classes([AllowAny])
-# def updateUserProfile(request, id):
-#     serializer = ProfileEditSerializer(data=request.data, partial=True)
-#     serializer.is_valid(raise_exception=True)
-#     user = User.objects.get(id=id)
-#     if user.id == id:
-#         user.first_name = request.data["first_name"]
-#         user.last_name = request.data["last_name"]
-#         user.save()
-#         serializer.save()
-#         print("saving")
-#         return Response(serializer.data)
-#     return ValidationError("Profile does not match")
+# def check_phone_list(request):
+#     serializer = PhoneListSerializer(data=request.data)
 
-# def get_queryset(self):
-#     user = self.request.user
+#     if serializer.is_valid():
+#         new_serializer = []
+#         users_phone_list = []
+#         sliced_users_phone_list_1 = []
+#         sliced_users_phone_list_2 = []
+#         users_dictionary = dict()
+#         users_list = User.objects.only("phone").order_by("id")
 
-#     if user.is_staff:
-#         return Profile.objects.all()
+#         try:
+#             for item in users_list:
+#                 num = item.phone
+#                 users_phone_list.append(num)
 
-#     profile_id = Profile.objects.only(
-#         'id').get(user_id=user.id)
-#     return Profile.objects.filter(profile_id=profile_id)
+#             for item in users_phone_list:
+#                 sliced_users_phone_list_1.append(str(item[-8:]))
+#                 sliced_users_phone_list_2.append(str(item[:-8]))
 
-# def get_serializer_context(self):
-#     return {"user_id": self.request.user.id}
+#             for item in serializer.data["phone_list"]:
+#                 digits = str(item)[-8:]
+#                 new_serializer.append(digits)
+#                 if digits in sliced_users_phone_list_1:
+#                     print(True)
+#                     print(digits)
+#                 else:
+#                     print(False)
+#                     print(digits)
 
-# def create(self, request, *args, **kwargs):
-#     serializer = UserCreateSerializer(
-#         data=request.data,
-#         context={'user_id': self.request.user.id})
-#     try:
-#         serializer.is_valid(raise_exception=True)
-#     user = serializer.save()
-#     serializer = OrderSerializer(order)
-#     return Response(serializer.data)
-# def get_queryset(self):
-#     return CartItem.objects.filter(cart_id=self.kwargs['cart_pk']).select_related('product')
-# def post(self, request, *args, **kwargs):
-#     id = request.user.id
-#     return self.create(request, *args, **kwargs)
+#         except:
+#             print(f"==ERRORR==ERRORR=========")
+#             pass
 
-# def update(self, request, *args, **kwargs):
-#     serializer = ProfileEditSerializer(data=request.data, partial=True)
+#         ultimate = [
+#             new_serializer,
+#             serializer.data,
+#             sliced_users_phone_list_1,
+#             sliced_users_phone_list_2,
+#             users_phone_list,
+#         ]
 
-#     serializer.is_valid(raise_exception=True)
-#     user = User.objects.get(id=kwargs["id"])
-#     if user.id == kwargs["id"]:
-#         user.first_name = request.data["first_name"]
-#         user.last_name = request.data["last_name"]
-#         user.save()
-#         serializer.save()
-#         return Response(serializer.data)
-#     return ValidationError("Profile does not match")
+#         return Response(ultimate, status=status.HTTP_200_OK)
+
+#     print(serializer.errors)
+#     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(["POST"])
-# @permission_classes([AllowAny])
-# def user_create(request):
-#     if request.method == "POST":
-#         serializer = UserCreateSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         # return Response("serializer", status=status.HTTP_201_CREATED)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+@api_view(
+    [
+        "POST",
+    ]
+)
+@permission_classes([AllowAny])
+def check_phone_list(request):
+    serializer = PhoneListSerializer(data=request.data)
 
+    if serializer.is_valid():
+        users_dictionary = {}
 
-# @api_view(["PATCH"])
-# @permission_classes([AllowAny])
-# def validate_user(request):
-#     if request.method == "PATCH":
-#         serializer = GetOtpSerializer(data=request.data, partial=True)
-#         # set partial=True to update a data partially
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(
-#             {"Validation Successful, Happy Learning"}, status=status.HTTP_200_OK
-#         )
+        try:
+            for item in serializer.data["phone_list"]:
+                digits = str(item)[-9:]
+                person = (
+                    User.objects.filter(phone__endswith=str(digits))
+                    .select_related("profile")
+                    .values(
+                        "id",
+                        "phone",
+                        "username",
+                        "email",
+                        "profile__full_name",
+                        "profile__bio",
+                        "profile__gender",
+                        "profile__institution",
+                        "profile__educational_level",
+                        "profile__course",
+                        "profile__location",
+                        "profile__avatar",
+                    )
+                )
 
+                if len(person) > 0:
+                    for person_item in person:
+                        users_dictionary.update({item: person_item})
+                        print(True)
+                    print(digits)
+                else:
+                    users_dictionary.update({item: "person not found"})
 
-# class RefreshOtpAPIView(GenericAPIView):
-#     serializer_class = RefreshOTPSerializer
-#     queryset = User
+        except:
+            print(f"==ERRORR=PHONE---LIST=ERRORR=========")
+            pass
 
-#     def post(self):
-#         print("serialize======111=============================")
-#         serializer = RefreshOtpSerializer(data=self.request.data)
-#         print("serialize=========222==========================")
-#         valid = serializer.is_valid()
-#         print("serialize============333=======================")
+        sorted_users_dictionary = dict(sorted(users_dictionary.items()))
 
-#         print("serialize============444=======================")
-#         if valid:
-#             return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(sorted_users_dictionary, status=status.HTTP_200_OK)
 
-#         return Response(status=status.HTTP_400_BAD_REQUEST)
+    print(serializer.errors)
+    return Response(status=status.HTTP_400_BAD_REQUEST)

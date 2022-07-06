@@ -146,6 +146,12 @@ class RefreshOTPSerializer(serializers.ModelSerializer):
         return value
 
 
+
+class PhoneListSerializer(serializers.Serializer):
+    phone_list = serializers.ListField()
+    
+
+    
 # ===================================================
 # ===================================================
 # ===================================================

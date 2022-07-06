@@ -4,6 +4,7 @@ from .views import (
     ProfileListAPIView,
     ProfileRetrieveAPIView,
     ProfileUpdateAPIView,
+    check_phone_list,
     login_view,
     refresh_OTP_view,
 )
@@ -22,4 +23,5 @@ urlpatterns = [
     path("profile/<int:id>/update/", ProfileUpdateAPIView.as_view()),
     path("login/", login_view),
     path("resend-otp/", refresh_OTP_view),
+    path("check-phone-list/", check_phone_list),
 ]

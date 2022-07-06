@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 admin.site.site_header = "PeersApp Admin"
@@ -28,11 +30,15 @@ urlpatterns = [
         ),
         name="PeersApp-schema",
     ),
+    path(
+        "favicon.ico",
+        RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),
+    ),
+    # path("__debug__/", include("debug_toolbar.urls")),
     # path("auth/", include("djoser.urls.jwt")),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    # path("__debug__/", include("debug_toolbar.urls")),
+# if settings.DEBUG:
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-    # urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]
+# urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]
