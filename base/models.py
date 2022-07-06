@@ -46,7 +46,7 @@ class Profile(models.Model):
         (FEMALE, "Female"),
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     full_name = models.CharField(max_length=100, null=True, blank=True)
     bio = models.CharField(max_length=100, null=True, blank=True)
     gender = models.CharField(

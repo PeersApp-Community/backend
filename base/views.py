@@ -182,8 +182,22 @@ def check_phone_list(request):
         try:
             for item in serializer.data["phone_list"]:
                 digits = str(item)[-3:]
-                person = User.objects.filter(phone__endswith=str(digits)).values(
-                    "id", "phone", "username", "profile__full_name"
+                person = (
+                    User.objects.filter(phone__endswith=str(digits))
+                    .select_related("profile")
+                    .values(
+                        "id",
+                        "phone",
+                        "username",
+                        "profile__full_name",
+                        "profile__bio",
+                        "profile__gender",
+                        "profile__institution",
+                        "profile__educational_level",
+                        "profile__course",
+                        "profile__location",
+                        "profile__avatar",
+                    )
                 )
                 if len(person) > 0:
                     users_dictionary.update({item: person[0]})
