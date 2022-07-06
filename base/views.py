@@ -174,10 +174,7 @@ def check_phone_list(request):
     serializer = PhoneListSerializer(data=request.data)
 
     if serializer.is_valid():
-        new_serializer = []
-        users_phone_list = []
         users_dictionary = {}
-        print(type(users_dictionary))
 
         try:
             for item in serializer.data["phone_list"]:
@@ -189,6 +186,7 @@ def check_phone_list(request):
                         "id",
                         "phone",
                         "username",
+                        "email",
                         "profile__full_name",
                         "profile__bio",
                         "profile__gender",
@@ -208,19 +206,13 @@ def check_phone_list(request):
                 else:
                     users_dictionary.update({item: "person not found"})
 
-
         except:
             print(f"==ERRORR=PHONE---LIST=ERRORR=========")
             pass
 
-        print(serializer.data)
-        ultimate = [
-            serializer.data,
-            users_dictionary,
-            users_phone_list,
-        ]
+        sorted_users_dictionary = dict(sorted(users_dictionary.items()))
 
-        return Response(users_dictionary, status=status.HTTP_200_OK)
+        return Response(sorted_users_dictionary, status=status.HTTP_200_OK)
 
     print(serializer.errors)
     return Response(status=status.HTTP_400_BAD_REQUEST)
