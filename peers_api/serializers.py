@@ -42,6 +42,7 @@ class SpaceSerializer(serializers.ModelSerializer):
             "description",
             "updated",
             "created",
+            "admins",
             "participants",
         ]
 
