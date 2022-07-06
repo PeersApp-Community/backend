@@ -98,7 +98,11 @@ class UserInfo(ModelViewSet):
 
 # All Spaces
 class AllSpaceModelViewSet(ModelViewSet):
-    queryset = Space.objects.filter(archived=False)
+    queryset = (
+        Space.objects.filter(archived=False)
+        .select_related("host")
+        .prefetch_related("admins", "participants")
+    )
     serializer_class = SpaceSerializer
 
     def get_serializer_class(self):
@@ -114,7 +118,11 @@ class AllSpaceModelViewSet(ModelViewSet):
 
 # Space
 class SpaceModelViewSet(ModelViewSet):
-    queryset = Space.objects.filter(archived=False)
+    queryset = (
+        Space.objects.filter(archived=False)
+        .select_related("host")
+        .prefetch_related("admins", "participants")
+    )
     serializer_class = SpaceSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
@@ -248,7 +256,7 @@ class ChatModelViewSet(ModelViewSet):
 class AllChatModelViewSet(ModelViewSet):
     serializer_class = ChatSerializer
     ordering_fields = ["updated", "created"]
-    queryset = Chat.objects.all()
+    queryset = Chat.objects.all().select_related("user1", "user2")
     http_method_names = ["get", "head", "options"]
 
 

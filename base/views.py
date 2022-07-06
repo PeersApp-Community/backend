@@ -110,6 +110,60 @@ class ProfileUpdateAPIView(UpdateAPIView):
             pass
 
 
+# @api_view(
+#     [
+#         "POST",
+#     ]
+# )
+# @permission_classes([AllowAny])
+# def check_phone_list(request):
+#     serializer = PhoneListSerializer(data=request.data)
+
+#     if serializer.is_valid():
+#         new_serializer = []
+#         users_phone_list = []
+#         sliced_users_phone_list_1 = []
+#         sliced_users_phone_list_2 = []
+#         users_dictionary = dict()
+#         users_list = User.objects.only("phone").order_by("id")
+
+#         try:
+#             for item in users_list:
+#                 num = item.phone
+#                 users_phone_list.append(num)
+
+#             for item in users_phone_list:
+#                 sliced_users_phone_list_1.append(str(item[-8:]))
+#                 sliced_users_phone_list_2.append(str(item[:-8]))
+
+#             for item in serializer.data["phone_list"]:
+#                 digits = str(item)[-8:]
+#                 new_serializer.append(digits)
+#                 if digits in sliced_users_phone_list_1:
+#                     print(True)
+#                     print(digits)
+#                 else:
+#                     print(False)
+#                     print(digits)
+
+#         except:
+#             print(f"==ERRORR==ERRORR=========")
+#             pass
+
+#         ultimate = [
+#             new_serializer,
+#             serializer.data,
+#             sliced_users_phone_list_1,
+#             sliced_users_phone_list_2,
+#             users_phone_list,
+#         ]
+
+#         return Response(ultimate, status=status.HTTP_200_OK)
+
+#     print(serializer.errors)
+#     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(
     [
         "POST",
@@ -122,43 +176,38 @@ def check_phone_list(request):
     if serializer.is_valid():
         new_serializer = []
         users_phone_list = []
-        sliced_users_phone_list_1 = []
-        sliced_users_phone_list_2 = []
-        users_dictionary = dict()
-        users_list = User.objects.only("phone").order_by("id")
+        users_dictionary = {}
+        print(type(users_dictionary))
 
         try:
-            for item in users_list:
-                num = item.phone
-                users_phone_list.append(num)
-
-            for item in users_phone_list:
-                sliced_users_phone_list_1.append(str(item[-8:]))
-                sliced_users_phone_list_2.append(str(item[:-8]))
-
             for item in serializer.data["phone_list"]:
-                digits = str(item)[-8:]
-                new_serializer.append(digits)
-                if digits in sliced_users_phone_list_1:
+                digits = str(item)[-3:]
+                person = User.objects.filter(phone__endswith=str(digits)).values(
+                    "id", "phone", "username", "profile__full_name"
+                )
+                if len(person) > 0:
+                    users_dictionary.update({item: person[0]})
                     print(True)
                     print(digits)
                 else:
+                    users_dictionary.update({item: "person not found"})
                     print(False)
                     print(digits)
 
+                for item in person:
+                    print("okay")
         except:
             print(f"==ERRORR==ERRORR=========")
             pass
 
+        print(serializer.data)
         ultimate = [
-            new_serializer,
             serializer.data,
-            sliced_users_phone_list_1,
-            sliced_users_phone_list_2,
+            users_dictionary,
             users_phone_list,
         ]
 
-        return Response(ultimate, status=status.HTTP_200_OK)
+        return Response(users_dictionary, status=status.HTTP_200_OK)
 
     print(serializer.errors)
     return Response(status=status.HTTP_400_BAD_REQUEST)
