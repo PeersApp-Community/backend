@@ -1,5 +1,5 @@
 import os
-from .common import *
+from .common import *, DEBUG
 import django_on_heroku
 import dj_database_url
 
@@ -7,7 +7,7 @@ import dj_database_url
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = os.environ["DEBUG"]
-
+print(DEBUG)
 ALLOWED_HOSTS = ["https://peers-app-sh.herokuapp.com"]
 
 DATABASES = {"default": dj_database_url.config()}
