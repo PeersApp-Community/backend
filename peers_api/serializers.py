@@ -56,6 +56,7 @@ class SpaceCreateSerializer(serializers.ModelSerializer):
             "name",
             "host",
             "description",
+            "admins",
             "participants",
         ]
 
