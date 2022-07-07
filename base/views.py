@@ -174,11 +174,12 @@ def check_phone_list(request):
     serializer = PhoneListSerializer(data=request.data)
 
     if serializer.is_valid():
-        users_dictionary = {}
+        users_found_list = []
+        users_not_found_list = []
 
         try:
             for item in serializer.data["phone_list"]:
-                digits = str(item)[-9:]
+                digits = str(item)[-2:]
                 person = (
                     User.objects.filter(phone__endswith=str(digits))
                     .select_related("profile")
@@ -197,22 +198,30 @@ def check_phone_list(request):
                         "profile__avatar",
                     )
                 )
-
+                print(person)
                 if len(person) > 0:
-                    for person_item in person:
-                        users_dictionary.update({item: person_item})
-                        print(True)
-                    print(digits)
+                    users_found_list.append(
+                        {
+                            "sent_phone_number": item,
+                            "details": [person_item for person_item in person],
+                        }
+                    )
                 else:
-                    users_dictionary.update({item: "person not found"})
+                    users_not_found_list.append(item)
 
         except:
             print(f"==ERRORR=PHONE---LIST=ERRORR=========")
             pass
 
-        sorted_users_dictionary = dict(sorted(users_dictionary.items()))
+        # sorted_users_dictionary = dict(sorted(users_dictionary.items()))
+        # sorted_users_not_found = dict(sorted(users_dictionary.items()))
+        return_info_dict = {
+            "found": users_found_list,
+            "not_found": users_not_found_list,
+        }
 
-        return Response(sorted_users_dictionary, status=status.HTTP_200_OK)
+        return Response(return_info_dict, status=status.HTTP_200_OK)
 
     print(serializer.errors)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
