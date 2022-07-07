@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 # DEBUG = False
-print(DEBUG)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # added
-    # "debug_toolbar",
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
@@ -40,7 +39,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # ...
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
     # ...
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
