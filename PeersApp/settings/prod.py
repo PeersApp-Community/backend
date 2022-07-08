@@ -8,7 +8,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = os.environ.get("DEBUG", False)
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["https://peers-app-sh.herokuapp.com"]
 
