@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from rest_framework import serializers
 from base.models import Profile, User
-from .models import Chat, ChatMsg, Space, SpaceMsg
+from .models import Chat, ChatMsg, Space, SpaceMsg, Friend
 from django.db.models import Q
 
 
@@ -121,6 +121,29 @@ class ChatCreateSerializer(serializers.ModelSerializer):
             raise ValidationError("the second user is same as first user")
 
         return super().validate(attrs)
+
+    # def save(self, **kwargs):
+    #     user1 = self.context.get("user1_id")
+    #     user2 = self.validated_data["user2"]
+    #     # friend = User.objects.get(id=user2)
+
+    #     try:
+    #         friends = Friend.objects.get(id=user1)
+    #         # user2
+    #         print("================================================================")
+    #         friends.friend_list.add(user2)
+    #         print(friends.user)
+    #         print("HI")
+    #         print(user1)
+    #         print(user2)
+    #         print("===========================================================")
+    #     except Friend.DoesNotExist:
+    #         Friend.objects.create(user=user1)
+    #         print("NONE")
+    #         print(user1 + "no")
+    #         print("===================================")
+
+    #     return super().save(**kwargs)
 
 
 # ChatMsg
