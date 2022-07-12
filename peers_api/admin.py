@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from extras.admin import SpaceTaskInline
-from .models import Chat, ChatMsg, Friend, Space, SpaceMsg, Friend
+from .models import Chat, ChatMsg, Space, SpaceMsg
 
 
 class SpaceMsgInline(admin.TabularInline):
@@ -31,9 +31,3 @@ class ChatAdmin(admin.ModelAdmin):
 class SpaceAdmin(admin.ModelAdmin):
     list_display = ["name", "id", "host", "created", "updated"]
     inlines = [SpaceMsgInline, SpaceTaskInline]
-
-
-@admin.register(Friend)
-class SpaceAdmin(admin.ModelAdmin):
-    pass
-    # list_display = ["user", "my_friends"]

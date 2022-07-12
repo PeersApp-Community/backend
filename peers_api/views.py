@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+
 # from django.db.models import Q
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import (
@@ -22,7 +23,7 @@ from base.serializers import (
     ProfileSerializer,
 )
 
-from .models import Chat, ChatMsg, Space, SpaceMsg, Friend
+from .models import Chat, ChatMsg, Space, SpaceMsg
 from .serializers import (
     ChatCreateSerializer,
     ChatMsgSerializer,
@@ -226,6 +227,7 @@ class ChatModelViewSet(ModelViewSet):
                 serializer.pop("user2")
 
             second = {"other_user": other_user}
+
             second_user_profile = Profile.objects.filter(
                 id=(second["other_user"]["id"])
             ).values(

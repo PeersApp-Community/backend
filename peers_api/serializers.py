@@ -2,6 +2,8 @@ from django.forms import ValidationError
 from rest_framework import serializers
 from base.models import Profile, User, Friend
 from .models import Chat, ChatMsg, Space, SpaceMsg
+from django.db.models import Q
+
 
 from django.db.models import Q
 
