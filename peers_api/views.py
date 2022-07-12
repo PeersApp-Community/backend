@@ -14,6 +14,7 @@ from rest_framework.parsers import (
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework import status
+from django.shortcuts import render
 
 from base.serializers import (
     ProfileEditSerializer,
@@ -21,7 +22,7 @@ from base.serializers import (
     ProfileSerializer,
 )
 
-from .models import Chat, ChatMsg, Space, SpaceMsg
+from .models import Chat, ChatMsg, Space, SpaceMsg, Friend
 from .serializers import (
     ChatCreateSerializer,
     ChatMsgSerializer,
@@ -35,6 +36,11 @@ from .serializers import (
 from base.models import Profile
 
 User = get_user_model()
+
+
+def testing(req):
+    context = {}
+    return render(req, "index.html", context)
 
 
 class ProfileModelViewSet(ModelViewSet):
@@ -205,14 +211,30 @@ class ChatModelViewSet(ModelViewSet):
             if int(serializer["user1"]["id"]) == int(current_user):
                 serializer.pop("user2")
                 serializer.pop("user1")
-                second = {"other_user": default_serializer.data.pop("user2")}
-                serializer.update(second)
+                other_user = default_serializer.data.pop("user2")
+                second = {"other_user": other_user}
 
             else:
+                other_user = default_serializer.data.pop("user1")
                 serializer.pop("user1")
                 serializer.pop("user2")
-                second = {"other_user": default_serializer.data.pop("user1")}
-                serializer.update(second)
+                second = {"other_user": other_user}
+
+            second_user_profile = Profile.objects.filter(
+                id=(second["other_user"]["id"])
+            ).values(
+                "full_name",
+                "bio",
+                "gender",
+                "institution",
+                "educational_level",
+                "course",
+                "location",
+                "avatar",
+            )
+            second_user_new_profile = list(second_user_profile)[0]
+            other_user.update(second_user_new_profile)
+            serializer.update(second)
 
         except:
             print(f"Something is wrong with user {current_user}'s chat list")
@@ -237,13 +259,29 @@ class ChatModelViewSet(ModelViewSet):
         try:
             for item in serializer:
                 if int(item["user1"]["id"]) == int(current_user):
-                    second = {"other_user": item.pop("user2")}
+                    other_user = item.pop("user2")
+                    second = {"other_user": other_user}
                     item.pop("user1")
-                    item.update(second)
                 else:
-                    second = {"other_user": item.pop("user1")}
+                    other_user = item.pop("user1")
+                    second = {"other_user": other_user}
                     item.pop("user2")
-                    item.update(second)
+
+                second_user_profile = Profile.objects.filter(
+                    id=(second["other_user"]["id"])
+                ).values(
+                    "full_name",
+                    "bio",
+                    "gender",
+                    "institution",
+                    "educational_level",
+                    "course",
+                    "location",
+                    "avatar",
+                )
+                second_user_new_profile = list(second_user_profile)[0]
+                other_user.update(second_user_new_profile)
+                item.update(second)
 
         except:
             print(f"Something is wrong with {current_user}'s chat list")

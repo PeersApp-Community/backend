@@ -7,14 +7,14 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
-
+from peers_api.views import testing
 
 admin.site.site_header = "PeersApp Admin"
 admin.site.index_title = "Administrator"
 
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="index.html"), name="index"),
+    path("", testing, name="index"),
     path("peers-admin/", admin.site.urls),
     path("api/", include("peers_api.urls")),
     path("base/", include("base.urls")),
