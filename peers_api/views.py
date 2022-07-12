@@ -23,7 +23,7 @@ from base.serializers import (
     ProfileSerializer,
 )
 
-from .models import Chat, ChatMsg, Space, SpaceMsg
+from .models import Chat, ChatMsg, Space, SpaceMsg, Friend
 from .serializers import (
     ChatCreateSerializer,
     ChatMsgSerializer,

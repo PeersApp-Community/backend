@@ -5,9 +5,6 @@ from .models import Chat, ChatMsg, Space, SpaceMsg
 from django.db.models import Q
 
 
-from django.db.models import Q
-
-
 class UserInfoSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
