@@ -2,6 +2,7 @@ from django.forms import ValidationError
 from rest_framework import serializers
 from base.models import Profile, User, Friend
 from .models import Chat, ChatMsg, Space, SpaceMsg
+
 from django.db.models import Q
 
 
@@ -17,9 +18,6 @@ class SpaceSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Space
         fields = ["id", "name", "host", "created", "updated"]
-
-
-# Organisation
 
 
 # Room

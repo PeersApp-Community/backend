@@ -22,7 +22,7 @@ from base.serializers import (
     ProfileSerializer,
 )
 
-from .models import Chat, ChatMsg, Space, SpaceMsg
+from .models import Chat, ChatMsg, Space, SpaceMsg, Friend
 from .serializers import (
     ChatCreateSerializer,
     ChatMsgSerializer,
@@ -217,12 +217,15 @@ class ChatModelViewSet(ModelViewSet):
                 serializer.pop("user2")
                 serializer.pop("user1")
                 other_user = default_serializer.data.pop("user2")
+
+                second = {"other_user": other_user}
+
             else:
                 other_user = default_serializer.data.pop("user1")
                 serializer.pop("user1")
                 serializer.pop("user2")
-            second = {"other_user": other_user}
 
+            second = {"other_user": other_user}
             second_user_profile = Profile.objects.filter(
                 id=(second["other_user"]["id"])
             ).values(
