@@ -1,6 +1,5 @@
-from tkinter.messagebox import RETRY
 from rest_framework.response import Response
-from django.db.models import Q
+# from django.db.models import Q
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import (
     AllowAny,
