@@ -23,6 +23,17 @@ class StoryModelViewSet(ModelViewSet):
         return {"user_id": self.kwargs.get("user_pk")}
 
 
+# Story
+class FriendStoryModelViewSet(ModelViewSet):
+    serializer_class = StorySerializer
+
+    def get_queryset(self):
+        return Story.objects.filter(user_id=self.kwargs["user_pk"])
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+
 # All Story
 class AllStoryModelViewSet(ModelViewSet):
     parser_classes = (MultiPartParser, FormParser, JSONParser)

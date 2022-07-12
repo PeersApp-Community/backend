@@ -26,8 +26,8 @@ class Space(models.Model):
         User, on_delete=models.SET_NULL, null=True, related_name="hosted_spaces"
     )
     description = models.TextField(null=True, blank=True)
-    participants = models.ManyToManyField(User, related_name="spaces")
-    admins = models.ManyToManyField(User, related_name="space_admins")
+    participants = models.ManyToManyField(User, related_name="spaces", blank=True)
+    admins = models.ManyToManyField(User, related_name="space_admins", blank=True)
     archived = models.BooleanField(default=False)
     pinned = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -98,12 +98,6 @@ class ChatMsg(models.Model):
         return f"{self.user} -- { self.message}"
 
 
-class Friend(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="friends")
-    friend_list = models.ManyToManyField(User)
-
-    def __str__(self):
-        return f"{self.user}"
 
 
 # class Friend(models.Model):

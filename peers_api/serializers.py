@@ -1,24 +1,18 @@
 from django.forms import ValidationError
 from rest_framework import serializers
-from base.models import Profile, User
-from .models import Chat, ChatMsg, Space, SpaceMsg, Friend
+from base.models import Profile, User, Friend
+from .models import Chat, ChatMsg, Space, SpaceMsg
 from django.db.models import Q
 
 
-class UserSimpleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["id", "email", "phone", "username"]
-
-
-class UserInfoSimpleerializer(serializers.ModelSerializer):
+class UserInfoSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "username", "email", "phone"]
 
 
 class SpaceSimpleSerializer(serializers.ModelSerializer):
-    host = UserSimpleSerializer()
+    host = UserInfoSimpleSerializer()
 
     class Meta:
         model = Space
@@ -30,8 +24,8 @@ class SpaceSimpleSerializer(serializers.ModelSerializer):
 
 # Room
 class SpaceSerializer(serializers.ModelSerializer):
-    host = UserSimpleSerializer()
-    participants = UserSimpleSerializer(many=True)
+    host = UserInfoSimpleSerializer()
+    participants = UserInfoSimpleSerializer(many=True)
 
     class Meta:
         model = Space
@@ -89,13 +83,28 @@ class SpaceMsgSerializer(serializers.ModelSerializer):
 
 # FriendChat
 class ChatSerializer(serializers.ModelSerializer):
-    user1 = UserSimpleSerializer()
-    user2 = UserSimpleSerializer()
+    user1 = UserInfoSimpleSerializer()
+    user2 = UserInfoSimpleSerializer()
 
     class Meta:
         model = Chat
-        fields = ["id", "user1", "user2", "updated", "created", "archived"]
-        depth = 3
+        fields = [
+            "id",
+            "user1",
+            "user2",
+            "updated",
+            "created",
+            "archived",
+            "pinned",
+            "deleted",
+            "retrieved",
+        ]
+
+
+class ChatPatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = ["archived", "pinned", "deleted", "retrieved"]
 
 
 class ChatCreateSerializer(serializers.ModelSerializer):
@@ -122,28 +131,18 @@ class ChatCreateSerializer(serializers.ModelSerializer):
 
         return super().validate(attrs)
 
-    # def save(self, **kwargs):
-    #     user1 = self.context.get("user1_id")
-    #     user2 = self.validated_data["user2"]
-    #     # friend = User.objects.get(id=user2)
+    def save(self, **kwargs):
+        user1 = self.context.get("user1_id")
+        user2 = self.validated_data["user2"]
 
-    #     try:
-    #         friends = Friend.objects.get(id=user1)
-    #         # user2
-    #         print("================================================================")
-    #         friends.friend_list.add(user2)
-    #         print(friends.user)
-    #         print("HI")
-    #         print(user1)
-    #         print(user2)
-    #         print("===========================================================")
-    #     except Friend.DoesNotExist:
-    #         Friend.objects.create(user=user1)
-    #         print("NONE")
-    #         print(user1 + "no")
-    #         print("===================================")
+        try:
+            friends = Friend.objects.get(id=user1)
+            friends.friend_list.add(user2)
+        except Friend.DoesNotExist:
+            Friend.objects.create(user_id=User.objects.get(id=user1), id=user1)
+            print("CREATED NEW FRIEND_LIST")
 
-    #     return super().save(**kwargs)
+        return super().save(**kwargs)
 
 
 # ChatMsg
@@ -152,6 +151,7 @@ class ChatMsgSerializer(serializers.ModelSerializer):
         model = ChatMsg
         fields = [
             "id",
+            "user_id",
             "file",
             "message",
             "created",
@@ -175,7 +175,7 @@ class ChatMsgSerializer(serializers.ModelSerializer):
 
 
 class ProfileInlineSerializer(serializers.ModelSerializer):
-    user = UserSimpleSerializer()
+    user = UserInfoSimpleSerializer()
 
     class Meta:
         model = Profile

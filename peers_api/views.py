@@ -1,3 +1,4 @@
+from tkinter.messagebox import RETRY
 from rest_framework.response import Response
 from django.db.models import Q
 from django.contrib.auth import get_user_model
@@ -22,16 +23,17 @@ from base.serializers import (
     ProfileSerializer,
 )
 
-from .models import Chat, ChatMsg, Space, SpaceMsg, Friend
+from .models import Chat, ChatMsg, Space, SpaceMsg
 from .serializers import (
     ChatCreateSerializer,
     ChatMsgSerializer,
+    ChatPatchSerializer,
     ChatSerializer,
     ProfileInlineSerializer,
     SpaceCreateSerializer,
     SpaceMsgSerializer,
     SpaceSerializer,
-    UserInfoSimpleerializer,
+    UserInfoSimpleSerializer,
 )
 from base.models import Profile
 
@@ -94,7 +96,7 @@ class ProfileModelViewSet(ModelViewSet):
 
 class UserInfo(ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserInfoSimpleerializer
+    serializer_class = UserInfoSimpleSerializer
     http_method_names = ["get", "head", "options"]
 
     # permission_classes = [
@@ -124,11 +126,11 @@ class AllSpaceModelViewSet(ModelViewSet):
 
 # Space
 class SpaceModelViewSet(ModelViewSet):
-    queryset = (
-        Space.objects.filter(archived=False)
-        .select_related("host")
-        .prefetch_related("admins", "participants")
-    )
+    # queryset = (
+    #     Space.objects.filter(archived=False)
+    #     .select_related("host")
+    #     .prefetch_related("admins", "participants")
+    # )
     serializer_class = SpaceSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
@@ -149,7 +151,7 @@ class SpaceModelViewSet(ModelViewSet):
         return {"user_id": self.kwargs.get("user_pk")}
 
     def get_queryset(self):
-        queryset = User.objects.get(id=self.kwargs.get("user_pk")).spaces.all()
+        queryset = User.objects.get(id=self.kwargs.get("user_pk")).spaces
         # queryset = queryset.filter(archived=False)
         return queryset
 
@@ -197,6 +199,8 @@ class ChatModelViewSet(ModelViewSet):
         try:
             if self.request.method == "GET":
                 return ChatSerializer
+            if self.request.method == "PATCH":
+                return ChatPatchSerializer
             return ChatCreateSerializer
         except:
             pass
@@ -219,7 +223,7 @@ class ChatModelViewSet(ModelViewSet):
                 serializer.pop("user1")
                 serializer.pop("user2")
             second = {"other_user": other_user}
-            
+
             second_user_profile = Profile.objects.filter(
                 id=(second["other_user"]["id"])
             ).values(

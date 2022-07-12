@@ -81,3 +81,11 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return f"{self.full_name}"
+
+
+class Friend(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="friends")
+    friend_list = models.ManyToManyField(User, blank=True)
+
+    def __str__(self):
+        return f"{self.user}"

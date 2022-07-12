@@ -1,6 +1,6 @@
 from django.contrib import admin
 from extras.admin import LibraryInline, MyTaskInline, StoryInline
-from .models import User, Profile, Otp
+from .models import User, Profile, Otp, Friend
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 from django.utils.html import format_html
@@ -93,3 +93,7 @@ class ProfileAdmin(admin.ModelAdmin):
         "course",
         "updated",
     ]
+
+@admin.register(Friend)
+class SpaceAdmin(admin.ModelAdmin):
+    list_display = ["user", "id", "user_id"]
