@@ -175,10 +175,12 @@ class SpaceMsgModelViewSet(ModelViewSet):
 class ChatModelViewSet(ModelViewSet):
     serializer_class = ChatSerializer
     ordering_fields = ["updated", "created"]
-    http_method_names = ["get", "post", "delete", "head", "options"]
+    http_method_names = ["get", "post", "patch", "delete", "head", "options"]
 
     def get_queryset(self):
-        queryset = Chat.objects.by_user(user=self.kwargs.get("user_pk"))
+        queryset = Chat.objects.by_user(user=self.kwargs.get("user_pk")).select_related(
+            "user1", "user2"
+        )
         # .prefetch_related("chat_msgs")
         # queryset = Chat.objects.filter(
         #     Q(sender_id=self.kwargs.get("user_pk"))
@@ -212,14 +214,12 @@ class ChatModelViewSet(ModelViewSet):
                 serializer.pop("user2")
                 serializer.pop("user1")
                 other_user = default_serializer.data.pop("user2")
-                second = {"other_user": other_user}
-
             else:
                 other_user = default_serializer.data.pop("user1")
                 serializer.pop("user1")
                 serializer.pop("user2")
-                second = {"other_user": other_user}
-
+            second = {"other_user": other_user}
+            
             second_user_profile = Profile.objects.filter(
                 id=(second["other_user"]["id"])
             ).values(
@@ -257,17 +257,17 @@ class ChatModelViewSet(ModelViewSet):
         current_user = self.kwargs.get("user_pk")
 
         try:
+            profiles = Profile.objects.all()
             for item in serializer:
                 if int(item["user1"]["id"]) == int(current_user):
                     other_user = item.pop("user2")
-                    second = {"other_user": other_user}
                     item.pop("user1")
                 else:
                     other_user = item.pop("user1")
-                    second = {"other_user": other_user}
                     item.pop("user2")
 
-                second_user_profile = Profile.objects.filter(
+                second = {"other_user": other_user}
+                second_user_profile = profiles.filter(
                     id=(second["other_user"]["id"])
                 ).values(
                     "full_name",
