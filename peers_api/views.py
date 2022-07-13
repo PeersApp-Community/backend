@@ -188,7 +188,7 @@ class ChatModelViewSet(ModelViewSet):
     def archive(self, request, *args, **kwargs):
         archived = (
             Chat.objects.by_user(user=self.kwargs.get("user_pk"))
-            .filter(archived=True)
+            .filter(archived=True, deleted=False)
             .select_related("user1", "user2")
         )
         default_serializer = ChatSerializer(archived, many=True)
