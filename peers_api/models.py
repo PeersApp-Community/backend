@@ -55,7 +55,7 @@ class SpaceMsg(models.Model):
     retrieved = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ["-updated", "-created"]
+        ordering = ["pinned", "-updated", "-created"]
 
     def __str__(self):
         return f"{self.author.email}"
@@ -96,6 +96,7 @@ class ChatMsg(models.Model):
 
     def __str__(self):
         return f"{self.user} -- { self.message}"
+
 
 # class Friend(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="friends")

@@ -14,7 +14,6 @@ from rest_framework.parsers import (
 )
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
-from rest_framework import status
 from django.shortcuts import render
 
 from base.serializers import (
@@ -179,15 +178,114 @@ class ChatModelViewSet(ModelViewSet):
     ordering_fields = ["updated", "created"]
     http_method_names = ["get", "post", "patch", "delete", "head", "options"]
 
-    def get_queryset(self):
-        queryset = Chat.objects.by_user(user=self.kwargs.get("user_pk")).select_related(
-            "user1", "user2"
+    @action(
+        detail=False,
+        methods=[
+            "GET",
+        ],
+        permission_classes=[AllowAny],
+    )
+    def archive(self, request, *args, **kwargs):
+        archived = (
+            Chat.objects.by_user(user=self.kwargs.get("user_pk"))
+            .filter(archived=True)
+            .select_related("user1", "user2")
         )
-        # .prefetch_related("chat_msgs")
-        # queryset = Chat.objects.filter(
-        #     Q(sender_id=self.kwargs.get("user_pk"))
-        #     | Q(receiver_id=self.kwargs.get("user_pk"))
-        # )
+        default_serializer = ChatSerializer(archived, many=True)
+        serializer = default_serializer.data.copy()
+
+        current_user = self.kwargs.get("user_pk")
+
+        try:
+            profiles = Profile.objects.all()
+            for item in serializer:
+                if int(item["user1"]["id"]) == int(current_user):
+                    other_user = item.pop("user2")
+                    item.pop("user1")
+                else:
+                    other_user = item.pop("user1")
+                    item.pop("user2")
+
+                second = {"other_user": other_user}
+                second_user_profile = profiles.filter(
+                    id=(second["other_user"]["id"])
+                ).values(
+                    "full_name",
+                    "bio",
+                    "gender",
+                    "institution",
+                    "educational_level",
+                    "course",
+                    "location",
+                    "avatar",
+                )
+                second_user_new_profile = list(second_user_profile)[0]
+                other_user.update(second_user_new_profile)
+                item.update(second)
+
+        except:
+            print(f"Something is wrong with {current_user}'s chat list")
+            pass
+
+        return Response(serializer)
+
+    @action(
+        detail=False,
+        methods=[
+            "GET",
+        ],
+        permission_classes=[AllowAny],
+    )
+    def deleted(self, request, *args, **kwargs):
+        deleted_chats = (
+            Chat.objects.by_user(user=self.kwargs.get("user_pk"))
+            .filter(deleted=True)
+            .select_related("user1", "user2")
+        )
+        default_serializer = ChatSerializer(deleted_chats, many=True)
+        serializer = default_serializer.data.copy()
+
+        current_user = self.kwargs.get("user_pk")
+
+        try:
+            profiles = Profile.objects.all()
+            for item in serializer:
+                if int(item["user1"]["id"]) == int(current_user):
+                    other_user = item.pop("user2")
+                    item.pop("user1")
+                else:
+                    other_user = item.pop("user1")
+                    item.pop("user2")
+
+                second = {"other_user": other_user}
+                second_user_profile = profiles.filter(
+                    id=(second["other_user"]["id"])
+                ).values(
+                    "full_name",
+                    "bio",
+                    "gender",
+                    "institution",
+                    "educational_level",
+                    "course",
+                    "location",
+                    "avatar",
+                )
+                second_user_new_profile = list(second_user_profile)[0]
+                other_user.update(second_user_new_profile)
+                item.update(second)
+
+        except:
+            print(f"Something is wrong with {current_user}'s chat list")
+            pass
+
+        return Response(serializer)
+
+    def get_queryset(self):
+        queryset = (
+            Chat.objects.by_user(user=self.kwargs.get("user_pk"))
+            .filter(archived=False, deleted=False)
+            .select_related("user1", "user2")
+        )
         return queryset
 
     def get_serializer_context(self):
