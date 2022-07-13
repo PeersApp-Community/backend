@@ -5,11 +5,20 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
+    ONLINE = "ON"
+    OFFLINE = "OFF"
+
+    CHOICE = [
+        (ONLINE, "ONLINE"),
+        (OFFLINE, "OFFLINE"),
+    ]
+
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15, unique=True)
     is_phone_verified = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+    online = models.CharField(max_length=7, choices=CHOICE, default=OFFLINE)
 
     USERNAME_FIELD = "phone"
     REQUIRED_FIELDS = ["username", "email"]
