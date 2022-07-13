@@ -8,6 +8,8 @@ from .views import (
     SpaceModelViewSet,
     SpaceMsgModelViewSet,
     UserInfo,
+    ReplyModelViewSet,
+    ThreadModelViewSet,
 )
 from extras.views import AllStoryModelViewSet, StoryModelViewSet
 
@@ -22,7 +24,7 @@ router.register("users", UserInfo, basename="users")
 router.register("all-chats", AllChatModelViewSet, basename="chats")
 router.register("all-spaces", AllSpaceModelViewSet)
 router.register("all-stories", AllStoryModelViewSet)
-# router.register("room-msg", SpaceMsgModelViewSet)
+# router.register("msg", ThreadModelViewSet)
 # router.register("chat-msg", ChatMsgModelViewSet)
 
 
@@ -51,8 +53,25 @@ space_router = routers.NestedDefaultRouter(users_router, "spaces", lookup="space
 space_router.register("msgs", SpaceMsgModelViewSet, basename="space-msgs")
 
 
+# SpaceMsgs
+spaceMsg_router = routers.NestedDefaultRouter(space_router, "msgs", lookup="msg")
+spaceMsg_router.register("thread", ThreadModelViewSet, basename="msg-thread")
+
+
+# Thread
+thread_router = routers.NestedDefaultRouter(spaceMsg_router, "thread", lookup="thread")
+thread_router.register("replies", ReplyModelViewSet, basename="reply")
+
+
 # Profile
 # profile_router = routers.NestedDefaultRouter(users_router, "profiles", lookup="profile")
 # profile_router.register("posts", ChatMsgModelViewSet, basename="space-post")
 
-urlpatterns = router.urls + users_router.urls + chats_router.urls + space_router.urls
+urlpatterns = (
+    router.urls
+    + users_router.urls
+    + chats_router.urls
+    + space_router.urls
+    + spaceMsg_router.urls
+    + thread_router.urls
+)

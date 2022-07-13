@@ -42,10 +42,10 @@ class Space(models.Model):
 
 
 class SpaceMsg(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="room_msgs")
-    room = models.ForeignKey(Space, on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="room_msgs")
+    space = models.ForeignKey(Space, on_delete=models.CASCADE)
     message = models.TextField()
-    file = models.FileField(upload_to="rooms/", null=True, blank=True)
+    file = models.FileField(upload_to="spaces/", null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     pinned = models.BooleanField(default=False)
@@ -58,7 +58,28 @@ class SpaceMsg(models.Model):
         ordering = ["pinned", "-updated", "-created"]
 
     def __str__(self):
-        return f"{self.author.email}"
+        return f"{self.sender.username}"
+
+
+class SpaceThread(models.Model):
+    thread_message = models.OneToOneField(
+        SpaceMsg, on_delete=models.CASCADE, related_name="threads"
+    )
+
+    def __str__(self):
+        return f"{self.thread_message.message}"
+
+
+class Reply(models.Model):
+    thread = models.ForeignKey(
+        SpaceThread, on_delete=models.CASCADE, related_name="replies"
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="replies")
+    message = models.TextField()
+    file = models.FileField(upload_to="replies/", null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username}"
 
 
 class Chat(models.Model):
@@ -69,6 +90,7 @@ class Chat(models.Model):
     pinned = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     retrieved = models.BooleanField(default=False)
+    stared = models.BooleanField(default=False)
     archived = models.BooleanField(default=False)
 
     objects = ChatManager()
@@ -83,7 +105,7 @@ class Chat(models.Model):
 
 class ChatMsg(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="chat_msgs")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.CharField(max_length=255, null=True, blank=True)
     file = models.FileField(upload_to="chats/% Y/% m/% d/", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -95,9 +117,4 @@ class ChatMsg(models.Model):
     retrieved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.user} -- { self.message}"
-
-
-# class Friend(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="friends")
-#     my_friends = models.ForeignKey(User, on_delete=models.CASCADE)
+        return f"{self.sender} -- { self.message}"

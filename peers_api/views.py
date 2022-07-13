@@ -12,6 +12,7 @@ from rest_framework.parsers import (
     FormParser,
     JSONParser,
 )
+from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from django.shortcuts import render
@@ -22,16 +23,19 @@ from base.serializers import (
     ProfileSerializer,
 )
 
-from .models import Chat, ChatMsg, Space, SpaceMsg
+from .models import Chat, ChatMsg, Reply, Space, SpaceMsg, SpaceThread
 from .serializers import (
     ChatCreateSerializer,
+    ChatMsgPatchSerializer,
     ChatMsgSerializer,
     ChatPatchSerializer,
     ChatSerializer,
     ProfileInlineSerializer,
+    ReplySerializer,
     SpaceCreateSerializer,
     SpaceMsgSerializer,
     SpaceSerializer,
+    ThreadSerializer,
     UserInfoSimpleSerializer,
 )
 from base.models import Profile
@@ -78,7 +82,7 @@ class ProfileModelViewSet(ModelViewSet):
     @action(
         detail=True,
         methods=[
-            "put",
+            "PUT",
         ],
     )
     def upload(self, request, pk=None, *args, **kwargs):
@@ -134,7 +138,7 @@ class SpaceModelViewSet(ModelViewSet):
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     @action(
-        detail=False,
+        detail=True,
         methods=[
             "GET",
         ],
@@ -180,9 +184,7 @@ class ChatModelViewSet(ModelViewSet):
 
     @action(
         detail=False,
-        methods=[
-            "GET",
-        ],
+        methods=["GET", "PATCH"],
         permission_classes=[AllowAny],
     )
     def archive(self, request, *args, **kwargs):
@@ -231,9 +233,7 @@ class ChatModelViewSet(ModelViewSet):
 
     @action(
         detail=False,
-        methods=[
-            "GET",
-        ],
+        methods=["GET", "PATCH"],
         permission_classes=[AllowAny],
     )
     def deleted(self, request, *args, **kwargs):
@@ -406,16 +406,66 @@ class AllChatModelViewSet(ModelViewSet):
 
 # FriendChatMsgs
 class ChatMsgModelViewSet(ModelViewSet):
-    queryset = ChatMsg.objects.all()
     serializer_class = ChatMsgSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     def get_queryset(self):
-        queryset = ChatMsg.objects.filter(chat_id=self.kwargs.get("chat_pk"))
+        queryset = ChatMsg.objects.filter(
+            chat_id=self.kwargs.get("chat_pk"), deleted=False
+        )
         return queryset
 
     def get_serializer_context(self):
         return {
             "chat_id": self.kwargs.get("chat_pk"),
             "user_id": self.kwargs.get("user_pk"),
+        }
+
+    @action(
+        detail=False,
+        methods=["GET", "PUT"],
+        permission_classes=[AllowAny],
+    )
+    def deleted(self, request, *args, **kwargs):
+        deleted_chat_msgs = ChatMsg.objects.filter(
+            chat_id=self.kwargs.get("chat_pk"), deleted=True
+        )
+        if request.method == "GET":
+            serializer = ChatMsgSerializer(deleted_chat_msgs, many=True)
+            return Response(serializer.data)
+        elif (
+            request.method == "PUT"
+            or request.method == "PATCH"
+            or request.method == "POST"
+        ):
+            serializer = ChatMsgPatchSerializer(deleted_chat_msgs, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
+
+
+# ThreadModelViewSet
+class ThreadModelViewSet(ModelViewSet):
+    serializer_class = ThreadSerializer
+
+    def get_queryset(self):
+        queryset = SpaceThread.objects.filter(id=self.kwargs.get("msg_pk"))
+        return queryset
+
+
+# ReplyModelViewSet
+class ReplyModelViewSet(ModelViewSet):
+    serializer_class = ReplySerializer
+
+    def get_queryset(self):
+        print(self.kwargs)
+        queryset = Reply.objects.filter(thread_id=self.kwargs.get("msg_pk")).select_related("thread")
+        return queryset
+
+    def get_serializer_context(self):
+        print(self.kwargs)
+        return {
+            "msg_id": self.kwargs.get("msg_pk"),
+            "user_id": self.kwargs.get("user_pk"),
+            "thread_id": self.kwargs.get("thread_pk"),
         }

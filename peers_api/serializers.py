@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from rest_framework import serializers
 from base.models import Profile, User, Friend
-from .models import Chat, ChatMsg, Space, SpaceMsg
+from .models import Chat, ChatMsg, Reply, Space, SpaceMsg, SpaceThread
 from django.db.models import Q
 
 
@@ -45,7 +45,6 @@ class SpaceCreateSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            # "host",
             "description",
             "admins",
             "participants",
@@ -75,7 +74,19 @@ class SpaceCreateSerializer(serializers.ModelSerializer):
 class SpaceMsgSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpaceMsg
-        fields = ["id", "author", "room", "message"]
+        fields = [
+            "id",
+            "sender",
+            "space",
+            "message",
+            "file",
+            "pinned",
+            "deleted",
+            "updated",
+            "created",
+            "seen",
+            "stared",
+        ]
 
 
 # FriendChat
@@ -148,13 +159,14 @@ class ChatMsgSerializer(serializers.ModelSerializer):
         model = ChatMsg
         fields = [
             "id",
-            "user_id",
+            "sender_id",
             "file",
             "message",
             "created",
             "updated",
             "seen",
             "pinned",
+            "stared",
             "stared",
             "deleted",
             "retrieved",
@@ -167,8 +179,14 @@ class ChatMsgSerializer(serializers.ModelSerializer):
         chat_id = self.context.get("chat_id")
         user_id = self.context.get("user_id")
         return ChatMsg.objects.create(
-            chat_id=chat_id, user_id=user_id, **validated_data
+            chat_id=chat_id, sender_id=user_id, **validated_data
         )
+
+
+class ChatMsgPatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChatMsg
+        fields = ["id", "pinned", "deleted"]
 
 
 class ProfileInlineSerializer(serializers.ModelSerializer):
@@ -202,3 +220,15 @@ class ProfileInlineSerializer(serializers.ModelSerializer):
     #         return super().save(**kwargs)
     #     except:
     #         raise ValueError("error")
+
+
+class ThreadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SpaceThread
+        fields = ["id", "thread_message_id"]
+
+
+class ReplySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reply
+        fields = "__all__"

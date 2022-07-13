@@ -22,22 +22,54 @@ class Story(models.Model):
         ordering = ["-updated", "-created"]
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    file = models.FileField(upload_to="status", null=True, blank=True)
+    link = models.URLField()
+    category = models.ManyToManyField(Category, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    pinned = models.BooleanField(default=False)
+    private = models.BooleanField(default=True)
+
+
 class Library(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         related_name="library",
     )
-    file = models.FileField(upload_to="status", null=True, blank=True)
-    link = models.URLField()
+    books = models.ManyToManyField(Book, blank=True)
+
+
+# PRIORITY_CHOICES PRIORITY_CHOICES PRIORITY_CHOICES
+# PRIORITY_CHOICES PRIORITY_CHOICES PRIORITY_CHOICES
+HIGH = "H"
+MEDIUM = "M"
+LOW = "L"
+
+PRIORITY_CHOICES = [
+    (HIGH, "HIGH"),
+    (MEDIUM, "MEDIUM"),
+    (LOW, "LOW"),
+]
 
 
 class SpaceTask(models.Model):
     space = models.ForeignKey(Space, on_delete=models.CASCADE, related_name="tasks")
-    title = models.CharField(max_length=200)
-    updated = models.DateTimeField(auto_now=True)
+    task = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     done = models.BooleanField(default=False)
+    priority = models.CharField(max_length=15, choices=PRIORITY_CHOICES, default=MEDIUM)
+
+    class Meta:
+        ordering = ["-updated", "-created"]
 
     def __str__(self):
         return f"{self.title}"
@@ -45,10 +77,14 @@ class SpaceTask(models.Model):
 
 class MyTask(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="mytasks")
-    title = models.CharField(max_length=200)
+    task = models.CharField(max_length=200)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     done = models.BooleanField(default=False)
+    priority = models.CharField(max_length=15, choices=PRIORITY_CHOICES, default=MEDIUM)
+
+    class Meta:
+        ordering = ["-updated", "-created"]
 
     def __str__(self):
         return f"{self.title}"

@@ -1,22 +1,12 @@
-# from django.conf import settings
-# from django.db.models.signals import post_save
-# from django.dispatch import receiver
-# from peers_api.models import Space
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from peers_api.models import SpaceMsg, SpaceThread
 
 
-# @receiver(post_save, sender=Space)
-# def add_host_to_paticipant(sender, **kwargs):
-#     if kwargs["created"]:
-#         space = kwargs["instance"]
-#         # space1 = Space.objects.get(id=space.id)
-#         # print("adding host")
-#         # print(space.id)
-#         # print(space.name)
-#         # print(space.participants.all())
-#         # print(space1.admins.all())
-#         # space.participants.add(space.host_id)
-#         # space.admins.add(space.host_id)
-#         # space.save()
-#         # print(kwargs["instance"].participants)
-#         # print(space.participants.all())
-#         print("host added")
+@receiver(post_save, sender=SpaceMsg)
+def add_host_to_paticipant(sender, **kwargs):
+    if kwargs["created"]:
+        msg = kwargs["instance"]
+        SpaceThread.objects.create(thread_message_id=msg.id, id=msg.id)
+        print("Thread Created")
