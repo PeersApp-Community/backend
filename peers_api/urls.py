@@ -16,7 +16,15 @@ from .views import (
     ArcSpaceModelViewSet,
     ArcChatModelViewSet,
 )
-from extras.views import AllStoryModelViewSet, StoryModelViewSet
+from extras.views import (
+    BookModelViewSet,
+    AllStoryModelViewSet,
+    StoryModelViewSet,
+    SpaceTaskModelViewSet,
+    LibraryModelViewSet,
+    MyTaskModelViewSet,
+    GenreModelViewSet,
+)
 
 # from base.models import Profile
 # from base.views import ProfileViewSet
@@ -24,11 +32,13 @@ from extras.views import AllStoryModelViewSet, StoryModelViewSet
 
 router = routers.DefaultRouter()
 
-
 router.register("users", UserInfo, basename="users")
 router.register("all-chats", AllChatModelViewSet, basename="chats")
 router.register("all-spaces", AllSpaceModelViewSet)
 router.register("all-stories", AllStoryModelViewSet)
+router.register("sptasks", SpaceTaskModelViewSet, basename="sptask")
+router.register("mytasks", MyTaskModelViewSet, basename="mytask")
+router.register("genre", GenreModelViewSet, basename="genre")
 # router.register("msg", ThreadModelViewSet)
 # router.register("chat-msg", ChatMsgModelViewSet)
 
@@ -40,6 +50,7 @@ spaces_router.register("tasks", ProfileModelViewSet, basename="space-task")
 
 
 users_router = routers.NestedDefaultRouter(router, "users", lookup="user")
+users_router.register("lib", LibraryModelViewSet, basename="lib")
 users_router.register("chats", ChatModelViewSet, basename="user-chats")
 users_router.register("arc-chats", ArcChatModelViewSet, basename="user-arc-chats")
 users_router.register("spaces", SpaceModelViewSet, basename="user-spaces")
@@ -49,6 +60,9 @@ users_router.register("profile", ProfileModelViewSet, basename="user-profile")
 users_router.register("library", ProfileModelViewSet, basename="user-library")
 users_router.register("tasks", ProfileModelViewSet, basename="user-task")
 
+# Nested
+library_router = routers.NestedDefaultRouter(users_router, "lib", lookup="lib")
+library_router.register("books", BookModelViewSet, basename="lib-books")
 
 # chats
 chats_router = routers.NestedDefaultRouter(users_router, "chats", lookup="chat")
@@ -116,4 +130,5 @@ urlpatterns += (
     + thread_router.urls
     + arc_space_router.urls
     + arc_spaceMsg_router.urls
+    + library_router.urls
 )

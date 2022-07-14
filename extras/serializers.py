@@ -26,21 +26,21 @@ class StorySerializer(serializers.ModelSerializer):
 class LibrarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Library
-        fields = ["__all__"]
+        fields = "__all__"
 
 
 # MyTaskSerializer
 class MyTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyTask
-        fields = ["__all__"]
+        fields = "__all__"
 
 
 # BookSerializer
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ["__all__"]
+        fields = "__all__"
 
 
 # GenreSerializer
@@ -54,4 +54,4 @@ class GenreSerializer(serializers.ModelSerializer):
 class SpaceTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpaceTask
-        fields = ["__all__"]
+        fields = "__all__"
