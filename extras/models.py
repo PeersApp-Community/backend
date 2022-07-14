@@ -43,10 +43,12 @@ class Library(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        related_name="library",
+        related_name="lib",
     )
     books = models.ManyToManyField(Book, blank=True)
 
+    def __str__(self):
+        return f"{self.user.username} library"
 
 # PRIORITY_CHOICES PRIORITY_CHOICES PRIORITY_CHOICES
 # PRIORITY_CHOICES PRIORITY_CHOICES PRIORITY_CHOICES
@@ -77,7 +79,7 @@ class SpaceTask(models.Model):
 
 
 class MyTask(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="mytasks")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tasks")
     task = models.CharField(max_length=200)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

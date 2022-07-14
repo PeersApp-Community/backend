@@ -1,23 +1,6 @@
 from rest_framework import serializers
 
-from .models import Story
-
-
-# import base64
-
-# from django.core.files.base import ContentFile
-
-
-# class Base64ImageField(serializers.ImageField):
-#     def from_native(self, data):
-#         if isinstance(data, basestring) and data.startswith("data:image"):
-#             # base64 encoded image - decode
-#             format, imgstr = data.split(";base64,")  # format ~= data:image/X,
-#             ext = format.split("/")[-1]  # guess file extension
-
-#             data = ContentFile(base64.b64decode(imgstr), name="temp." + ext)
-
-#         return super(Base64ImageField, self).from_native(data)
+from .models import MyTask, Story, Library, Book, Genre, SpaceTask, MyTask
 
 
 # Story
@@ -28,6 +11,7 @@ class AllStorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+# StorySerializer
 class StorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Story
@@ -36,3 +20,38 @@ class StorySerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_id = self.context.get("user_id")
         return Story.objects.create(user_id=user_id, **validated_data)
+
+
+# LibrarySerializer
+class LibrarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Library
+        fields = ["__all__"]
+
+
+# MyTaskSerializer
+class MyTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyTask
+        fields = ["__all__"]
+
+
+# BookSerializer
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ["__all__"]
+
+
+# GenreSerializer
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ["__all__"]
+
+
+# SpaceTaskSerializer
+class SpaceTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SpaceTask
+        fields = ["__all__"]

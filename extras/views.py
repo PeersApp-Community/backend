@@ -5,13 +5,19 @@ from rest_framework.parsers import (
     FormParser,
     JSONParser,
 )
+from .models import MyTask, Story, Library, Book, Genre, SpaceTask, MyTask
+from .serializers import (
+    AllStorySerializer,
+    BookSerializer,
+    GenreSerializer,
+    LibrarySerializer,
+    MyTaskSerializer,
+    SpaceTaskSerializer,
+    StorySerializer,
+)
 
 
-from .models import Story
-from .serializers import AllStorySerializer, StorySerializer
-
-
-# Story
+# StoryModelViewSet
 class StoryModelViewSet(ModelViewSet):
     serializer_class = StorySerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
@@ -23,7 +29,7 @@ class StoryModelViewSet(ModelViewSet):
         return {"user_id": self.kwargs.get("user_pk")}
 
 
-# Story
+# FriendStoryModelViewSet
 class FriendStoryModelViewSet(ModelViewSet):
     serializer_class = StorySerializer
 
@@ -42,33 +48,56 @@ class AllStoryModelViewSet(ModelViewSet):
     serializer_class = AllStorySerializer
 
 
-# ===========================================
-# ===========================================
-# ===========================================
-# @action(
-#     detail=False,
-#     methods=[
-#         "put",
-#     ],
-# )
-# def upload(self, request, pk=None):
-#     serializer = AllStorySerializer(data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         return Response(serializer.data, status=status.HTTP_200_OK)
+# Library
+class LibraryModelViewSet(ModelViewSet):
+    serializer_class = LibrarySerializer
 
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-# @action(
-#     detail=True,
-#     methods=[
-#         "put",
-#     ],
-# )
-# def upload(self, request, pk=None):
-#     story = Story.objects.get(id=pk)
-#     serializer = StorySerializer(story, data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         return Response(serializer.data, status=status.HTTP_200_OK)
+    def get_queryset(self):
+        return Library.objects.filter()
 
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+
+# Book
+class BookModelViewSet(ModelViewSet):
+    serializer_class = BookSerializer
+
+    def get_queryset(self):
+        return Book.objects.filter()
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+
+# MyTask
+class MyTaskModelViewSet(ModelViewSet):
+    serializer_class = MyTaskSerializer
+
+    def get_queryset(self):
+        return MyTask.objects.filter()
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+
+# SpaceTask
+class SpaceTaskModelViewSet(ModelViewSet):
+    serializer_class = SpaceTaskSerializer
+
+    def get_queryset(self):
+        return SpaceTask.objects.filter()
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+
+# Genre
+class GenreModelViewSet(ModelViewSet):
+    serializer_class = GenreSerializer
+
+    def get_queryset(self):
+        return Genre.objects.filter()
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
