@@ -27,7 +27,7 @@ class Space(models.Model):
     )
     description = models.TextField(null=True, blank=True)
     participants = models.ManyToManyField(User, related_name="spaces", blank=True)
-    admins = models.ManyToManyField(User, related_name="space_admins", blank=True)
+    admins = models.ManyToManyField(User, related_name="isadmin_spaces", blank=True)
     archived = models.BooleanField(default=False)
     pinned = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -35,7 +35,7 @@ class Space(models.Model):
     # topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
-        ordering = ["pinned", "-updated", "-created"]
+        ordering = ["-pinned", "-updated", "-created"]
 
     def __str__(self):
         return f"{self.name}"
@@ -55,7 +55,7 @@ class SpaceMsg(models.Model):
     retrieved = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ["pinned", "-updated", "-created"]
+        ordering = ["-pinned", "-updated", "-created"]
 
     def __str__(self):
         return f"{self.sender.username}"

@@ -1,3 +1,4 @@
+from django.urls import path
 from rest_framework_nested import routers
 from .views import (
     AllChatModelViewSet,
@@ -5,11 +6,15 @@ from .views import (
     ChatMsgModelViewSet,
     ChatModelViewSet,
     ProfileModelViewSet,
+    SpaceDelMsgModelViewSet,
     SpaceModelViewSet,
     SpaceMsgModelViewSet,
     UserInfo,
     ReplyModelViewSet,
     ThreadModelViewSet,
+    ChatDelMsgModelViewSet,
+    ArcSpaceModelViewSet,
+    ArcChatModelViewSet,
 )
 from extras.views import AllStoryModelViewSet, StoryModelViewSet
 
@@ -36,7 +41,9 @@ spaces_router.register("tasks", ProfileModelViewSet, basename="space-task")
 
 users_router = routers.NestedDefaultRouter(router, "users", lookup="user")
 users_router.register("chats", ChatModelViewSet, basename="user-chats")
+users_router.register("arc-chats", ArcChatModelViewSet, basename="user-arc-chats")
 users_router.register("spaces", SpaceModelViewSet, basename="user-spaces")
+users_router.register("arc-spaces", ArcSpaceModelViewSet, basename="user-arc-spaces")
 users_router.register("stories", StoryModelViewSet, basename="user-story")
 users_router.register("profile", ProfileModelViewSet, basename="user-profile")
 users_router.register("library", ProfileModelViewSet, basename="user-library")
@@ -46,11 +53,13 @@ users_router.register("tasks", ProfileModelViewSet, basename="user-task")
 # chats
 chats_router = routers.NestedDefaultRouter(users_router, "chats", lookup="chat")
 chats_router.register("msgs", ChatMsgModelViewSet, basename="chat-msgs")
+chats_router.register("del-msgs", ChatDelMsgModelViewSet, basename="chat-del-msgs")
 
 
 # Space
 space_router = routers.NestedDefaultRouter(users_router, "spaces", lookup="space")
 space_router.register("msgs", SpaceMsgModelViewSet, basename="space-msgs")
+space_router.register("del-msgs", SpaceDelMsgModelViewSet, basename="space-del-msgs")
 
 
 # SpaceMsgs
@@ -67,7 +76,13 @@ thread_router.register("replies", ReplyModelViewSet, basename="reply")
 # profile_router = routers.NestedDefaultRouter(users_router, "profiles", lookup="profile")
 # profile_router.register("posts", ChatMsgModelViewSet, basename="space-post")
 
-urlpatterns = (
+
+urlpatterns = [
+    # path("users/<int:user_pk>/chats/del-msgs/", ChatDelMsgMixins.as_view(), name="chat-del-msgs"),
+]
+
+
+urlpatterns += (
     router.urls
     + users_router.urls
     + chats_router.urls

@@ -7,6 +7,13 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAuthenticated,
 )
+from rest_framework.generics import (
+    ListAPIView,
+    DestroyAPIView,
+    RetrieveAPIView,
+    UpdateAPIView,
+    GenericAPIView,
+)
 from rest_framework.parsers import (
     MultiPartParser,
     FormParser,
@@ -16,6 +23,7 @@ from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from django.shortcuts import render
+from uritemplate import partial
 
 from base.serializers import (
     ProfileEditSerializer,
@@ -79,15 +87,8 @@ class ProfileModelViewSet(ModelViewSet):
 
         return ProfileEditSerializer
 
-    @action(
-        detail=True,
-        methods=[
-            "PUT",
-        ],
-    )
+    @action(detail=True, methods=["PUT"])
     def upload(self, request, pk=None, *args, **kwargs):
-        print(request.data)
-        print(request.FILES)
         profile = Profile.objects.get(id=self.kwargs["user_pk"])
         serializer = ProfileImageSerializer(profile, data=request.data)
         if serializer.is_valid():
@@ -127,6 +128,26 @@ class AllSpaceModelViewSet(ModelViewSet):
         return SpaceCreateSerializer
 
 
+# Archived Spaces
+class ArcSpaceModelViewSet(ModelViewSet):
+    queryset = (
+        Space.objects.filter(archived=True)
+        .select_related("host")
+        .prefetch_related("admins", "participants")
+    )
+    serializer_class = SpaceSerializer
+
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return SpaceSerializer
+            return SpaceCreateSerializer
+        except:
+            pass
+
+        return SpaceCreateSerializer
+
+
 # Space
 class SpaceModelViewSet(ModelViewSet):
     # queryset = (
@@ -137,16 +158,9 @@ class SpaceModelViewSet(ModelViewSet):
     serializer_class = SpaceSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
-    @action(
-        detail=True,
-        methods=[
-            "GET",
-        ],
-        permission_classes=[AllowAny],
-    )
+    @action(detail=False, methods=["GET"])
     def hosted(self, request, *args, **kwargs):
         hosted_spaces = Space.objects.filter(host_id=kwargs.get("user_pk"))
-
         serializer = SpaceSerializer(hosted_spaces, many=True)
         return Response(serializer.data)
 
@@ -154,7 +168,9 @@ class SpaceModelViewSet(ModelViewSet):
         return {"user_id": self.kwargs.get("user_pk")}
 
     def get_queryset(self):
-        queryset = User.objects.get(id=self.kwargs.get("user_pk")).spaces
+        queryset = User.objects.get(id=self.kwargs.get("user_pk")).spaces.filter(
+            archived=False
+        )
         # queryset = queryset.filter(archived=False)
         return queryset
 
@@ -168,12 +184,61 @@ class SpaceModelViewSet(ModelViewSet):
 
         return SpaceCreateSerializer
 
+    @action(detail=False, methods=["GET"])
+    def isadmin(self, request, *args, **kwargs):
 
-# SpaceChat
+        isadmin_spaces = (
+            Space.objects.filter(
+                admins__in=[
+                    self.kwargs.get("user_pk"),
+                ]
+            )
+            .select_related("host")
+            .prefetch_related("admins", "participants")
+        )
+        serializer = SpaceSerializer(isadmin_spaces, many=True)
+        return Response(serializer.data)
+
+
+# SpaceMsgModelViewSet
 class SpaceMsgModelViewSet(ModelViewSet):
     queryset = SpaceMsg.objects.all()
     serializer_class = SpaceMsgSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
+
+    def get_queryset(self):
+        queryset = SpaceMsg.objects.filter(
+            space_id=self.kwargs.get("space_pk"), deleted=False
+        )
+        return queryset
+
+
+class SpaceDelMsgModelViewSet(ModelViewSet):
+    queryset = SpaceMsg.objects.all()
+    serializer_class = SpaceMsgSerializer
+
+    def get_queryset(self):
+        print(self.kwargs)
+        queryset = SpaceMsg.objects.filter(
+            space_id=self.kwargs.get("space_pk"), deleted=True
+        )
+        return queryset
+
+
+# ArcChatModelViewSet
+# Chat
+class ArcChatModelViewSet(ModelViewSet):
+    serializer_class = ChatSerializer
+    ordering_fields = ["updated", "created"]
+    # http_method_names = ["get", "post", "patch", "delete", "head", "options"]
+
+    def get_queryset(self):
+        queryset = (
+            Chat.objects.by_user(user=self.kwargs.get("user_pk"))
+            .filter(archived=True, deleted=False)
+            .select_related("user1", "user2")
+        )
+        return queryset
 
 
 # Chat
@@ -421,27 +486,35 @@ class ChatMsgModelViewSet(ModelViewSet):
             "user_id": self.kwargs.get("user_pk"),
         }
 
-    @action(
-        detail=False,
-        methods=["GET", "PUT"],
-        permission_classes=[AllowAny],
-    )
-    def deleted(self, request, *args, **kwargs):
-        deleted_chat_msgs = ChatMsg.objects.filter(
+
+class ChatDelMsgModelViewSet(ModelViewSet):
+    serializer_class = ChatMsgSerializer
+
+    def get_queryset(self):
+        queryset = ChatMsg.objects.filter(
             chat_id=self.kwargs.get("chat_pk"), deleted=True
         )
-        if request.method == "GET":
-            serializer = ChatMsgSerializer(deleted_chat_msgs, many=True)
-            return Response(serializer.data)
-        elif (
-            request.method == "PUT"
-            or request.method == "PATCH"
-            or request.method == "POST"
-        ):
-            serializer = ChatMsgPatchSerializer(deleted_chat_msgs, data=request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data)
+        return queryset
+
+
+# class ChatDelMsgMixins(
+#     ListAPIView, DestroyAPIView, RetrieveAPIView, UpdateAPIView, GenericAPIView
+# ):
+#     serializer_class = ChatMsgSerializer
+#
+#
+#     def get_queryset(self):
+#         print(self.kwargs)
+#         queryset = ChatMsg.objects.filter(
+#             chat_id=self.kwargs.get("chat_pk"), deleted=True
+#         )
+#         return queryset
+
+#     def get_serializer_context(self):
+#         return {
+#             "chat_id": self.kwargs.get("chat_pk"),
+#             "user_id": self.kwargs.get("user_pk"),
+#         }
 
 
 # ThreadModelViewSet
@@ -459,7 +532,9 @@ class ReplyModelViewSet(ModelViewSet):
 
     def get_queryset(self):
         print(self.kwargs)
-        queryset = Reply.objects.filter(thread_id=self.kwargs.get("msg_pk")).select_related("thread")
+        queryset = Reply.objects.filter(
+            thread_id=self.kwargs.get("msg_pk")
+        ).select_related("thread")
         return queryset
 
     def get_serializer_context(self):

@@ -12,3 +12,4 @@ PeersApp/__pycache__/urls.cpython-39.pyc
 peers_api/__pycache__
 PeersApp/settings/__pycache__
 db.sqlite3
+PeersApp/url2.py

@@ -31,6 +31,8 @@ class SpaceSerializer(serializers.ModelSerializer):
             "name",
             "host",
             "description",
+            "archived",
+            "pinned",
             "updated",
             "created",
             "admins",
@@ -46,6 +48,8 @@ class SpaceCreateSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "description",
+            "archived",
+            "pinned",
             "admins",
             "participants",
         ]
@@ -76,8 +80,8 @@ class SpaceMsgSerializer(serializers.ModelSerializer):
         model = SpaceMsg
         fields = [
             "id",
-            "sender",
-            "space",
+            "sender_id",
+            "space_id",
             "message",
             "file",
             "pinned",
