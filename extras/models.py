@@ -45,7 +45,7 @@ class Library(models.Model):
         on_delete=models.CASCADE,
         related_name="lib",
     )
-    books = models.ManyToManyField(Book, blank=True)
+    books = models.ManyToManyField(Book, blank=True, related_name="lib")
 
     def __str__(self):
         return f"{self.user.username} library"
