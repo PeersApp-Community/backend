@@ -22,19 +22,20 @@ class Story(models.Model):
         ordering = ["-updated", "-created"]
 
 
-class Category(models.Model):
+class Genre(models.Model):
     title = models.CharField(max_length=200)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateField(auto_now_add=True)
 
 
 class Book(models.Model):
+    author = models.CharField(max_length=200, null=True, blank=True)
     title = models.CharField(max_length=200)
+    description = models.TextField()
     file = models.FileField(upload_to="status", null=True, blank=True)
-    link = models.URLField()
-    category = models.ManyToManyField(Category, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    pinned = models.BooleanField(default=False)
+    genre = models.ManyToManyField(Genre, blank=True)
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+    saved = models.BooleanField(default=False)
     private = models.BooleanField(default=True)
 
 

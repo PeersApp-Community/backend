@@ -34,7 +34,6 @@ from base.serializers import (
 from .models import Chat, ChatMsg, Reply, Space, SpaceMsg, SpaceThread
 from .serializers import (
     ChatCreateSerializer,
-    ChatMsgPatchSerializer,
     ChatMsgSerializer,
     ChatPatchSerializer,
     ChatSerializer,
@@ -150,19 +149,8 @@ class ArcSpaceModelViewSet(ModelViewSet):
 
 # Space
 class SpaceModelViewSet(ModelViewSet):
-    # queryset = (
-    #     Space.objects.filter(archived=False)
-    #     .select_related("host")
-    #     .prefetch_related("admins", "participants")
-    # )
     serializer_class = SpaceSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
-
-    @action(detail=False, methods=["GET"])
-    def hosted(self, request, *args, **kwargs):
-        hosted_spaces = Space.objects.filter(host_id=kwargs.get("user_pk"))
-        serializer = SpaceSerializer(hosted_spaces, many=True)
-        return Response(serializer.data)
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
@@ -185,8 +173,13 @@ class SpaceModelViewSet(ModelViewSet):
         return SpaceCreateSerializer
 
     @action(detail=False, methods=["GET"])
-    def isadmin(self, request, *args, **kwargs):
+    def hosted(self, request, *args, **kwargs):
+        hosted_spaces = Space.objects.filter(host_id=kwargs.get("user_pk"))
+        serializer = SpaceSerializer(hosted_spaces, many=True)
+        return Response(serializer.data)
 
+    @action(detail=False, methods=["GET"])
+    def isadmin(self, request, *args, **kwargs):
         isadmin_spaces = (
             Space.objects.filter(
                 admins__in=[
@@ -211,6 +204,12 @@ class SpaceMsgModelViewSet(ModelViewSet):
             space_id=self.kwargs.get("space_pk"), deleted=False
         )
         return queryset
+
+    def get_serializer_context(self):
+        return {
+            "space_id": self.kwargs.get("space_pk"),
+            "user_id": self.kwargs.get("user_pk"),
+        }
 
 
 class SpaceDelMsgModelViewSet(ModelViewSet):
@@ -246,104 +245,6 @@ class ChatModelViewSet(ModelViewSet):
     serializer_class = ChatSerializer
     ordering_fields = ["updated", "created"]
     http_method_names = ["get", "post", "patch", "delete", "head", "options"]
-
-    @action(
-        detail=False,
-        methods=["GET", "PATCH"],
-        permission_classes=[AllowAny],
-    )
-    def archive(self, request, *args, **kwargs):
-        archived = (
-            Chat.objects.by_user(user=self.kwargs.get("user_pk"))
-            .filter(archived=True, deleted=False)
-            .select_related("user1", "user2")
-        )
-        default_serializer = ChatSerializer(archived, many=True)
-        serializer = default_serializer.data.copy()
-
-        current_user = self.kwargs.get("user_pk")
-
-        try:
-            profiles = Profile.objects.all()
-            for item in serializer:
-                if int(item["user1"]["id"]) == int(current_user):
-                    other_user = item.pop("user2")
-                    item.pop("user1")
-                else:
-                    other_user = item.pop("user1")
-                    item.pop("user2")
-
-                second = {"other_user": other_user}
-                second_user_profile = profiles.filter(
-                    id=(second["other_user"]["id"])
-                ).values(
-                    "full_name",
-                    "bio",
-                    "gender",
-                    "institution",
-                    "educational_level",
-                    "course",
-                    "location",
-                    "avatar",
-                )
-                second_user_new_profile = list(second_user_profile)[0]
-                other_user.update(second_user_new_profile)
-                item.update(second)
-
-        except:
-            print(f"Something is wrong with {current_user}'s chat list")
-            pass
-
-        return Response(serializer)
-
-    @action(
-        detail=False,
-        methods=["GET", "PATCH"],
-        permission_classes=[AllowAny],
-    )
-    def deleted(self, request, *args, **kwargs):
-        deleted_chats = (
-            Chat.objects.by_user(user=self.kwargs.get("user_pk"))
-            .filter(deleted=True)
-            .select_related("user1", "user2")
-        )
-        default_serializer = ChatSerializer(deleted_chats, many=True)
-        serializer = default_serializer.data.copy()
-
-        current_user = self.kwargs.get("user_pk")
-
-        try:
-            profiles = Profile.objects.all()
-            for item in serializer:
-                if int(item["user1"]["id"]) == int(current_user):
-                    other_user = item.pop("user2")
-                    item.pop("user1")
-                else:
-                    other_user = item.pop("user1")
-                    item.pop("user2")
-
-                second = {"other_user": other_user}
-                second_user_profile = profiles.filter(
-                    id=(second["other_user"]["id"])
-                ).values(
-                    "full_name",
-                    "bio",
-                    "gender",
-                    "institution",
-                    "educational_level",
-                    "course",
-                    "location",
-                    "avatar",
-                )
-                second_user_new_profile = list(second_user_profile)[0]
-                other_user.update(second_user_new_profile)
-                item.update(second)
-
-        except:
-            print(f"Something is wrong with {current_user}'s chat list")
-            pass
-
-        return Response(serializer)
 
     def get_queryset(self):
         queryset = (
@@ -509,12 +410,6 @@ class ChatDelMsgModelViewSet(ModelViewSet):
 #             chat_id=self.kwargs.get("chat_pk"), deleted=True
 #         )
 #         return queryset
-
-#     def get_serializer_context(self):
-#         return {
-#             "chat_id": self.kwargs.get("chat_pk"),
-#             "user_id": self.kwargs.get("user_pk"),
-#         }
 
 
 # ThreadModelViewSet

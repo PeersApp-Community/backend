@@ -92,6 +92,14 @@ class SpaceMsgSerializer(serializers.ModelSerializer):
             "stared",
         ]
 
+    def create(self, validated_data):
+        sender_id = self.context.get("user_id")
+        space_id = self.context.get("space_id")
+        spaceMsg = SpaceMsg.objects.create(
+            sender_id=sender_id, space_id=space_id, **validated_data
+        )
+        return spaceMsg
+
 
 # FriendChat
 class ChatSerializer(serializers.ModelSerializer):

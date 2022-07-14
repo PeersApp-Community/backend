@@ -56,15 +56,40 @@ chats_router.register("msgs", ChatMsgModelViewSet, basename="chat-msgs")
 chats_router.register("del-msgs", ChatDelMsgModelViewSet, basename="chat-del-msgs")
 
 
+# Arc chats
+arc_chats_router = routers.NestedDefaultRouter(users_router, "arc-chats", lookup="chat")
+arc_chats_router.register("msgs", ChatMsgModelViewSet, basename="arc-chat-msgs")
+arc_chats_router.register(
+    "del-msgs", ChatDelMsgModelViewSet, basename="arc-chat-del-msgs"
+)
+
+
 # Space
 space_router = routers.NestedDefaultRouter(users_router, "spaces", lookup="space")
 space_router.register("msgs", SpaceMsgModelViewSet, basename="space-msgs")
 space_router.register("del-msgs", SpaceDelMsgModelViewSet, basename="space-del-msgs")
 
 
+# Arc Space
+arc_space_router = routers.NestedDefaultRouter(
+    users_router, "arc-spaces", lookup="space"
+)
+arc_space_router.register("msgs", SpaceMsgModelViewSet, basename="arc-space-msgs")
+arc_space_router.register(
+    "del-msgs", SpaceDelMsgModelViewSet, basename="arc-space-del-msgs"
+)
+
+
 # SpaceMsgs
 spaceMsg_router = routers.NestedDefaultRouter(space_router, "msgs", lookup="msg")
 spaceMsg_router.register("thread", ThreadModelViewSet, basename="msg-thread")
+
+
+# Arc SpaceMsgs
+arc_spaceMsg_router = routers.NestedDefaultRouter(
+    arc_space_router, "msgs", lookup="msg"
+)
+arc_spaceMsg_router.register("thread", ThreadModelViewSet, basename="arc-msg-thread")
 
 
 # Thread
@@ -86,7 +111,9 @@ urlpatterns += (
     router.urls
     + users_router.urls
     + chats_router.urls
-    + space_router.urls
+    + arc_space_router.urls
     + spaceMsg_router.urls
     + thread_router.urls
+    + arc_space_router.urls
+    + arc_spaceMsg_router.urls
 )
