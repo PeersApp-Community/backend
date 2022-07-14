@@ -53,7 +53,9 @@ class LibraryModelViewSet(ModelViewSet):
     serializer_class = LibrarySerializer
 
     def get_queryset(self):
-        return Library.objects.filter()
+        return Library.objects.filter(id=self.kwargs.get("user_pk")).prefetch_related(
+            "books"
+        )
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}

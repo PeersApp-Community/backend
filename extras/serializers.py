@@ -26,7 +26,7 @@ class StorySerializer(serializers.ModelSerializer):
 class LibrarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Library
-        fields = "__all__"
+        fields = ["id", "user_id", "books"]
 
 
 # MyTaskSerializer
