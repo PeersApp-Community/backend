@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.parsers import (
