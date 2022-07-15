@@ -37,7 +37,7 @@ class Book(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     saved = models.BooleanField(default=False)
-    private = models.BooleanField(default=True)
+    public = models.BooleanField(default=False)
 
 
 class Library(models.Model):

@@ -72,7 +72,7 @@ class LibraryModelViewSet(ModelViewSet):
 # Book
 class AllBookModelViewSet(ModelViewSet):
     serializer_class = BookSerializer
-    queryset = Book.objects.filter(private=False)
+    queryset = Book.objects.filter(public=True)
     http_method_names = ["get"]
 
 
@@ -85,7 +85,7 @@ class BookModelViewSet(ModelViewSet):
             id__in=Library.objects.filter(
                 id=self.kwargs.get("user_pk")
             ).prefetch_related("books"),
-            private=False,
+            public=False,
         ).prefetch_related("genre")
 
     def get_serializer_context(self):
