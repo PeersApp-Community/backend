@@ -40,6 +40,7 @@ from .serializers import (
     ProfileInlineSerializer,
     ReplyCreateSerializer,
     ReplySerializer,
+    SpaceCreateMsgSerializer,
     SpaceCreateSerializer,
     SpaceMsgSerializer,
     SpaceSerializer,
@@ -215,6 +216,17 @@ class SpaceMsgModelViewSet(ModelViewSet):
             "space_id": self.kwargs.get("space_pk"),
             "user_id": self.kwargs.get("user_pk"),
         }
+        
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return SpaceMsgSerializer
+            if self.request.method == "PATCH":
+                return SpaceCreateMsgSerializer
+        except:
+            pass
+        
+        return SpaceCreateMsgSerializer
 
 
 class SpaceDelMsgModelViewSet(ModelViewSet):
@@ -390,6 +402,8 @@ class ChatMsgModelViewSet(ModelViewSet):
             "chat_id": self.kwargs.get("chat_pk"),
             "user_id": self.kwargs.get("user_pk"),
         }
+        
+        
 
 
 class ChatDelMsgModelViewSet(ModelViewSet):

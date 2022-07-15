@@ -129,7 +129,7 @@ urlpatterns = [
         BookPrivRetrieveUpdateDestroyAPIView.as_view(),
     ),
     path("users/<int:user_pk>/lib/privbooks/", BookPrivListCreateAPIView.as_view()),
-    path("users/<int:user_pk>/lib/privbooks/<int:book_pk>/", library),
+    path("users/<int:user_pk>/lib/privbooks/<int:book_pk>/", BookPrivRetrieveUpdateDestroyAPIView.as_view()),
     # path(),
 ]
 

@@ -105,8 +105,24 @@ class SpaceMsgSerializer(serializers.ModelSerializer):
         model = SpaceMsg
         fields = [
             "id",
-            "sender",
             "space_id",
+            "message",
+            "file",
+            "pinned",
+            "deleted",
+            "updated",
+            "created",
+            "seen",
+            "stared",
+            "sender",
+        ]
+
+
+class SpaceCreateMsgSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SpaceMsg
+        fields = [
+            "id",
             "message",
             "file",
             "pinned",

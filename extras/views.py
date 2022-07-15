@@ -159,7 +159,7 @@ class BookListCreateAPIView(ListCreateAPIView):
             id__in=Library.objects.filter(
                 id=self.kwargs.get("user_pk")
             ).prefetch_related("books"),
-            public=False,
+            public=True,
         )
 
     def get_serializer_context(self):
