@@ -5,7 +5,7 @@ from rest_framework.parsers import (
     FormParser,
     JSONParser,
 )
-from .models import MyTask, Story, Library, Book,  SpaceTask, MyTask
+from .models import MyTask, Story, Library, Book, SpaceTask, MyTask
 from .serializers import (
     AllStorySerializer,
     BookSerializer,
@@ -85,7 +85,7 @@ class BookModelViewSet(ModelViewSet):
                 id=self.kwargs.get("user_pk")
             ).prefetch_related("books"),
             public=False,
-        ).prefetch_related("genre")
+        )
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
@@ -100,7 +100,7 @@ class BookPriModelViewSet(ModelViewSet):
                 id=self.kwargs.get("user_pk")
             ).prefetch_related("books"),
             private=True,
-        ).prefetch_related("genre")
+        )
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
