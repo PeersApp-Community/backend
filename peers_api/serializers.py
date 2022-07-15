@@ -234,7 +234,24 @@ class ProfileInlineSerializer(serializers.ModelSerializer):
     #         raise ValueError("error")
 
 
+class ProfileSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            "full_name",
+            "bio",
+            "gender",
+            "institution",
+            "educational_level",
+            "course",
+            "location",
+            "avatar",
+        ]
+
+
 class UserInfoSimpleSerializer2(serializers.ModelSerializer):
+    profile = ProfileSerializer2()
+
     class Meta:
         model = User
         fields = ["id", "username", "email", "phone", "profile"]
