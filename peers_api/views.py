@@ -157,10 +157,15 @@ class SpaceModelViewSet(ModelViewSet):
         return {"user_id": self.kwargs.get("user_pk")}
 
     def get_queryset(self):
-        queryset = User.objects.get(id=self.kwargs.get("user_pk")).spaces.filter(
-            archived=False
+        #    User.objects.get(id=self.kwargs.get("user_pk"))
+        # .spaces.filter(archived=False)
+        # .select_related("host")
+        # .prefetch_related("participants", "admins")
+        queryset = (
+            Space.objects.filter(participants__in=[self.kwargs.get("user_pk")])
+            .select_related("host")
+            .prefetch_related("participants", "admins")
         )
-        # queryset = queryset.filter(archived=False)
         return queryset
 
     def get_serializer_class(self):
@@ -198,12 +203,11 @@ class SpaceModelViewSet(ModelViewSet):
 class SpaceMsgModelViewSet(ModelViewSet):
     queryset = SpaceMsg.objects.all()
     serializer_class = SpaceMsgSerializer
-    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     def get_queryset(self):
         queryset = SpaceMsg.objects.filter(
             space_id=self.kwargs.get("space_pk"), deleted=False
-        )
+        ).select_related("sender__profile")
         return queryset
 
     def get_serializer_context(self):
@@ -218,10 +222,9 @@ class SpaceDelMsgModelViewSet(ModelViewSet):
     serializer_class = SpaceMsgSerializer
 
     def get_queryset(self):
-        print(self.kwargs)
         queryset = SpaceMsg.objects.filter(
             space_id=self.kwargs.get("space_pk"), deleted=True
-        )
+        ).select_related("sender__profile")
         return queryset
 
 
@@ -441,7 +444,6 @@ class ReplyModelViewSet(ModelViewSet):
             "thread_id": self.kwargs.get("thread_pk"),
         }
 
-
     def get_serializer_class(self):
         try:
             if self.request.method == "GET":
@@ -451,5 +453,5 @@ class ReplyModelViewSet(ModelViewSet):
             # return ChatCreateSerializer
         except:
             pass
-        
+
         return ReplyCreateSerializer

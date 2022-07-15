@@ -5,10 +5,33 @@ from .models import Chat, ChatMsg, Reply, Space, SpaceMsg, SpaceThread
 from django.db.models import Q
 
 
+class ProfileSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            "full_name",
+            "bio",
+            "gender",
+            "institution",
+            "educational_level",
+            "course",
+            "location",
+            "avatar",
+        ]
+
+
 class UserInfoSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "username", "email", "phone"]
+
+
+class UserInfoSimpleSerializer2(serializers.ModelSerializer):
+    profile = ProfileSerializer2()
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "email", "phone", "profile"]
 
 
 class SpaceSimpleSerializer(serializers.ModelSerializer):
@@ -76,11 +99,13 @@ class SpaceCreateSerializer(serializers.ModelSerializer):
 
 # RoomChat
 class SpaceMsgSerializer(serializers.ModelSerializer):
+    sender = UserInfoSimpleSerializer2()
+
     class Meta:
         model = SpaceMsg
         fields = [
             "id",
-            "sender_id",
+            "sender",
             "space_id",
             "message",
             "file",
@@ -232,29 +257,6 @@ class ProfileInlineSerializer(serializers.ModelSerializer):
     #         return super().save(**kwargs)
     #     except:
     #         raise ValueError("error")
-
-
-class ProfileSerializer2(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = [
-            "full_name",
-            "bio",
-            "gender",
-            "institution",
-            "educational_level",
-            "course",
-            "location",
-            "avatar",
-        ]
-
-
-class UserInfoSimpleSerializer2(serializers.ModelSerializer):
-    profile = ProfileSerializer2()
-
-    class Meta:
-        model = User
-        fields = ["id", "username", "email", "phone", "profile"]
 
 
 class ThreadSerializer(serializers.ModelSerializer):

@@ -18,13 +18,17 @@ from .views import (
 )
 from extras.views import (
     AllBookModelViewSet,
+    BookListCreateAPIView,
     BookModelViewSet,
     AllStoryModelViewSet,
+    BookPrivRetrieveUpdateDestroyAPIView,
+    BookPrivListCreateAPIView,
     StoryModelViewSet,
     SpaceTaskModelViewSet,
     LibraryModelViewSet,
     MyTaskModelViewSet,
-    BookPriModelViewSet
+    BookPriModelViewSet,
+    library,
 )
 
 # from base.models import Profile
@@ -50,20 +54,19 @@ spaces_router.register("tasks", ProfileModelViewSet, basename="space-task")
 
 
 users_router = routers.NestedDefaultRouter(router, "users", lookup="user")
-users_router.register("lib", LibraryModelViewSet, basename="lib")
 users_router.register("chats", ChatModelViewSet, basename="user-chats")
 users_router.register("arc-chats", ArcChatModelViewSet, basename="user-arc-chats")
 users_router.register("spaces", SpaceModelViewSet, basename="user-spaces")
 users_router.register("arc-spaces", ArcSpaceModelViewSet, basename="user-arc-spaces")
 users_router.register("stories", StoryModelViewSet, basename="user-story")
 users_router.register("profile", ProfileModelViewSet, basename="user-profile")
-users_router.register("library", ProfileModelViewSet, basename="user-library")
 users_router.register("tasks", ProfileModelViewSet, basename="user-task")
+# users_router.register("lib", LibraryModelViewSet, basename="lib")
 
 # Nested
-library_router = routers.NestedDefaultRouter(users_router, "lib", lookup="lib")
-library_router.register("books", BookModelViewSet, basename="lib-books")
-library_router.register("privbooks", BookPriModelViewSet, basename="lib-priv-books")
+# library_router = routers.NestedDefaultRouter(users_router, "lib", lookup="lib")
+# library_router.register("books", BookModelViewSet, basename="lib-books")
+# library_router.register("privbooks", BookPriModelViewSet, basename="lib-priv-books")
 
 # chats
 chats_router = routers.NestedDefaultRouter(users_router, "chats", lookup="chat")
@@ -119,6 +122,15 @@ thread_router.register("replies", ReplyModelViewSet, basename="reply")
 
 urlpatterns = [
     # path("users/<int:user_pk>/chats/del-msgs/", ChatDelMsgMixins.as_view(), name="chat-del-msgs"),
+    path("users/<int:user_pk>/lib/", library),
+    path("users/<int:user_pk>/lib/books/", BookListCreateAPIView.as_view()),
+    path(
+        "users/<int:user_pk>/lib/books/<int:pk>/",
+        BookPrivRetrieveUpdateDestroyAPIView.as_view(),
+    ),
+    path("users/<int:user_pk>/lib/privbooks/", BookPrivListCreateAPIView.as_view()),
+    path("users/<int:user_pk>/lib/privbooks/<int:book_pk>/", library),
+    # path(),
 ]
 
 
@@ -132,5 +144,5 @@ urlpatterns += (
     + thread_router.urls
     + arc_space_router.urls
     + arc_spaceMsg_router.urls
-    + library_router.urls
+    # + library_router.urls
 )
