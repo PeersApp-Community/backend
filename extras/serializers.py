@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import MyTask, Story, Library, Book, Genre, SpaceTask, MyTask
+from .models import MyTask, Story, Library, Book, SpaceTask, MyTask
 
 
 # Story
@@ -49,10 +49,10 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 # GenreSerializer
-class GenreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Genre
-        fields = "__all__"
+# class GenreSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Genre
+#         fields = "__all__"
 
 
 # SpaceTaskSerializer

@@ -24,7 +24,6 @@ from extras.views import (
     SpaceTaskModelViewSet,
     LibraryModelViewSet,
     MyTaskModelViewSet,
-    GenreModelViewSet,
     BookPriModelViewSet
 )
 
@@ -40,7 +39,6 @@ router.register("all-spaces", AllSpaceModelViewSet)
 router.register("all-stories", AllStoryModelViewSet)
 router.register("books", AllBookModelViewSet, basename="books")
 router.register("mytasks", MyTaskModelViewSet, basename="mytask")
-router.register("genre", GenreModelViewSet, basename="genre")
 # router.register("msg", ThreadModelViewSet)
 # router.register("chat-msg", ChatMsgModelViewSet)
 

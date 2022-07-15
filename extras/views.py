@@ -5,11 +5,10 @@ from rest_framework.parsers import (
     FormParser,
     JSONParser,
 )
-from .models import MyTask, Story, Library, Book, Genre, SpaceTask, MyTask
+from .models import MyTask, Story, Library, Book,  SpaceTask, MyTask
 from .serializers import (
     AllStorySerializer,
     BookSerializer,
-    GenreSerializer,
     LibrarySerializer,
     MyTaskSerializer,
     SpaceTaskSerializer,
@@ -130,11 +129,11 @@ class SpaceTaskModelViewSet(ModelViewSet):
 
 
 # Genre
-class GenreModelViewSet(ModelViewSet):
-    serializer_class = GenreSerializer
+# class GenreModelViewSet(ModelViewSet):
+#     serializer_class = GenreSerializer
 
-    def get_queryset(self):
-        return Genre.objects.filter()
+#     def get_queryset(self):
+#         return Genre.objects.filter()
 
-    def get_serializer_context(self):
-        return {"user_id": self.kwargs.get("user_pk")}
+#     def get_serializer_context(self):
+#         return {"user_id": self.kwargs.get("user_pk")}

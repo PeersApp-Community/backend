@@ -22,9 +22,9 @@ class Story(models.Model):
         ordering = ["-updated", "-created"]
 
 
-class Genre(models.Model):
-    title = models.CharField(max_length=200)
-    created = models.DateField(auto_now_add=True)
+# class Genre(models.Model):
+#     title = models.CharField(max_length=200)
+#     created = models.DateField(auto_now_add=True)
 
 
 class Book(models.Model):
@@ -33,7 +33,7 @@ class Book(models.Model):
     description = models.TextField()
     file = models.FileField(upload_to="books", null=True, blank=True)
     cover = models.ImageField(upload_to="cover", null=True, blank=True)
-    genre = models.ManyToManyField(Genre, blank=True)
+    # genre = models.ManyToManyField(Genre, blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     saved = models.BooleanField(default=False)
