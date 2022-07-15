@@ -234,6 +234,12 @@ class ProfileInlineSerializer(serializers.ModelSerializer):
     #         raise ValueError("error")
 
 
+class UserInfoSimpleSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "email", "phone", "profile"]
+
+
 class ThreadSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpaceThread
@@ -241,6 +247,19 @@ class ThreadSerializer(serializers.ModelSerializer):
 
 
 class ReplySerializer(serializers.ModelSerializer):
+    user = UserInfoSimpleSerializer2()
+
     class Meta:
         model = Reply
-        fields = "__all__"
+        fields = ["id", "message", "file", "user"]
+
+
+class ReplyCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reply
+        fields = ["id", "message", "file", "user"]
+
+    def create(self, validated_data):
+        thread_id = self.context.get("thread_id")
+        thread = Reply.objects.create(thread_id=thread_id, **validated_data)
+        return thread

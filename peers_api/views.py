@@ -38,6 +38,7 @@ from .serializers import (
     ChatPatchSerializer,
     ChatSerializer,
     ProfileInlineSerializer,
+    ReplyCreateSerializer,
     ReplySerializer,
     SpaceCreateSerializer,
     SpaceMsgSerializer,
@@ -429,7 +430,7 @@ class ReplyModelViewSet(ModelViewSet):
         print(self.kwargs)
         queryset = Reply.objects.filter(
             thread_id=self.kwargs.get("msg_pk")
-        ).select_related("thread")
+        ).select_related("user__profile")
         return queryset
 
     def get_serializer_context(self):
@@ -439,3 +440,16 @@ class ReplyModelViewSet(ModelViewSet):
             "user_id": self.kwargs.get("user_pk"),
             "thread_id": self.kwargs.get("thread_pk"),
         }
+
+
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return ReplySerializer
+            # if self.request.method == "PATCH":
+            #     return ChatPatchSerializer
+            # return ChatCreateSerializer
+        except:
+            pass
+        
+        return ReplyCreateSerializer

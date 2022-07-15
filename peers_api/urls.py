@@ -127,6 +127,7 @@ urlpatterns += (
     + users_router.urls
     + chats_router.urls
     + arc_space_router.urls
+    + space_router.urls
     + spaceMsg_router.urls
     + thread_router.urls
     + arc_space_router.urls
