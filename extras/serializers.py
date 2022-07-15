@@ -41,13 +41,18 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = "__all__"
+        
+    def create(self, validated_data):
+        
+        
+        return super().create(validated_data)
 
 
 # GenreSerializer
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ["__all__"]
+        fields = "__all__"
 
 
 # SpaceTaskSerializer
