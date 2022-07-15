@@ -17,6 +17,7 @@ from .views import (
     ArcChatModelViewSet,
 )
 from extras.views import (
+    AllBookModelViewSet,
     BookModelViewSet,
     AllStoryModelViewSet,
     StoryModelViewSet,
@@ -36,7 +37,7 @@ router.register("users", UserInfo, basename="users")
 router.register("all-chats", AllChatModelViewSet, basename="chats")
 router.register("all-spaces", AllSpaceModelViewSet)
 router.register("all-stories", AllStoryModelViewSet)
-router.register("sptasks", SpaceTaskModelViewSet, basename="sptask")
+router.register("books", AllBookModelViewSet, basename="books")
 router.register("mytasks", MyTaskModelViewSet, basename="mytask")
 router.register("genre", GenreModelViewSet, basename="genre")
 # router.register("msg", ThreadModelViewSet)

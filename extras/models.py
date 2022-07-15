@@ -31,7 +31,8 @@ class Book(models.Model):
     author = models.CharField(max_length=200, null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
-    file = models.FileField(upload_to="status", null=True, blank=True)
+    file = models.FileField(upload_to="books")
+    cover = models.ImageField(upload_to="cover")
     genre = models.ManyToManyField(Genre, blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
@@ -49,6 +50,7 @@ class Library(models.Model):
 
     def __str__(self):
         return f"{self.user.username} library"
+
 
 # PRIORITY_CHOICES PRIORITY_CHOICES PRIORITY_CHOICES
 # PRIORITY_CHOICES PRIORITY_CHOICES PRIORITY_CHOICES

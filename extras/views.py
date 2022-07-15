@@ -51,6 +51,14 @@ class AllStoryModelViewSet(ModelViewSet):
 # Library
 class LibraryModelViewSet(ModelViewSet):
     serializer_class = LibrarySerializer
+    http_method_names = [
+        "get",
+        "put",
+        "patch",
+        "delete",
+        "head",
+        "options",
+    ]
 
     def get_queryset(self):
         return Library.objects.filter(id=self.kwargs.get("user_pk")).prefetch_related(
@@ -59,6 +67,13 @@ class LibraryModelViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
+
+
+# Book
+class AllBookModelViewSet(ModelViewSet):
+    serializer_class = BookSerializer
+    queryset = Book.objects.filter(private=False)
+    http_method_names = ["get"]
 
 
 # Book
