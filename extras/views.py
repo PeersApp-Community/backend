@@ -83,8 +83,9 @@ class BookModelViewSet(ModelViewSet):
     def get_queryset(self):
         return Book.objects.filter(
             id__in=Library.objects.filter(
-                id=self.kwargs.get("user_pk"), private=True
-            ).prefetch_related("books")
+                id=self.kwargs.get("user_pk")
+            ).prefetch_related("books"),
+            private=False,
         ).prefetch_related("genre")
 
     def get_serializer_context(self):
@@ -97,8 +98,9 @@ class BookPriModelViewSet(ModelViewSet):
     def get_queryset(self):
         return Book.objects.filter(
             id__in=Library.objects.filter(
-                id=self.kwargs.get("user_pk"), private=True
-            ).prefetch_related("books")
+                id=self.kwargs.get("user_pk")
+            ).prefetch_related("books"),
+            private=True,
         ).prefetch_related("genre")
 
     def get_serializer_context(self):
