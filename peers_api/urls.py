@@ -25,6 +25,7 @@ from extras.views import (
     LibraryModelViewSet,
     MyTaskModelViewSet,
     GenreModelViewSet,
+    BookPriModelViewSet
 )
 
 # from base.models import Profile
@@ -64,6 +65,7 @@ users_router.register("tasks", ProfileModelViewSet, basename="user-task")
 # Nested
 library_router = routers.NestedDefaultRouter(users_router, "lib", lookup="lib")
 library_router.register("books", BookModelViewSet, basename="lib-books")
+library_router.register("privbooks", BookPriModelViewSet, basename="lib-priv-books")
 
 # chats
 chats_router = routers.NestedDefaultRouter(users_router, "chats", lookup="chat")

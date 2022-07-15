@@ -1,3 +1,4 @@
+from tkinter.tix import Tree
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.parsers import (
@@ -83,7 +84,21 @@ class BookModelViewSet(ModelViewSet):
     def get_queryset(self):
         return Book.objects.filter(
             id__in=Library.objects.filter(
-                id=self.kwargs.get("user_pk")
+                id=self.kwargs.get("user_pk"), private=True
+            ).prefetch_related("books")
+        ).prefetch_related("genre")
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+
+class BookPriModelViewSet(ModelViewSet):
+    serializer_class = BookSerializer
+
+    def get_queryset(self):
+        return Book.objects.filter(
+            id__in=Library.objects.filter(
+                id=self.kwargs.get("user_pk"), private=True
             ).prefetch_related("books")
         ).prefetch_related("genre")
 
