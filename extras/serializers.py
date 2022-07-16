@@ -56,6 +56,17 @@ class BookSerializer(serializers.ModelSerializer):
         return Book.objects.create(creator_id=creator_id, **validated_data)
 
 
+# BookCreateSerializer
+class BookCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ["id", "author", "title", "description", "file", "cover", "public"]
+
+    def create(self, validated_data):
+        creator_id = self.context.get("user_id")
+        return Book.objects.create(creator_id=creator_id, **validated_data)
+
+
 # SavedBookSerializer
 class SavedBookSerializer(serializers.ModelSerializer):
     creator = UserInfoSimpleSerializer2()

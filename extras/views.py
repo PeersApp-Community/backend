@@ -17,6 +17,7 @@ from .models import MyTask, Story, Library, Book, SpaceTask, MyTask
 from django.contrib.auth import get_user_model
 from .serializers import (
     AllStorySerializer,
+    BookCreateSerializer,
     BookSerializer,
     LibrarySerializer,
     MyTaskSerializer,
@@ -115,6 +116,12 @@ class PrivBookListCreateAPIView(ListCreateAPIView):
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
 
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return BookSerializer
+
+        return BookCreateSerializer
+
 
 class BookListCreateAPIView(ListCreateAPIView):
     serializer_class = BookSerializer
@@ -124,6 +131,12 @@ class BookListCreateAPIView(ListCreateAPIView):
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return BookSerializer
+
+        return BookCreateSerializer
 
 
 class SavedBookListCreateAPIView(ListCreateAPIView):
