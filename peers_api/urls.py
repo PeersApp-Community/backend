@@ -16,8 +16,8 @@ from .views import (
     ArcSpaceModelViewSet,
     ArcChatModelViewSet,
 )
+
 from extras.views import (
-    AllBookModelViewSet,
     AllBooks,
     AllBooksRetrieveUpdateAPIView,
     BookListCreateAPIView,
@@ -33,6 +33,7 @@ from extras.views import (
     library,
 )
 
+
 # from base.models import Profile
 # from base.views import ProfileViewSet
 
@@ -43,8 +44,7 @@ router.register("users", UserInfo, basename="users")
 router.register("all-chats", AllChatModelViewSet, basename="chats")
 router.register("all-spaces", AllSpaceModelViewSet)
 router.register("all-stories", AllStoryModelViewSet)
-router.register("books", AllBookModelViewSet, basename="books")
-router.register("mytasks", MyTaskModelViewSet, basename="mytask")
+
 # router.register("msg", ThreadModelViewSet)
 # router.register("chat-msg", ChatMsgModelViewSet)
 
@@ -52,7 +52,6 @@ router.register("mytasks", MyTaskModelViewSet, basename="mytask")
 # Nested
 spaces_router = routers.NestedDefaultRouter(router, "all-spaces", lookup="space")
 spaces_router.register("tasks", ProfileModelViewSet, basename="space-task")
-# spaces_router.register("library", ProfileModelViewSet, basename="space-library")
 
 
 users_router = routers.NestedDefaultRouter(router, "users", lookup="user")
@@ -60,15 +59,9 @@ users_router.register("chats", ChatModelViewSet, basename="user-chats")
 users_router.register("arc-chats", ArcChatModelViewSet, basename="user-arc-chats")
 users_router.register("spaces", SpaceModelViewSet, basename="user-spaces")
 users_router.register("arc-spaces", ArcSpaceModelViewSet, basename="user-arc-spaces")
-users_router.register("stories", StoryModelViewSet, basename="user-story")
 users_router.register("profile", ProfileModelViewSet, basename="user-profile")
 users_router.register("tasks", ProfileModelViewSet, basename="user-task")
-# users_router.register("lib", LibraryModelViewSet, basename="lib")
 
-# Nested
-# library_router = routers.NestedDefaultRouter(users_router, "lib", lookup="lib")
-# library_router.register("books", BookModelViewSet, basename="lib-books")
-# library_router.register("privbooks", BookPriModelViewSet, basename="lib-priv-books")
 
 # chats
 chats_router = routers.NestedDefaultRouter(users_router, "chats", lookup="chat")
@@ -124,6 +117,7 @@ thread_router.register("replies", ReplyModelViewSet, basename="reply")
 
 urlpatterns = [
     path("books/", AllBooks.as_view()),
+    path("books/<int:pk>/", AllBooksRetrieveUpdateAPIView.as_view()),
     path("users/<int:user_pk>/lib/", library),
     path("users/<int:user_pk>/lib/books/", BookListCreateAPIView.as_view()),
     path("users/<int:user_pk>/lib/saved/", SavedBookListCreateAPIView.as_view()),
@@ -143,7 +137,6 @@ urlpatterns = [
 ]
 
 
-
 urlpatterns += (
     router.urls
     + users_router.urls
@@ -154,5 +147,4 @@ urlpatterns += (
     + thread_router.urls
     + arc_space_router.urls
     + arc_spaceMsg_router.urls
-    # + library_router.urls
 )

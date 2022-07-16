@@ -17,6 +17,7 @@ from .views import (
     library,
 )
 
+
 from peers_api.urls import router, users_router
 
 router.register("all-stories", AllStoryModelViewSet)
@@ -47,7 +48,4 @@ urlpatterns = [
 ]
 
 
-urlpatterns += (
-    router.urls
-    + users_router.urls
-)
+urlpatterns += router.urls + users_router.urls
