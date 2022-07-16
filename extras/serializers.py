@@ -47,7 +47,7 @@ class BookSerializer(serializers.ModelSerializer):
             "description",
             "file",
             "cover",
-            "saved",
+            "savers",
             "public",
         ]
 
@@ -56,7 +56,7 @@ class BookSerializer(serializers.ModelSerializer):
         return Book.objects.create(creator_id=creator_id, **validated_data)
 
 
-# BookSerializer
+# SavedBookSerializer
 class SavedBookSerializer(serializers.ModelSerializer):
     creator = UserInfoSimpleSerializer2()
 
@@ -70,9 +70,16 @@ class SavedBookSerializer(serializers.ModelSerializer):
             "description",
             "file",
             "cover",
-            "saved",
+            "savers",
             "public",
         ]
+
+
+# SavedPatchBookSerializer
+class SavedPatchBookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ["savers"]
 
 
 # SpaceTaskSerializer

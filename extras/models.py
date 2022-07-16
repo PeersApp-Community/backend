@@ -36,7 +36,7 @@ class Book(models.Model):
     cover = models.ImageField(upload_to="cover", null=True, blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    saved = models.ManyToManyField(User, blank=True, related_name="saved_books")
+    savers = models.ManyToManyField(User, blank=True, related_name="saved_books")
     public = models.BooleanField(default=False)
     read = models.IntegerField(default=0)
 

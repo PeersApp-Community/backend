@@ -21,6 +21,7 @@ from .serializers import (
     LibrarySerializer,
     MyTaskSerializer,
     SavedBookSerializer,
+    SavedPatchBookSerializer,
     SpaceTaskSerializer,
     StorySerializer,
 )
@@ -103,42 +104,6 @@ class SpaceTaskModelViewSet(ModelViewSet):
         return {"user_id": self.kwargs.get("user_pk")}
 
 
-# Library
-# class LibraryModelViewSet(ModelViewSet):
-#     serializer_class = LibrarySerializer
-#     http_method_names = [
-#         "get",
-#         "put",
-#         "patch",
-#         "delete",
-#         "head",
-#         "options",
-#     ]
-
-#     def get_queryset(self):
-#         return Library.objects.filter(id=self.kwargs.get("user_pk")).prefetch_related(
-#             "books"
-#         )
-
-#     def get_serializer_context(self):
-#         return {"user_id": self.kwargs.get("user_pk")}
-
-
-# class BookPriModelViewSet(ModelViewSet):
-#     serializer_class = BookSerializer
-
-#     def get_queryset(self):
-#         return Book.objects.filter(
-#             id__in=Library.objects.filter(
-#                 id=self.kwargs.get("user_pk")
-#             ).prefetch_related("books"),
-#             public=False,
-#         )
-
-#     def get_serializer_context(self):
-#         return {"user_id": self.kwargs.get("user_pk")}
-
-
 # Book
 class PrivBookListCreateAPIView(ListCreateAPIView):
     serializer_class = BookSerializer
@@ -167,14 +132,14 @@ class SavedBookListCreateAPIView(ListCreateAPIView):
 
     def get_queryset(self):
         return (
-            # User.objects.prefetch_related("saved_books")
+            # User.objects.prefetch_related("savers_books")
             # .filter(id=self.kwargs.get("user_pk"))[0]
-            # .saved_books.select_related("creator")
-            # .prefetch_related("saved")
+            # .savers_books.select_related("creator")
+            # .prefetch_related("savers")
             Book.objects.exclude(creator_id=self.kwargs.get("user_pk"))
-            .filter(public=True, saved__in=[self.kwargs.get("user_pk")])
+            .filter(public=True, savers__in=[self.kwargs.get("user_pk")])
             .select_related("creator__profile")
-            .prefetch_related("saved")
+            .prefetch_related("savers")
         )
 
     def get_serializer_context(self):
@@ -189,7 +154,7 @@ class SavedBookRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         return (
             Book.objects.filter(public=True, id=self.kwargs.get("pk"))
             .select_related("creator__profile")
-            .prefetch_related("saved")
+            .prefetch_related("savers")
         )
 
     def get_serializer_context(self):
@@ -202,7 +167,7 @@ class PrivBookRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Book.objects.filter(
             public=False, id=self.kwargs.get("pk")
-        ).prefetch_related("saved")
+        ).prefetch_related("savers")
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
@@ -214,7 +179,7 @@ class BookRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Book.objects.filter(
             public=True, id=self.kwargs.get("pk")
-        ).prefetch_related("saved")
+        ).prefetch_related("savers")
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
@@ -234,9 +199,35 @@ class AllBooks(ListAPIView):
     def get_queryset(self):
         return (
             Book.objects.filter(public=True)
-            .prefetch_related("saved")
+            .prefetch_related("savers")
             .select_related("creator__profile")
         )
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
+
+
+class AllBooksRetrieveUpdateAPIView(RetrieveUpdateAPIView):
+    serializer_class = SavedBookSerializer
+    http_method_names = ["get", "patch", "head", "options"]
+
+    def get_queryset(self):
+        return (
+            Book.objects.filter(public=True, id=self.kwargs.get("pk"))
+            .prefetch_related("savers")
+            .select_related("creator__profile")
+        )
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+    def get_serializer_class(self):
+        try:
+            if self.request.method == "GET":
+                return SavedBookSerializer
+            if self.request.method == "PATCH":
+                return SavedPatchBookSerializer
+        except:
+            pass
+
+        return SavedPatchBookSerializer

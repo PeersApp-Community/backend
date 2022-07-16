@@ -18,6 +18,7 @@ urlpatterns = [
     path("", testing, name="index"),
     path("peers-admin/", admin.site.urls),
     path("api/", include("peers_api.urls")),
+    path("api/", include("extras.urls")),
     path("base/", include("base.urls")),
     path("reports/", include("reports.urls")),
     #
