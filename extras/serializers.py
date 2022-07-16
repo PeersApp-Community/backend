@@ -40,12 +40,37 @@ class MyTaskSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = "__all__"
-        
+        fields = [
+            "id",
+            "author",
+            "title",
+            "description",
+            "file",
+            "cover",
+            "saved",
+            "public",
+        ]
+
     def create(self, validated_data):
-        
-        
-        return super().create(validated_data)
+        creator_id = self.context.get("user_id")
+        return Book.objects.create(creator_id=creator_id, **validated_data)
+
+
+# BookSerializer
+class SavedBookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = [
+            "id",
+            "author",
+            "title",
+            "creator_id",
+            "description",
+            "file",
+            "cover",
+            "saved",
+            "public",
+        ]
 
 
 # GenreSerializer

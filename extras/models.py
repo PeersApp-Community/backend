@@ -28,16 +28,23 @@ class Story(models.Model):
 
 
 class Book(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="books")
     author = models.CharField(max_length=200, null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
     file = models.FileField(upload_to="books", null=True, blank=True)
     cover = models.ImageField(upload_to="cover", null=True, blank=True)
-    # genre = models.ManyToManyField(Genre, blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    saved = models.BooleanField(default=False)
+    saved = models.ManyToManyField(User, blank=True, related_name="saved_books")
     public = models.BooleanField(default=False)
+    read = models.IntegerField(default=0)
+
+    def __str__(self) -> str:
+        return f"{self.title}"
+
+    class Meta:
+        ordering = ["-updated", "-created"]
 
 
 class Library(models.Model):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SpaceTask, MyTask, Library, Story
+from .models import Book, SpaceTask, MyTask, Library, Story
 
 # Register your models here.
 
@@ -31,3 +31,8 @@ class LibraryInline(admin.TabularInline):
 @admin.register(Library)
 class LibraryAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ["creator", "id", "title","public", "author"]

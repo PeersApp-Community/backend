@@ -18,16 +18,17 @@ from .views import (
 )
 from extras.views import (
     AllBookModelViewSet,
+    AllBooks,
     BookListCreateAPIView,
-    BookModelViewSet,
     AllStoryModelViewSet,
-    BookPrivRetrieveUpdateDestroyAPIView,
-    BookPrivListCreateAPIView,
+    BookRetrieveUpdateDestroyAPIView,
+    PrivBookListCreateAPIView,
+    PrivBookRetrieveUpdateDestroyAPIView,
+    SavedBookListCreateAPIView,
+    SavedBookRetrieveUpdateAPIView,
     StoryModelViewSet,
     SpaceTaskModelViewSet,
-    LibraryModelViewSet,
     MyTaskModelViewSet,
-    BookPriModelViewSet,
     library,
 )
 
@@ -122,15 +123,23 @@ thread_router.register("replies", ReplyModelViewSet, basename="reply")
 
 urlpatterns = [
     # path("users/<int:user_pk>/chats/del-msgs/", ChatDelMsgMixins.as_view(), name="chat-del-msgs"),
+    path("books/", AllBooks.as_view()),
     path("users/<int:user_pk>/lib/", library),
     path("users/<int:user_pk>/lib/books/", BookListCreateAPIView.as_view()),
+    path("users/<int:user_pk>/lib/saved/", SavedBookListCreateAPIView.as_view()),
+    path("users/<int:user_pk>/lib/privbooks/", PrivBookListCreateAPIView.as_view()),
+    path(
+        "users/<int:user_pk>/lib/saved/<int:pk>/",
+        SavedBookRetrieveUpdateAPIView.as_view(),
+    ),
     path(
         "users/<int:user_pk>/lib/books/<int:pk>/",
-        BookPrivRetrieveUpdateDestroyAPIView.as_view(),
+        BookRetrieveUpdateDestroyAPIView.as_view(),
     ),
-    path("users/<int:user_pk>/lib/privbooks/", BookPrivListCreateAPIView.as_view()),
-    path("users/<int:user_pk>/lib/privbooks/<int:book_pk>/", BookPrivRetrieveUpdateDestroyAPIView.as_view()),
-    # path(),
+    path(
+        "users/<int:user_pk>/lib/privbooks/<int:pk>/",
+        PrivBookRetrieveUpdateDestroyAPIView.as_view(),
+    ),
 ]
 
 

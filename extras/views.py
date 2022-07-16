@@ -2,8 +2,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import (
+    ListAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
+    RetrieveUpdateAPIView,
 )
 from rest_framework.decorators import api_view
 from rest_framework.parsers import (
@@ -11,17 +13,19 @@ from rest_framework.parsers import (
     FormParser,
     JSONParser,
 )
-from yaml import serialize
 from .models import MyTask, Story, Library, Book, SpaceTask, MyTask
+from django.contrib.auth import get_user_model
 from .serializers import (
     AllStorySerializer,
     BookSerializer,
     LibrarySerializer,
     MyTaskSerializer,
+    SavedBookSerializer,
     SpaceTaskSerializer,
     StorySerializer,
 )
 
+User = get_user_model()
 
 # StoryModelViewSet
 class StoryModelViewSet(ModelViewSet):
@@ -100,52 +104,48 @@ class SpaceTaskModelViewSet(ModelViewSet):
 
 
 # Library
-class LibraryModelViewSet(ModelViewSet):
-    serializer_class = LibrarySerializer
-    http_method_names = [
-        "get",
-        "put",
-        "patch",
-        "delete",
-        "head",
-        "options",
-    ]
+# class LibraryModelViewSet(ModelViewSet):
+#     serializer_class = LibrarySerializer
+#     http_method_names = [
+#         "get",
+#         "put",
+#         "patch",
+#         "delete",
+#         "head",
+#         "options",
+#     ]
 
-    def get_queryset(self):
-        return Library.objects.filter(id=self.kwargs.get("user_pk")).prefetch_related(
-            "books"
-        )
+#     def get_queryset(self):
+#         return Library.objects.filter(id=self.kwargs.get("user_pk")).prefetch_related(
+#             "books"
+#         )
 
-    def get_serializer_context(self):
-        return {"user_id": self.kwargs.get("user_pk")}
+#     def get_serializer_context(self):
+#         return {"user_id": self.kwargs.get("user_pk")}
 
 
-class BookPriModelViewSet(ModelViewSet):
-    serializer_class = BookSerializer
+# class BookPriModelViewSet(ModelViewSet):
+#     serializer_class = BookSerializer
 
-    def get_queryset(self):
-        return Book.objects.filter(
-            id__in=Library.objects.filter(
-                id=self.kwargs.get("user_pk")
-            ).prefetch_related("books"),
-            public=False,
-        )
+#     def get_queryset(self):
+#         return Book.objects.filter(
+#             id__in=Library.objects.filter(
+#                 id=self.kwargs.get("user_pk")
+#             ).prefetch_related("books"),
+#             public=False,
+#         )
 
-    def get_serializer_context(self):
-        return {"user_id": self.kwargs.get("user_pk")}
+#     def get_serializer_context(self):
+#         return {"user_id": self.kwargs.get("user_pk")}
 
 
 # Book
-class BookPrivListCreateAPIView(ListCreateAPIView):
+class PrivBookListCreateAPIView(ListCreateAPIView):
     serializer_class = BookSerializer
 
     def get_queryset(self):
-        return Book.objects.filter(
-            id__in=Library.objects.filter(
-                id=self.kwargs.get("user_pk")
-            ).prefetch_related("books"),
-            public=True,
-        )
+        return Book.objects.filter(public=False, creator_id=self.kwargs.get("user_pk"))
+        # .select_related("creator"),
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
@@ -155,28 +155,54 @@ class BookListCreateAPIView(ListCreateAPIView):
     serializer_class = BookSerializer
 
     def get_queryset(self):
-        return Book.objects.filter(
-            id__in=Library.objects.filter(
-                id=self.kwargs.get("user_pk")
-            ).prefetch_related("books"),
-            public=True,
+        return Book.objects.filter(public=True, creator_id=self.kwargs.get("user_pk"))
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+
+class SavedBookListCreateAPIView(ListCreateAPIView):
+    serializer_class = SavedBookSerializer
+    http_method_names = ["get", "head", "options"]
+
+    def get_queryset(self):
+        return (
+            # User.objects.prefetch_related("saved_books")
+            # .filter(id=self.kwargs.get("user_pk"))[0]
+            # .saved_books.select_related("creator")
+            # .prefetch_related("saved")
+            Book.objects.exclude(creator_id=self.kwargs.get("user_pk"))
+            .filter(public=True, saved__in=[self.kwargs.get("user_pk")])
+            .select_related("creator")
+            .prefetch_related("saved")
         )
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
 
 
-class BookPrivRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+class SavedBookRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = BookSerializer
-    lookup_field = "pk"
+    http_method_names = ["get", "patch", "head", "options"]
+
+    def get_queryset(self):
+        return (
+            Book.objects.filter(public=True, id=self.kwargs.get("pk"))
+            .select_related("creator")
+            .prefetch_related("saved")
+        )
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
+
+
+class PrivBookRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = BookSerializer
 
     def get_queryset(self):
         return Book.objects.filter(
-            id__in=Library.objects.filter(
-                id=self.kwargs.get("user_pk")
-            ).prefetch_related("books"),
-            public=False,
-        )
+            public=False, id=self.kwargs.get("pk")
+        ).prefetch_related("saved")
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
@@ -184,15 +210,11 @@ class BookPrivRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 
 class BookRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = BookSerializer
-    lookup_field = "pk"
 
     def get_queryset(self):
         return Book.objects.filter(
-            id__in=Library.objects.filter(
-                id=self.kwargs.get("user_pk")
-            ).prefetch_related("books"),
-            public=True,
-        )
+            public=True, id=self.kwargs.get("pk")
+        ).prefetch_related("saved")
 
     def get_serializer_context(self):
         return {"user_id": self.kwargs.get("user_pk")}
@@ -204,3 +226,17 @@ def library(req, user_pk):
         queryset = Library.objects.filter(id=user_pk).prefetch_related("books")
         serializer = LibrarySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class AllBooks(ListAPIView):
+    serializer_class = SavedBookSerializer
+
+    def get_queryset(self):
+        return (
+            Book.objects.filter(public=True)
+            .prefetch_related("saved")
+            .select_related("creator")
+        )
+
+    def get_serializer_context(self):
+        return {"user_id": self.kwargs.get("user_pk")}
