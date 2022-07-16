@@ -28,7 +28,7 @@ class Story(models.Model):
 
 
 class Book(models.Model):
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="books")
+    posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="books")
     author = models.CharField(max_length=200, null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField()

@@ -35,4 +35,4 @@ class LibraryAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ["creator", "id", "title","public", "author"]
+    list_display = ["posted_by", "id", "title", "public", "author"]
