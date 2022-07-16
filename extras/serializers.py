@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import MyTask, Story, Library, Book, SpaceTask, MyTask
-
+from peers_api.serializers import UserInfoSimpleSerializer2
 
 # Story
 class AllStorySerializer(serializers.ModelSerializer):
@@ -58,26 +58,21 @@ class BookSerializer(serializers.ModelSerializer):
 
 # BookSerializer
 class SavedBookSerializer(serializers.ModelSerializer):
+    creator = UserInfoSimpleSerializer2()
+
     class Meta:
         model = Book
         fields = [
             "id",
             "author",
             "title",
-            "creator_id",
+            "creator",
             "description",
             "file",
             "cover",
             "saved",
             "public",
         ]
-
-
-# GenreSerializer
-# class GenreSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Genre
-#         fields = "__all__"
 
 
 # SpaceTaskSerializer

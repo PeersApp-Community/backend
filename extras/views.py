@@ -173,7 +173,7 @@ class SavedBookListCreateAPIView(ListCreateAPIView):
             # .prefetch_related("saved")
             Book.objects.exclude(creator_id=self.kwargs.get("user_pk"))
             .filter(public=True, saved__in=[self.kwargs.get("user_pk")])
-            .select_related("creator")
+            .select_related("creator__profile")
             .prefetch_related("saved")
         )
 
@@ -182,13 +182,13 @@ class SavedBookListCreateAPIView(ListCreateAPIView):
 
 
 class SavedBookRetrieveUpdateAPIView(RetrieveUpdateAPIView):
-    serializer_class = BookSerializer
+    serializer_class = SavedBookSerializer
     http_method_names = ["get", "patch", "head", "options"]
 
     def get_queryset(self):
         return (
             Book.objects.filter(public=True, id=self.kwargs.get("pk"))
-            .select_related("creator")
+            .select_related("creator__profile")
             .prefetch_related("saved")
         )
 
@@ -235,7 +235,7 @@ class AllBooks(ListAPIView):
         return (
             Book.objects.filter(public=True)
             .prefetch_related("saved")
-            .select_related("creator")
+            .select_related("creator__profile")
         )
 
     def get_serializer_context(self):
