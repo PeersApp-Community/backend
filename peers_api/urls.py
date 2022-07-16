@@ -61,6 +61,7 @@ users_router.register("spaces", SpaceModelViewSet, basename="user-spaces")
 users_router.register("arc-spaces", ArcSpaceModelViewSet, basename="user-arc-spaces")
 users_router.register("profile", ProfileModelViewSet, basename="user-profile")
 users_router.register("tasks", ProfileModelViewSet, basename="user-task")
+users_router.register("stories", StoryModelViewSet, basename="user-story")
 
 
 # chats
