@@ -19,6 +19,7 @@ from .views import (
 from extras.views import (
     AllBookModelViewSet,
     AllBooks,
+    AllBooksRetrieveUpdateAPIView,
     BookListCreateAPIView,
     AllStoryModelViewSet,
     BookRetrieveUpdateDestroyAPIView,
@@ -122,7 +123,6 @@ thread_router.register("replies", ReplyModelViewSet, basename="reply")
 
 
 urlpatterns = [
-    # path("users/<int:user_pk>/chats/del-msgs/", ChatDelMsgMixins.as_view(), name="chat-del-msgs"),
     path("books/", AllBooks.as_view()),
     path("users/<int:user_pk>/lib/", library),
     path("users/<int:user_pk>/lib/books/", BookListCreateAPIView.as_view()),
@@ -141,6 +141,7 @@ urlpatterns = [
         PrivBookRetrieveUpdateDestroyAPIView.as_view(),
     ),
 ]
+
 
 
 urlpatterns += (
