@@ -29,11 +29,11 @@ class Story(models.Model):
 
 class Book(models.Model):
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="books")
-    author = models.CharField(max_length=200, null=True, blank=True)
+    author = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     description = models.TextField()
-    file = models.FileField(upload_to="books", null=True, blank=True)
-    cover = models.ImageField(upload_to="cover", null=True, blank=True)
+    file = models.FileField(upload_to="books")
+    cover = models.ImageField(upload_to="cover")
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     savers = models.ManyToManyField(User, blank=True, related_name="saved_books")
