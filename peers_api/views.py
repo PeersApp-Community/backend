@@ -116,6 +116,7 @@ class AllSpaceModelViewSet(ModelViewSet):
         .select_related("host")
         .prefetch_related("admins", "participants")
     )
+
     serializer_class = SpaceSerializer
 
     def get_serializer_class(self):
@@ -216,7 +217,7 @@ class SpaceMsgModelViewSet(ModelViewSet):
             "space_id": self.kwargs.get("space_pk"),
             "user_id": self.kwargs.get("user_pk"),
         }
-        
+
     def get_serializer_class(self):
         try:
             if self.request.method == "GET":
@@ -225,7 +226,7 @@ class SpaceMsgModelViewSet(ModelViewSet):
                 return SpaceCreateMsgSerializer
         except:
             pass
-        
+
         return SpaceCreateMsgSerializer
 
 
@@ -241,7 +242,6 @@ class SpaceDelMsgModelViewSet(ModelViewSet):
 
 
 # ArcChatModelViewSet
-# Chat
 class ArcChatModelViewSet(ModelViewSet):
     serializer_class = ChatSerializer
     ordering_fields = ["updated", "created"]
@@ -402,8 +402,6 @@ class ChatMsgModelViewSet(ModelViewSet):
             "chat_id": self.kwargs.get("chat_pk"),
             "user_id": self.kwargs.get("user_pk"),
         }
-        
-        
 
 
 class ChatDelMsgModelViewSet(ModelViewSet):
